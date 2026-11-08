@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarih Vize & Final Hazırlık Platformu | Atatürk İlkeleri ve İnkılap Tarihi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0a0d16;
+            --bg-card: #111726;
+            --bg-card-hover: #161e31;
+            --bg-subtle: #192238;
+            --border-color: #212c44;
+            --border-glow: #3d4f7c;
+            --text-main: #f1f5f9;
+            --text-muted: #8e9bb5;
+            --text-dim: #5c6882;
+            
+            --grad-accent: linear-gradient(135deg, #6366f1, #d946ef);
+            --grad-accent-btn: linear-gradient(135deg, #4f46e5, #c026d3);
+            --accent-pink: #d946ef;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #38bdf8;
+            --accent-cyan: #06b6d4;
+            
+            --success: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.12);
+            --success-border: #059669;
+            
+            --danger: #f43f5e;
+            --danger-bg: rgba(244, 63, 94, 0.12);
+            --danger-border: #e11d48;
+            
+            --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-pill: 9999px;
+            
+            --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.45);
+            --shadow-glow: 0 0 25px rgba(217, 70, 239, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent),
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05), transparent),
+                radial-gradient(circle at 90% 80%, rgba(217, 70, 239, 0.04), transparent);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        /* Top Header */
+        header.top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .badge-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, #6366f1, #9333ea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(147, 51, 234, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .brand-text h1 {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+
+        .brand-text p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .header-stats {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .stat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            transition: all 0.2s ease;
+        }
+
+        .stat-pill.correct {
+            color: #34d399;
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.25);
+        }
+
+        .stat-pill.wrong {
+            color: #fb7185;
+            background: rgba(244, 63, 94, 0.1);
+            border-color: rgba(244, 63, 94, 0.25);
+        }
+
+        .stat-pill.rate {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.25);
+        }
+
+        .icon-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            color: #fff;
+            border-color: var(--accent-purple);
+            background: var(--bg-subtle);
+        }
+
+        /* Navigation Filters */
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            min-width: 58px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 7px 15px;
+            border-radius: var(--radius-pill);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-pill:hover {
+            color: #fff;
+            border-color: var(--border-glow);
+            background: var(--bg-subtle);
+        }
+
+        .nav-pill.active {
+            background: var(--grad-accent);
+            color: #fff;
+            border-color: transparent;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(217, 70, 239, 0.35);
+        }
+
+        /* Week Info Card */
+        .week-info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 18px 24px;
+            margin-top: 18px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .week-info-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--grad-accent);
+        }
+
+        .week-info-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            max-width: 720px;
+        }
+
+        .week-icon-box {
+            width: 14px;
+            height: 14px;
+            background: #38bdf8;
+            border-radius: 3px;
+            margin-top: 5px;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px #38bdf8;
+        }
+
+        .week-info-text h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .week-info-text p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .week-info-counts {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 12px;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.25);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            white-space: nowrap;
+        }
+
+        .week-info-counts strong {
+            color: #fff;
+            margin-left: 4px;
+        }
+
+        /* Progress Bar */
+        .progress-wrapper {
+            margin-bottom: 18px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .progress-header span:last-child {
+            color: var(--accent-pink);
+            font-weight: 700;
+        }
+
+        .progress-bar-bg {
+            height: 6px;
+            background: #182033;
+            border-radius: var(--radius-pill);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--grad-accent);
+            border-radius: var(--radius-pill);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 12px rgba(217, 70, 239, 0.5);
+        }
+
+        /* Question Map (Soru Haritası) */
+        .map-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .map-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .map-title {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+        }
+
+        .map-legend {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .legend-dot.green { background: var(--success); }
+        .legend-dot.red { background: var(--danger); }
+        .legend-dot.current { background: var(--accent-blue); }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+            gap: 6px;
+            max-height: 220px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .map-btn {
+            height: 32px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-subtle);
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-btn:hover {
+            border-color: var(--accent-purple);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .map-btn.current {
+            border-color: var(--accent-blue);
+            color: #fff;
+            background: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+            font-weight: 800;
+        }
+
+        .map-btn.correct {
+            background: var(--success);
+            border-color: var(--success-border);
+            color: #fff;
+        }
+
+        .map-btn.wrong {
+            background: var(--danger);
+            border-color: var(--danger-border);
+            color: #fff;
+        }
+
+        /* Question Box Card */
+        .qcard {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .qcard-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .q-badge {
+            background: rgba(56, 189, 248, 0.12);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 5px 12px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .q-counter {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .q-title {
+            font-size: 18.5px;
+            font-weight: 700;
+            line-height: 1.55;
+            color: #fff;
+            margin-bottom: 22px;
+        }
+
+        /* Options List */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .opt-btn {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            width: 100%;
+            text-align: left;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            color: var(--text-main);
+            font-size: 15px;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1.45;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            background: var(--bg-card-hover);
+            border-color: var(--border-glow);
+            transform: translateX(3px);
+        }
+
+        .opt-letter {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .opt-btn:hover:not(:disabled) .opt-letter {
+            background: rgba(217, 70, 239, 0.2);
+            color: var(--accent-pink);
+        }
+
+        .opt-btn.correct {
+            background: var(--success-bg) !important;
+            border-color: var(--success-border) !important;
+            color: #fff;
+        }
+
+        .opt-btn.correct .opt-letter {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .opt-btn.wrong {
+            background: var(--danger-bg) !important;
+            border-color: var(--danger-border) !important;
+            color: #fff;
+        }
+
+        .opt-btn.wrong .opt-letter {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .opt-btn:disabled {
+            cursor: default;
+        }
+
+        /* Feedback Explanation Box */
+        .explanation-box {
+            margin-top: 22px;
+            padding: 18px 20px;
+            border-radius: var(--radius-md);
+            background: rgba(14, 21, 37, 0.95);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-pink);
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .explanation-box.show {
+            display: block;
+        }
+
+        .explanation-box.good {
+            border-left-color: var(--success);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .explanation-box.bad {
+            border-left-color: var(--danger);
+            background: rgba(244, 63, 94, 0.05);
+        }
+
+        .exp-title {
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exp-title.good { color: #34d399; }
+        .exp-title.bad { color: #fb7185; }
+
+        .exp-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Navigation Foot */
+        .qcard-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 14px;
+            font-weight: 700;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--grad-accent);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(217, 70, 239, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            box-shadow: 0 6px 22px rgba(217, 70, 239, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border-color: var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .btn-ghost:hover:not(:disabled) {
+            background: var(--bg-subtle);
+            border-color: var(--border-glow);
+            color: #fff;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* MOD 2: Boşluk Doldurma Styles */
+        .blank-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .code-box {
+            background: #060911;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            color: #38bdf8;
+            line-height: 1.6;
+        }
+
+        .chips-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .chip-btn {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            color: var(--accent-pink);
+            padding: 5px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .chip-btn:hover {
+            border-color: var(--accent-pink);
+            background: rgba(217, 70, 239, 0.15);
+            color: #fff;
+        }
+
+        .blank-input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .blank-input {
+            flex: 1;
+            min-width: 200px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px 18px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .blank-input:focus {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+        }
+
+        /* MOD 3: PDF Hap Bilgiler & Haftalık Özetler Styles */
+        .summary-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .summary-header {
+            padding: 18px 22px;
+            background: var(--bg-subtle);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 15.5px;
+            color: #fff;
+        }
+
+        .summary-header:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .summary-body {
+            padding: 22px;
+            display: none;
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #cbd5e1;
+        }
+
+        .summary-body ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .summary-body li {
+            margin-bottom: 10px;
+        }
+
+        .summary-card.open .summary-body {
+            display: block;
+        }
+
+        .summary-card.open .summary-header {
+            border-bottom: 1px solid var(--border-color);
+            color: var(--accent-pink);
+        }
+
+        .highlight-box {
+            background: rgba(217, 70, 239, 0.08);
+            border-left: 3px solid var(--accent-pink);
+            padding: 14px 18px;
+            border-radius: 4px;
+            margin: 14px 0;
+            font-size: 14px;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-pink);
+        }
+
+        /* Timer Badge */
+        .timer-badge {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            color: #fb7185;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 13px;
+            padding: 5px 12px;
+            border-radius: var(--radius-pill);
+            display: none;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px 12px;
+            }
+            .brand-area {
+                width: 100%;
+            }
+            .header-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .filter-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .week-info-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .qcard {
+                padding: 18px 16px;
+            }
+            .q-title {
+                font-size: 16.5px;
+            }
+            .opt-btn {
+                font-size: 14px;
+                padding: 12px 14px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Print Mode */
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            header.top-header,
+            .filter-row,
+            .progress-wrapper,
+            .map-section,
+            .qcard-foot,
+            .icon-btn,
+            .btn {
+                display: none !important;
+            }
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            .summary-body {
+                display: block !important;
+            }
+            .summary-card {
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            .summary-header {
+                background: #f1f1f1 !important;
+                color: #000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="brand-area">
+                <div class="badge-logo">AİİT</div>
+                <div class="brand-text">
+                    <h1>Tarih Vize & Final Hazırlık Platformu</h1>
+                    <p>Atatürk İlkeleri ve İnkılap Tarihi • Hafta 1 - 7 Kapsamlı Çalışma</p>
+                </div>
+            </div>
+
+            <div class="header-stats">
+                <span class="stat-pill correct" id="statCorrect">✓ 0 Doğru</span>
+                <span class="stat-pill wrong" id="statWrong">X 0 Yanlış</span>
+                <span class="stat-pill rate" id="statRate">%0 Başarı</span>
+                <span class="timer-badge" id="vizeTimer">⏱️ 40:00</span>
+                <button class="icon-btn" id="soundBtn" title="Ses Aç/Kapat">🔊 Ses</button>
+                <button class="icon-btn" id="resetBtn" title="Test İlerlemesini Sıfırla">🔄 Sıfırla</button>
+            </div>
+        </header>
+
+        <!-- Week Filter Navigation -->
+        <div class="filter-row">
+            <span class="filter-label">HAFTA:</span>
+            <div class="filter-group" id="weekFilterGroup">
+                <button class="nav-pill active" data-week="hafta1">Hafta 1 (Giriş & Yapı)</button>
+                <button class="nav-pill" data-week="hafta2">Hafta 2 (Duraklama & Islahat)</button>
+                <button class="nav-pill" data-week="hafta3">Hafta 3 (Tanzimat & Islahat)</button>
+                <button class="nav-pill" data-week="hafta4">Hafta 4 (Meşrutiyet & Kanun-ı Esasi)</button>
+                <button class="nav-pill" data-week="hafta5">Hafta 5 (Trablusgarp & Balkan)</button>
+                <button class="nav-pill" data-week="hafta6">Hafta 6 (1. Dünya Savaşı)</button>
+                <button class="nav-pill" data-week="hafta7">Hafta 7 (Mondros & İşgaller)</button>
+                <button class="nav-pill" data-week="all">🏆 Tüm Konular (200 Soru Testi)</button>
+            </div>
+        </div>
+
+        <!-- Mode Filter Navigation -->
+        <div class="filter-row">
+            <span class="filter-label">MOD:</span>
+            <div class="filter-group" id="modeFilterGroup">
+                <button class="nav-pill active" data-mode="quiz">🎯 Çoktan Seçmeli Test</button>
+                <button class="nav-pill" data-mode="blanks">✍️ Boşluk Doldurma & Kavramlar</button>
+                <button class="nav-pill" data-mode="summary">📌 PDF Hap Bilgiler & Özetler</button>
+            </div>
+        </div>
+
+        <!-- Active Week Description Card -->
+        <div class="week-info-card">
+            <div class="week-info-left">
+                <div class="week-icon-box"></div>
+                <div class="week-info-text">
+                    <h2 id="weekCardTitle">Hafta 1: Dersin Kapsamı, Temel Kavramlar & Osmanlı Devleti'nin Yapısı</h2>
+                    <p id="weekCardDesc">İhtilal, inkılap, ıslahat ve darbe kavramları; Osmanlı padişah otoritesi, Divan-ı Hümayun, tımar ve vergi sistemi.</p>
+                </div>
+            </div>
+            <div class="week-info-counts" id="weekCardCounts">
+                <span>Test: <strong id="countTest">31 Soru</strong></span>
+                <span>Boşluk Doldurma: <strong id="countBlanks">4 Soru</strong></span>
+                <span>Özet: <strong id="countSummary">7 Hafta</strong></span>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 1: QUIZ VIEW ==================== -->
+        <div id="viewQuiz">
+            <!-- Progress Bar -->
+            <div class="progress-wrapper">
+                <div class="progress-header">
+                    <span id="qProgressText">Soru 1 / 31</span>
+                    <span id="qProgressPercent">%0</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Question Map -->
+            <div class="map-section">
+                <div class="map-top">
+                    <span class="map-title">SORU HARİTASI & HIZLI ATLAMA</span>
+                    <div class="map-legend">
+                        <span class="legend-item"><span class="legend-dot green"></span> Yeşil: Doğru</span>
+                        <span class="legend-item"><span class="legend-dot red"></span> Kırmızı: Yanlış</span>
+                        <span class="legend-item"><span class="legend-dot current"></span> Mavi: Aktif Soru</span>
+                    </div>
+                </div>
+                <div class="map-grid" id="mapGrid"></div>
+            </div>
+
+            <!-- Question Box -->
+            <div class="qcard">
+                <div class="qcard-top">
+                    <span class="q-badge" id="qBadgeCategory">ÇOKTAN SEÇMELİ TEST</span>
+                    <span class="q-counter" id="qCounterBadge">Hafta 1 • Soru 1 / 31</span>
+                </div>
+
+                <div class="q-title" id="qTitleText">Soru yükleniyor...</div>
+
+                <div class="options-list" id="optionsList"></div>
+
+                <!-- Feedback / Explanation -->
+                <div class="explanation-box" id="explanationBox">
+                    <div class="exp-title" id="expTitle">Açıklama & Sınav İpucu</div>
+                    <div class="exp-desc" id="expDesc"></div>
+                </div>
+
+                <!-- Footer Navigation Buttons -->
+                <div class="qcard-foot">
+                    <button class="btn btn-ghost" id="prevBtn">← Önceki Soru</button>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="btn btn-ghost" id="clearBtn">Yeniden Çöz</button>
+                        <button class="btn btn-ghost" id="wrongOnlyBtn">⚠️ Yanlışlara Odaklan</button>
+                    </div>
+                    <button class="btn btn-primary" id="nextBtn">Sonraki Soru →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 2: BLANKS VIEW ==================== -->
+        <div id="viewBlanks" style="display: none;">
+            <div class="qcard">
+                <div class="qcard-top">
+                    <span class="q-badge">TARİH KAVRAMLARI & BOŞLUK DOLDURMA</span>
+                    <span class="q-counter" id="blankCounterBadge">Soru 1 / 4</span>
+                </div>
+
+                <div class="blank-area">
+                    <div class="q-title" id="blankQuestionText">...</div>
+                    <div class="code-box" id="blankCodeBox"></div>
+
+                    <div>
+                        <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 8px; font-weight: 700;">HIZLI KAVRAM SEÇİMİ:</div>
+                        <div class="chips-row">
+                            <button class="chip-btn" data-insert="ıslahat">ıslahat</button>
+                            <button class="chip-btn" data-insert="ihtilal">ihtilal</button>
+                            <button class="chip-btn" data-insert="tımar">tımar</button>
+                            <button class="chip-btn" data-insert="Divan-ı Hümayun">Divan-ı Hümayun</button>
+                            <button class="chip-btn" data-insert="Karlofça">Karlofça</button>
+                            <button class="chip-btn" data-insert="Ekber ve Erşed">Ekber ve Erşed</button>
+                            <button class="chip-btn" data-insert="Lale">Lale</button>
+                            <button class="chip-btn" data-insert="Sened-i İttifak">Sened-i İttifak</button>
+                            <button class="chip-btn" data-insert="Vaka-i Hayriye">Vaka-i Hayriye</button>
+                            <button class="chip-btn" data-insert="Tanzimat">Tanzimat</button>
+                            <button class="chip-btn" data-insert="Kanun-ı Esasi">Kanun-ı Esasi</button>
+                            <button class="chip-btn" data-insert="Düyûn-ı Umûmiye">Düyûn-ı Umûmiye</button>
+                            <button class="chip-btn" data-insert="Trablusgarp">Trablusgarp</button>
+                            <button class="chip-btn" data-insert="Uşi">Uşi</button>
+                            <button class="chip-btn" data-insert="Kutü'l-Amare">Kutü'l-Amare</button>
+                            <button class="chip-btn" data-insert="Mondros">Mondros</button>
+                            <button class="chip-btn" data-insert="7">7</button>
+                        </div>
+                    </div>
+
+                    <div class="blank-input-group">
+                        <input type="text" class="blank-input" id="blankInput" placeholder="Doğru kavram veya cevabı yazın..." autocomplete="off">
+                        <button class="btn btn-primary" id="blankCheckBtn">Kontrol Et</button>
+                        <button class="btn btn-ghost" id="blankHintBtn">💡 İpucu</button>
+                        <button class="btn btn-ghost" id="blankShowBtn">Cevabı Göster</button>
+                    </div>
+
+                    <div class="explanation-box" id="blankFeedback">
+                        <div class="exp-title" id="blankFeedbackTitle"></div>
+                        <div class="exp-desc" id="blankFeedbackDesc"></div>
+                    </div>
+                </div>
+
+                <div class="qcard-foot">
+                    <button class="btn btn-ghost" id="blankPrevBtn">← Önceki</button>
+                    <button class="btn btn-primary" id="blankNextBtn">Sonraki →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW 3: SUMMARY VIEW ==================== -->
+        <div id="viewSummary" style="display: none;">
+            <div class="qcard" style="margin-bottom: 20px;">
+                <div class="qcard-top">
+                    <div>
+                        <span class="q-badge">HAFTALIK DERS ÖZETLERİ & HAP BİLGİLER</span>
+                        <h2 style="font-size: 20px; font-weight: 800; margin-top: 8px;">Atatürk İlkeleri ve İnkılap Tarihi Vize Özeti</h2>
+                        <p style="font-size: 13.5px; color: var(--text-muted);">Haftalık konu başlıklarını açarak sınav öncesi kapsamlı tekrar yapabilirsiniz.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="window.print()">🖨️ Yazdır / PDF Kaydet</button>
+                </div>
+            </div>
+
+            <div class="summary-grid" id="summaryCardsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        const PLATFORM_DATA = {"questionData":{"hafta1":[{"id":1,"q":"Atatürk İlkeleri ve İnkılap Tarihi derslerinin yaygınlaştırılmasının temel amaçlarından biri nedir?","o":["Cumhuriyet değerlerini halka benimsetmek","Osmanlı hanedanını yeniden yönetime getirmek","Saltanat yönetimini güçlendirmek","Sömürgeciliği desteklemek"],"a":0,"e":"Dersin temel amaçlarından biri Cumhuriyetin kuruluş sürecini ve temel değerlerini tanıtmaktır."},{"id":7,"q":"Fransız İhtilali'nin Osmanlı Devleti'ni en fazla etkileyen düşüncesi hangisidir?","o":["Merkantilizm","Hümanizm","Milliyetçilik","Feodalizm"],"a":2,"e":"Milliyetçilik, çok uluslu Osmanlı Devleti'nde ayrılıkçı hareketleri güçlendirmiştir."},{"id":19,"q":"Tımar sisteminin bozulması hangi sonuca yol açmıştır?","o":["Avrupa'da sanayinin durmasına","Osmanlı donanmasının güçlenmesine","Taşrada güvenlik ve üretim sorunlarının artmasına","Merkezi yönetimin güçlenmesine"],"a":2,"e":"Tımar sisteminin bozulması üretimi, vergi düzenini ve taşra güvenliğini olumsuz etkilemiştir."},{"id":23,"q":"Islahat Fermanı'nın temel hedeflerinden biri nedir?","o":["Yeniçeri Ocağı'nı kurmak","Saltanatı kaldırmak","Gayrimüslimlere yeni haklar tanımak","Cumhuriyete geçmek"],"a":2,"e":"1856 Islahat Fermanı özellikle gayrimüslim tebaanın hak ve statüsüne ilişkin düzenlemeler getirmiştir."},{"id":31,"q":"II. Abdülhamit dönemindeki baskıcı yönetim hangi kavramla ifade edilir?","o":["Tanzimat","Meşrutiyet","İstibdat","Islahat"],"a":2,"e":"İstibdat, II. Abdülhamit dönemindeki sıkı denetim ve baskıcı yönetim anlayışını tanımlar."},{"id":37,"q":"Avrupa'daki bilimsel gelişmelerin takip edilmemesi hangi alanda gerilemeye neden olmuştur?","o":["Bilim ve eğitim","Tarım arazileri","Deniz ticareti","Nüfus"],"a":0,"e":"Bilimsel ve teknik gelişmelerin gerisinde kalmak eğitim, teknoloji ve üretim kapasitesini olumsuz etkilemiştir."},{"id":41,"q":"Osmanlı'da taşrada güç kazanan yerel eşrafa ne ad verilirdi?","o":["Ayan","Yeniçeri","Müderris","Kapıkulu"],"a":0,"e":"Ayanlar, özellikle merkezi otoritenin zayıfladığı dönemlerde taşrada nüfuz sahibi yerel ileri gelenlerdi."},{"id":50,"q":"Osmanlı duraklamasının iç nedenlerinden biri hangisidir?","o":["Avrupa'da Rönesans","Merkezi yönetimin bozulması","Coğrafi Keşifler","Sanayi Devrimi"],"a":1,"e":"Merkezi yönetimdeki bozulma, taşrada otorite kaybına ve devlet düzeninin zayıflamasına yol açmıştır."},{"id":53,"q":"Islahatların başarısız olmasının nedenlerinden biri nedir?","o":["Yeniliklerin kişilere bağlı kalması ve süreklilik kazanmaması","Avrupa'nın müdahale etmemesi","Halkın tüm yenilikleri desteklemesi","Devletin çok güçlü ekonomisi"],"a":0,"e":"Reformların kurumsallaşamaması ve kişilere bağlı kalması kalıcı sonuç alınmasını zorlaştırmıştır."},{"id":59,"q":"Sanayi Devrimi'nin Avrupa'daki sonuçlarından biri hangisidir?","o":["El işçiliğine dönüş","Sömürgeciliğin bitmesi","Ham madde ve pazar ihtiyacının artması","Fabrikaların kapanması"],"a":2,"e":"Sanayileşme, fabrikalar için ham madde ve ürünler için yeni pazar arayışını hızlandırmıştır."},{"id":69,"q":"Vergi toplama hakkının belirli kişilere verilmesi hangi sistemdir?","o":["İltizam","Devşirme","Tımar","Ekber-Erşed"],"a":0,"e":"İltizam sisteminde vergi toplama hakkı belirli süre ve bedel karşılığında mültezimlere bırakılır."},{"id":75,"q":"Osmanlı yönetiminde en üst makamda kim bulunurdu?","o":["Sadrazam","Kazasker","Padişah","Defterdar"],"a":2,"e":"Osmanlı klasik yönetim düzeninde devletin başında padişah bulunurdu."},{"id":84,"q":"Merkezi yönetimin zayıflaması hangi sonuca yol açmıştır?","o":["Bilimsel gelişmelerin hızlanması","Sömürgeciliğin bitmesi","Sanayi üretiminin artması","Taşrada otorite kaybı"],"a":3,"e":"Merkezî otorite zayıfladıkça yerel güçler artmış, güvenlik ve vergi düzeni bozulmuştur."},{"id":89,"q":"Sened-i İttifak'ın tarihî önemi nedir?","o":["Padişah otoritesinin ilk kez bazı yönlerden sınırlandırılması","Cumhuriyetin ilanı","Yeniçeriliğin kaldırılması","İlk anayasanın yürürlüğe girmesi"],"a":0,"e":"Sened-i İttifak, padişah ile ayanlar arasında karşılıklı yükümlülükler getirerek merkezî otoriteyi sınırlayan bir belge olarak değerlendirilir."},{"id":97,"q":"Irak Cephesi'nde Osmanlı hangi devletle mücadele etmiştir?","o":["İngiltere","Fransa","İtalya","Almanya"],"a":0,"e":"Irak Cephesi'nde Osmanlı kuvvetleri İngiliz ordusuna karşı savaşmıştır."},{"id":100,"q":"Aşağıdaki bilgilerden hangisi doğrudur? atatürk İlkeleri ve İnkılap Tarihi derslerinin yaygınlaştırılmasının temel amaçlarından biri nedir?","o":["Osmanlı hanedanını yeniden yönetime getirmek","Saltanat yönetimini güçlendirmek","Sömürgeciliği desteklemek","Cumhuriyet değerlerini halka benimsetmek"],"a":3,"e":"Dersin temel amaçlarından biri Cumhuriyetin kuruluş sürecini ve temel değerlerini tanıtmaktır."},{"id":106,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: fransız İhtilali'nin Osmanlı Devleti'ni en fazla etkileyen düşüncesi hangisidir?","o":["Merkantilizm","Milliyetçilik","Hümanizm","Feodalizm"],"a":1,"e":"Milliyetçilik, çok uluslu Osmanlı Devleti'nde ayrılıkçı hareketleri güçlendirmiştir."},{"id":118,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: tımar sisteminin bozulması hangi sonuca yol açmıştır?","o":["Avrupa'da sanayinin durmasına","Taşrada güvenlik ve üretim sorunlarının artmasına","Osmanlı donanmasının güçlenmesine","Merkezi yönetimin güçlenmesine"],"a":1,"e":"Tımar sisteminin bozulması üretimi, vergi düzenini ve taşra güvenliğini olumsuz etkilemiştir."},{"id":122,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: islahat Fermanı'nın temel hedeflerinden biri nedir?","o":["Yeniçeri Ocağı'nı kurmak","Gayrimüslimlere yeni haklar tanımak","Saltanatı kaldırmak","Cumhuriyete geçmek"],"a":1,"e":"1856 Islahat Fermanı özellikle gayrimüslim tebaanın hak ve statüsüne ilişkin düzenlemeler getirmiştir."},{"id":130,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: iI. Abdülhamit dönemindeki baskıcı yönetim hangi kavramla ifade edilir?","o":["Tanzimat","İstibdat","Meşrutiyet","Islahat"],"a":1,"e":"İstibdat, II. Abdülhamit dönemindeki sıkı denetim ve baskıcı yönetim anlayışını tanımlar."},{"id":136,"q":"Aşağıdaki bilgilerden hangisi doğrudur? avrupa'daki bilimsel gelişmelerin takip edilmemesi hangi alanda gerilemeye neden olmuştur?","o":["Tarım arazileri","Deniz ticareti","Nüfus","Bilim ve eğitim"],"a":3,"e":"Bilimsel ve teknik gelişmelerin gerisinde kalmak eğitim, teknoloji ve üretim kapasitesini olumsuz etkilemiştir."},{"id":140,"q":"Aşağıdaki bilgilerden hangisi doğrudur? osmanlı'da taşrada güç kazanan yerel eşrafa ne ad verilirdi?","o":["Yeniçeri","Müderris","Kapıkulu","Ayan"],"a":3,"e":"Ayanlar, özellikle merkezi otoritenin zayıfladığı dönemlerde taşrada nüfuz sahibi yerel ileri gelenlerdi."},{"id":149,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? osmanlı duraklamasının iç nedenlerinden biri hangisidir?","o":["Merkezi yönetimin bozulması","Avrupa'da Rönesans","Coğrafi Keşifler","Sanayi Devrimi"],"a":0,"e":"Merkezi yönetimdeki bozulma, taşrada otorite kaybına ve devlet düzeninin zayıflamasına yol açmıştır."},{"id":152,"q":"Aşağıdaki bilgilerden hangisi doğrudur? islahatların başarısız olmasının nedenlerinden biri nedir?","o":["Avrupa'nın müdahale etmemesi","Halkın tüm yenilikleri desteklemesi","Devletin çok güçlü ekonomisi","Yeniliklerin kişilere bağlı kalması ve süreklilik kazanmaması"],"a":3,"e":"Reformların kurumsallaşamaması ve kişilere bağlı kalması kalıcı sonuç alınmasını zorlaştırmıştır."},{"id":158,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: sanayi Devrimi'nin Avrupa'daki sonuçlarından biri hangisidir?","o":["El işçiliğine dönüş","Ham madde ve pazar ihtiyacının artması","Sömürgeciliğin bitmesi","Fabrikaların kapanması"],"a":1,"e":"Sanayileşme, fabrikalar için ham madde ve ürünler için yeni pazar arayışını hızlandırmıştır."},{"id":168,"q":"Aşağıdaki bilgilerden hangisi doğrudur? vergi toplama hakkının belirli kişilere verilmesi hangi sistemdir?","o":["Devşirme","Tımar","Ekber-Erşed","İltizam"],"a":3,"e":"İltizam sisteminde vergi toplama hakkı belirli süre ve bedel karşılığında mültezimlere bırakılır."},{"id":174,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı yönetiminde en üst makamda kim bulunurdu?","o":["Sadrazam","Padişah","Kazasker","Defterdar"],"a":1,"e":"Osmanlı klasik yönetim düzeninde devletin başında padişah bulunurdu."},{"id":183,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? merkezi yönetimin zayıflaması hangi sonuca yol açmıştır?","o":["Bilimsel gelişmelerin hızlanması","Sömürgeciliğin bitmesi","Taşrada otorite kaybı","Sanayi üretiminin artması"],"a":2,"e":"Merkezî otorite zayıfladıkça yerel güçler artmış, güvenlik ve vergi düzeni bozulmuştur."},{"id":188,"q":"Aşağıdaki bilgilerden hangisi doğrudur? sened-i İttifak'ın tarihî önemi nedir?","o":["Cumhuriyetin ilanı","Yeniçeriliğin kaldırılması","İlk anayasanın yürürlüğe girmesi","Padişah otoritesinin ilk kez bazı yönlerden sınırlandırılması"],"a":3,"e":"Sened-i İttifak, padişah ile ayanlar arasında karşılıklı yükümlülükler getirerek merkezî otoriteyi sınırlayan bir belge olarak değerlendirilir."},{"id":196,"q":"Aşağıdaki bilgilerden hangisi doğrudur? irak Cephesi'nde Osmanlı hangi devletle mücadele etmiştir?","o":["Fransa","İtalya","Almanya","İngiltere"],"a":3,"e":"Irak Cephesi'nde Osmanlı kuvvetleri İngiliz ordusuna karşı savaşmıştır."},{"id":199,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? atatürk İlkeleri ve İnkılap Tarihi derslerinin yaygınlaştırılmasının temel amaçlarından biri nedir?","o":["Osmanlı hanedanını yeniden yönetime getirmek","Saltanat yönetimini güçlendirmek","Cumhuriyet değerlerini halka benimsetmek","Sömürgeciliği desteklemek"],"a":2,"e":"Dersin temel amaçlarından biri Cumhuriyetin kuruluş sürecini ve temel değerlerini tanıtmaktır."}],"hafta2":[{"id":3,"q":"1699 Karlofça Antlaşması'nın Osmanlı tarihi açısından önemi nedir?","o":["Kapitülasyonları kaldırması","Cumhuriyeti ilan etmesi","Büyük çaplı toprak kayıplarının yaşandığı önemli bir dönüm noktası olması","Kuzey Afrika'yı Osmanlı'ya kazandırması"],"a":2,"e":"Karlofça, Osmanlı'nın Avrupa'da genişleme döneminin sona erdiğini ve önemli toprak kayıplarını simgeler."},{"id":6,"q":"Ekber ve Erşed sistemi neyi esas alır?","o":["En küçük şehzadenin tahta geçmesini","Hanedanın en yaşlı ve aklı başında üyesinin tahta geçmesini","Seçimle padişah belirlenmesini","Sadrazamın hükümdar olmasını"],"a":1,"e":"Ekber ve Erşed, hanedanın en yaşlı erkek üyesinin tahta geçmesi esasına dayanır."},{"id":11,"q":"Osmanlı ıslahatlarının askerî alanda yoğunlaşmasının temel nedeni nedir?","o":["Sömürgeciliğin bitmesi","Deniz ticaretinin bırakılması","Askerî yenilgiler ve güç kaybı","Milliyetçiliğin ortadan kalkması"],"a":2,"e":"Askerî yenilgiler, devlet adamlarını öncelikle orduda ve askerî teknolojide yenilik yapmaya yöneltmiştir."},{"id":17,"q":"Kabakçı Mustafa İsyanı hangi padişah döneminde yaşanmıştır?","o":["III. Selim","II. Mahmut","IV. Murat","II. Abdülhamit"],"a":0,"e":"Kabakçı Mustafa İsyanı 1807'de III. Selim'in yeniliklerine karşı çıkmıştır."},{"id":24,"q":"II. Viyana Kuşatması hangi yıl gerçekleşmiştir?","o":["1699","1718","1730","1683"],"a":3,"e":"1683 II. Viyana Kuşatması'nın başarısızlığı, Osmanlı'nın Avrupa'da geri çekilme sürecini hızlandırmıştır."},{"id":27,"q":"Lale Devri hangi antlaşmadan sonra başlamıştır?","o":["Küçük Kaynarca","Karlofça","Pasarofça","Berlin"],"a":2,"e":"1718 Pasarofça Antlaşması sonrasında Lale Devri başlamıştır."},{"id":33,"q":"1718-1730 yılları arasındaki döneme ne ad verilir?","o":["Lale Devri","Tanzimat","Meşrutiyet","Fetret"],"a":0,"e":"Lale Devri 1718 Pasarofça ile başlayıp 1730 Patrona Halil İsyanı ile sona ermiştir."},{"id":55,"q":"Karlofça sonrası yeniliklerin temel hedefi neydi?","o":["Saltanatı kaldırmak","Cumhuriyeti ilan etmek","Kaybedilen toprakları geri almak ve devleti güçlendirmek","Avrupa'yla savaşı büyütmek"],"a":2,"e":"Karlofça sonrasında Osmanlı, askerî ve idari yeniliklerle kayıpları telafi etmeye çalışmıştır."},{"id":76,"q":"Lale Devri'ni sona erdiren isyan hangisidir?","o":["Celali","Kabakçı Mustafa","31 Mart","Patrona Halil"],"a":3,"e":"1730 Patrona Halil İsyanı Lale Devri'ni sona erdirmiştir."},{"id":80,"q":"17. yüzyılda sorunları rapor eden devlet adamı kimdir?","o":["Mustafa Reşit Paşa","Mithat Paşa","Mahmut Şevket Paşa","Koçi Bey"],"a":3,"e":"Koçi Bey, IV. Murat ve Sultan İbrahim dönemlerinde devlet düzenindeki sorunları raporlarıyla ele almıştır."},{"id":87,"q":"Karlofça Antlaşması hangi savaşlar sonrasında imzalanmıştır?","o":["İngiltere-Fransa savaşları","İtalya-Almanya savaşları","Kutsal İttifak savaşları","Rusya-İran savaşları"],"a":2,"e":"Osmanlı, Kutsal İttifak devletleriyle uzun savaşların ardından 1699'da Karlofça'yı imzalamıştır."},{"id":92,"q":"Patrona Halil İsyanı'nın lideri kimdir?","o":["Kabakçı Mustafa","Alemdar Mustafa Paşa","Resneli Niyazi","Patrona Halil"],"a":3,"e":"İsyan, Patrona Halil'in önderliğinde 1730'da gerçekleşmiştir."},{"id":95,"q":"Osmanlı ıslahatlarının ilk dönemlerinde ağırlık verilen alan hangisidir?","o":["Spor","Turizm","Askerî alan","Sinema"],"a":2,"e":"Askerî yenilgiler nedeniyle ilk yenilik girişimleri çoğunlukla orduyu güçlendirmeye yönelmiştir."},{"id":102,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: 1699 Karlofça Antlaşması'nın Osmanlı tarihi açısından önemi nedir?","o":["Kapitülasyonları kaldırması","Büyük çaplı toprak kayıplarının yaşandığı önemli bir dönüm noktası olması","Cumhuriyeti ilan etmesi","Kuzey Afrika'yı Osmanlı'ya kazandırması"],"a":1,"e":"Karlofça, Osmanlı'nın Avrupa'da genişleme döneminin sona erdiğini ve önemli toprak kayıplarını simgeler."},{"id":105,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? ekber ve Erşed sistemi neyi esas alır?","o":["Hanedanın en yaşlı ve aklı başında üyesinin tahta geçmesini","En küçük şehzadenin tahta geçmesini","Seçimle padişah belirlenmesini","Sadrazamın hükümdar olmasını"],"a":0,"e":"Ekber ve Erşed, hanedanın en yaşlı erkek üyesinin tahta geçmesi esasına dayanır."},{"id":110,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı ıslahatlarının askerî alanda yoğunlaşmasının temel nedeni nedir?","o":["Sömürgeciliğin bitmesi","Askerî yenilgiler ve güç kaybı","Deniz ticaretinin bırakılması","Milliyetçiliğin ortadan kalkması"],"a":1,"e":"Askerî yenilgiler, devlet adamlarını öncelikle orduda ve askerî teknolojide yenilik yapmaya yöneltmiştir."},{"id":116,"q":"Aşağıdaki bilgilerden hangisi doğrudur? kabakçı Mustafa İsyanı hangi padişah döneminde yaşanmıştır?","o":["II. Mahmut","IV. Murat","II. Abdülhamit","III. Selim"],"a":3,"e":"Kabakçı Mustafa İsyanı 1807'de III. Selim'in yeniliklerine karşı çıkmıştır."},{"id":123,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? iI. Viyana Kuşatması hangi yıl gerçekleşmiştir?","o":["1699","1718","1683","1730"],"a":2,"e":"1683 II. Viyana Kuşatması'nın başarısızlığı, Osmanlı'nın Avrupa'da geri çekilme sürecini hızlandırmıştır."},{"id":126,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: lale Devri hangi antlaşmadan sonra başlamıştır?","o":["Küçük Kaynarca","Pasarofça","Karlofça","Berlin"],"a":1,"e":"1718 Pasarofça Antlaşması sonrasında Lale Devri başlamıştır."},{"id":132,"q":"Aşağıdaki bilgilerden hangisi doğrudur? 1718-1730 yılları arasındaki döneme ne ad verilir?","o":["Tanzimat","Meşrutiyet","Fetret","Lale Devri"],"a":3,"e":"Lale Devri 1718 Pasarofça ile başlayıp 1730 Patrona Halil İsyanı ile sona ermiştir."},{"id":154,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: karlofça sonrası yeniliklerin temel hedefi neydi?","o":["Saltanatı kaldırmak","Kaybedilen toprakları geri almak ve devleti güçlendirmek","Cumhuriyeti ilan etmek","Avrupa'yla savaşı büyütmek"],"a":1,"e":"Karlofça sonrasında Osmanlı, askerî ve idari yeniliklerle kayıpları telafi etmeye çalışmıştır."},{"id":175,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? lale Devri'ni sona erdiren isyan hangisidir?","o":["Celali","Kabakçı Mustafa","Patrona Halil","31 Mart"],"a":2,"e":"1730 Patrona Halil İsyanı Lale Devri'ni sona erdirmiştir."},{"id":179,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? 17. yüzyılda sorunları rapor eden devlet adamı kimdir?","o":["Mustafa Reşit Paşa","Mithat Paşa","Koçi Bey","Mahmut Şevket Paşa"],"a":2,"e":"Koçi Bey, IV. Murat ve Sultan İbrahim dönemlerinde devlet düzenindeki sorunları raporlarıyla ele almıştır."},{"id":186,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: karlofça Antlaşması hangi savaşlar sonrasında imzalanmıştır?","o":["İngiltere-Fransa savaşları","Kutsal İttifak savaşları","İtalya-Almanya savaşları","Rusya-İran savaşları"],"a":1,"e":"Osmanlı, Kutsal İttifak devletleriyle uzun savaşların ardından 1699'da Karlofça'yı imzalamıştır."},{"id":191,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? patrona Halil İsyanı'nın lideri kimdir?","o":["Kabakçı Mustafa","Alemdar Mustafa Paşa","Patrona Halil","Resneli Niyazi"],"a":2,"e":"İsyan, Patrona Halil'in önderliğinde 1730'da gerçekleşmiştir."},{"id":194,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı ıslahatlarının ilk dönemlerinde ağırlık verilen alan hangisidir?","o":["Spor","Askerî alan","Turizm","Sinema"],"a":1,"e":"Askerî yenilgiler nedeniyle ilk yenilik girişimleri çoğunlukla orduyu güçlendirmeye yönelmiştir."}],"hafta3":[{"id":12,"q":"Tanzimat Fermanı hangi yıl ilan edilmiştir?","o":["1856","1876","1808","1839"],"a":3,"e":"Tanzimat Fermanı 3 Kasım 1839'da Gülhane'de ilan edilmiştir."},{"id":21,"q":"Sened-i İttifak hangi taraflar arasında imzalanmıştır?","o":["Padişah ile ayanlar","Osmanlı-Rusya","Osmanlı-İngiltere","Osmanlı-Fransa"],"a":0,"e":"1808 Sened-i İttifak, II. Mahmut ile ayanlar arasında yapılmıştır."},{"id":29,"q":"Yeniçeri Ocağı'nın kaldırılması hangi olayla anılır?","o":["Vaka-i Hayriye","31 Mart Olayı","Babıâli Baskını","Kabakçı İsyanı"],"a":0,"e":"1826'da Yeniçeri Ocağı kaldırılmış ve bu olay Vaka-i Hayriye olarak adlandırılmıştır."},{"id":44,"q":"Tanzimat Fermanı hangi hakları güvence altına almayı hedeflemiştir?","o":["Sadece askerlerin haklarını","Saray çalışanlarının ayrıcalıklarını","Yalnız ticaret gemilerini","Can, mal ve namus güvenliğini"],"a":3,"e":"Tanzimat Fermanı, tebaanın can, mal ve namus güvenliğini güvence altına alma vaadi içerir."},{"id":46,"q":"II. Mahmut dönemindeki önemli gelişmelerden biri hangisidir?","o":["Saltanatın kaldırılması","Yeniçeri Ocağı'nın kaldırılması","Cumhuriyetin ilanı","Halifeliğin kaldırılması"],"a":1,"e":"II. Mahmut döneminde 1826'da Yeniçeri Ocağı kaldırılmıştır."},{"id":52,"q":"Mısır Meselesi sırasında Mehmet Ali Paşa ile yapılan antlaşma hangisidir?","o":["Uşi","Karlofça","Berlin","Kütahya"],"a":3,"e":"1833 Kütahya Antlaşması, Osmanlı ile Mehmet Ali Paşa arasındaki krizin geçici çözümüdür."},{"id":66,"q":"Tanzimat Fermanı'nın ilanında etkili olan devlet adamı kimdir?","o":["Köprülü Mehmet Paşa","Mustafa Reşit Paşa","Tarhuncu Ahmet Paşa","Koçi Bey"],"a":1,"e":"Mustafa Reşit Paşa, Gülhane Hatt-ı Hümayunu'nun ilanında öncü rol oynamıştır."},{"id":71,"q":"II. Mahmut döneminde kaldırılan askerî teşkilat hangisidir?","o":["Nizam-ı Cedid","Asakir-i Mansure","Yeniçeri Ocağı","Redif"],"a":2,"e":"Yeniçeri Ocağı 1826'da Vaka-i Hayriye ile kaldırılmıştır."},{"id":90,"q":"Mısır Meselesi'nin önemli taraflarından biri kimdir?","o":["Enver Paşa","Mehmet Ali Paşa","Mustafa Reşit Paşa","Mahmut Şevket Paşa"],"a":1,"e":"Mısır Valisi Mehmet Ali Paşa'nın güçlenmesi Osmanlı yönetimiyle ciddi bir krize yol açmıştır."},{"id":111,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? tanzimat Fermanı hangi yıl ilan edilmiştir?","o":["1856","1876","1839","1808"],"a":2,"e":"Tanzimat Fermanı 3 Kasım 1839'da Gülhane'de ilan edilmiştir."},{"id":120,"q":"Aşağıdaki bilgilerden hangisi doğrudur? sened-i İttifak hangi taraflar arasında imzalanmıştır?","o":["Osmanlı-Rusya","Osmanlı-İngiltere","Osmanlı-Fransa","Padişah ile ayanlar"],"a":3,"e":"1808 Sened-i İttifak, II. Mahmut ile ayanlar arasında yapılmıştır."},{"id":128,"q":"Aşağıdaki bilgilerden hangisi doğrudur? yeniçeri Ocağı'nın kaldırılması hangi olayla anılır?","o":["31 Mart Olayı","Babıâli Baskını","Kabakçı İsyanı","Vaka-i Hayriye"],"a":3,"e":"1826'da Yeniçeri Ocağı kaldırılmış ve bu olay Vaka-i Hayriye olarak adlandırılmıştır."},{"id":143,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? tanzimat Fermanı hangi hakları güvence altına almayı hedeflemiştir?","o":["Sadece askerlerin haklarını","Saray çalışanlarının ayrıcalıklarını","Can, mal ve namus güvenliğini","Yalnız ticaret gemilerini"],"a":2,"e":"Tanzimat Fermanı, tebaanın can, mal ve namus güvenliğini güvence altına alma vaadi içerir."},{"id":145,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? iI. Mahmut dönemindeki önemli gelişmelerden biri hangisidir?","o":["Yeniçeri Ocağı'nın kaldırılması","Saltanatın kaldırılması","Cumhuriyetin ilanı","Halifeliğin kaldırılması"],"a":0,"e":"II. Mahmut döneminde 1826'da Yeniçeri Ocağı kaldırılmıştır."},{"id":151,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? mısır Meselesi sırasında Mehmet Ali Paşa ile yapılan antlaşma hangisidir?","o":["Uşi","Karlofça","Kütahya","Berlin"],"a":2,"e":"1833 Kütahya Antlaşması, Osmanlı ile Mehmet Ali Paşa arasındaki krizin geçici çözümüdür."},{"id":165,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? tanzimat Fermanı'nın ilanında etkili olan devlet adamı kimdir?","o":["Mustafa Reşit Paşa","Köprülü Mehmet Paşa","Tarhuncu Ahmet Paşa","Koçi Bey"],"a":0,"e":"Mustafa Reşit Paşa, Gülhane Hatt-ı Hümayunu'nun ilanında öncü rol oynamıştır."},{"id":170,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: iI. Mahmut döneminde kaldırılan askerî teşkilat hangisidir?","o":["Nizam-ı Cedid","Yeniçeri Ocağı","Asakir-i Mansure","Redif"],"a":1,"e":"Yeniçeri Ocağı 1826'da Vaka-i Hayriye ile kaldırılmıştır."},{"id":189,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? mısır Meselesi'nin önemli taraflarından biri kimdir?","o":["Mehmet Ali Paşa","Enver Paşa","Mustafa Reşit Paşa","Mahmut Şevket Paşa"],"a":0,"e":"Mısır Valisi Mehmet Ali Paşa'nın güçlenmesi Osmanlı yönetimiyle ciddi bir krize yol açmıştır."}],"hafta4":[{"id":4,"q":"31 Mart Olayı'nı bastırmak için kurulan ordunun adı nedir?","o":["Nizam-ı Cedid","Sekban-ı Cedid","Asakir-i Mansure","Hareket Ordusu"],"a":3,"e":"Hareket Ordusu İstanbul'a gelerek 31 Mart Olayı'nı bastırmıştır."},{"id":9,"q":"Osmanlı Devleti'nin ilk anayasasının adı nedir?","o":["Kanun-ı Esasi","Sened-i İttifak","Tanzimat Fermanı","Islahat Fermanı"],"a":0,"e":"Kanun-ı Esasi 1876'da ilan edilmiş, Osmanlı'nın ilk anayasası olmuştur."},{"id":14,"q":"I. Meşrutiyet hangi yıl ilan edilmiştir?","o":["1908","1876","1923","1839"],"a":1,"e":"I. Meşrutiyet 1876'da II. Abdülhamit döneminde ilan edilmiştir."},{"id":16,"q":"Osmanlı borçlarını denetlemek amacıyla kurulan kurum hangisidir?","o":["Meclis-i Mebusan","Divan-ı Hümayun","Babıâli","Düyûn-ı Umûmiye"],"a":3,"e":"Düyûn-ı Umûmiye, 1881'de Osmanlı gelirlerinin bir bölümünü dış borçların ödenmesi için denetlemiştir."},{"id":26,"q":"Kanun-ı Esasi hangi yıl yeniden yürürlüğe girmiştir?","o":["1839","1908","1856","1876"],"a":1,"e":"Kanun-ı Esasi 1908'de II. Meşrutiyet'in ilanıyla yeniden yürürlüğe konmuştur."},{"id":34,"q":"93 Harbi hangi devletler arasında yapılmıştır?","o":["Osmanlı-Fransa","Osmanlı-Rusya","Osmanlı-İtalya","Osmanlı-İngiltere"],"a":1,"e":"1877-1878 Osmanlı-Rus Savaşı, Hicrî takvimde 1293 yılına denk geldiği için 93 Harbi olarak bilinir."},{"id":39,"q":"31 Mart Olayı'nın temel hedefi neydi?","o":["Cumhuriyeti ilan etmek","Trablusgarp'ı almak","II. Meşrutiyet'e son vermek","Yeniçeri Ocağı'nı kaldırmak"],"a":2,"e":"Ayaklanma, II. Meşrutiyet yönetimine karşı gelişmiş ve Hareket Ordusu tarafından bastırılmıştır."},{"id":43,"q":"Osmanlı'da ilk anayasal yönetime geçiş hangi gelişmeyle olmuştur?","o":["Tanzimat","II. Meşrutiyet","I. Meşrutiyet","Sened-i İttifak"],"a":2,"e":"1876 I. Meşrutiyet ile anayasa ve parlamento temelli yönetime geçilmiştir."},{"id":57,"q":"31 Mart Olayı sonrasında tahttan indirilen padişah kimdir?","o":["II. Abdülhamit","V. Mehmet Reşat","Abdülaziz","II. Mahmut"],"a":0,"e":"31 Mart Olayı'nın ardından II. Abdülhamit tahttan indirilmiştir."},{"id":58,"q":"1853-1856 arasında Rusya'ya karşı yapılan savaş hangisidir?","o":["Trablusgarp","Kırım Savaşı","Balkan Savaşı","93 Harbi"],"a":1,"e":"Kırım Savaşı 1853-1856 yılları arasında Osmanlı ve müttefiklerinin Rusya'ya karşı mücadelesidir."},{"id":60,"q":"II. Meşrutiyet sonrasında yeniden açılan parlamento hangisidir?","o":["Ayan Meclisi","Divan-ı Hümayun","Meclis-i Vala","Meclis-i Mebusan"],"a":3,"e":"II. Meşrutiyet'in ilanıyla Meclis-i Mebusan yeniden faaliyete geçmiştir."},{"id":62,"q":"II. Abdülhamit döneminde meclisin kapatılması hangi uygulamayı gösterir?","o":["Meclisin sürekli açık tutulmasını","İstibdat yönetimini","Saltanatın kaldırılmasını","Basın özgürlüğünün genişlemesini"],"a":1,"e":"Meclisin kapatılması ve siyasi denetimin sıkılaştırılması istibdat döneminin özelliklerindendir."},{"id":67,"q":"1909 Kanun-ı Esasi değişikliklerinden biri hangisidir?","o":["Padişaha sınırsız yetki verilmesi","Meclisin kaldırılması","Hükûmetin Meclis'e karşı sorumlu hâle gelmesi","Partilerin yasaklanması"],"a":2,"e":"1909 değişiklikleri padişahın yetkilerini sınırlamış, parlamenter yapıyı güçlendirmiştir."},{"id":72,"q":"93 Harbi hangi yıllarda yapılmıştır?","o":["1853-1856","1912-1913","1914-1918","1877-1878"],"a":3,"e":"93 Harbi, 1877-1878 Osmanlı-Rus Savaşı'nın adıdır."},{"id":73,"q":"II. Meşrutiyet'in ilanından sonra hangi siyasi gelişme hızlanmıştır?","o":["Çok partili siyasi hayat","Saltanatın kaldırılması","Cumhuriyetin ilanı","Halifeliğin kaldırılması"],"a":0,"e":"Meşrutiyetin yeniden ilanı siyasal örgütlenmeyi ve parti faaliyetlerini artırmıştır."},{"id":77,"q":"Islahat Fermanı hangi savaşın ardından ilan edilmiştir?","o":["Kırım Savaşı","93 Harbi","Trablusgarp","Birinci Balkan"],"a":0,"e":"1856 Islahat Fermanı, Kırım Savaşı'nın ardından ilan edilmiştir."},{"id":82,"q":"Kanun-ı Esasi hangi padişah döneminde ilan edilmiştir?","o":["Abdülaziz","II. Abdülhamit","II. Mahmut","V. Mehmet Reşat"],"a":1,"e":"Kanun-ı Esasi, II. Abdülhamit'in tahta çıkışının ardından 1876'da ilan edilmiştir."},{"id":85,"q":"II. Meşrutiyet öncesinde Makedonya'da öne çıkan isimlerden biri kimdir?","o":["Resneli Niyazi","Koçi Bey","Tarhuncu Ahmet Paşa","Mithat Paşa"],"a":0,"e":"Resneli Niyazi, 1908 sürecinde Makedonya'da başlattığı hareketle II. Meşrutiyet'in ilanında etkili olmuştur."},{"id":96,"q":"Berlin Antlaşması sonrasında bağımsızlığını kazanan devletlerden biri hangisidir?","o":["Bulgaristan","Yunanistan","Arnavutluk","Romanya"],"a":3,"e":"Berlin Antlaşması ile Romanya, Sırbistan ve Karadağ'ın bağımsızlığı tanınmıştır."},{"id":98,"q":"II. Meşrutiyet ile yeniden yürürlüğe giren belge hangisidir?","o":["Tanzimat","Kanun-ı Esasi","Islahat","Sened-i İttifak"],"a":1,"e":"II. Meşrutiyet, 1876 Kanun-ı Esasi'sini yeniden yürürlüğe koymuştur."},{"id":103,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? 31 Mart Olayı'nı bastırmak için kurulan ordunun adı nedir?","o":["Nizam-ı Cedid","Sekban-ı Cedid","Hareket Ordusu","Asakir-i Mansure"],"a":2,"e":"Hareket Ordusu İstanbul'a gelerek 31 Mart Olayı'nı bastırmıştır."},{"id":108,"q":"Aşağıdaki bilgilerden hangisi doğrudur? osmanlı Devleti'nin ilk anayasasının adı nedir?","o":["Sened-i İttifak","Tanzimat Fermanı","Islahat Fermanı","Kanun-ı Esasi"],"a":3,"e":"Kanun-ı Esasi 1876'da ilan edilmiş, Osmanlı'nın ilk anayasası olmuştur."},{"id":113,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? i. Meşrutiyet hangi yıl ilan edilmiştir?","o":["1876","1908","1923","1839"],"a":0,"e":"I. Meşrutiyet 1876'da II. Abdülhamit döneminde ilan edilmiştir."},{"id":115,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? osmanlı borçlarını denetlemek amacıyla kurulan kurum hangisidir?","o":["Meclis-i Mebusan","Divan-ı Hümayun","Düyûn-ı Umûmiye","Babıâli"],"a":2,"e":"Düyûn-ı Umûmiye, 1881'de Osmanlı gelirlerinin bir bölümünü dış borçların ödenmesi için denetlemiştir."},{"id":125,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? kanun-ı Esasi hangi yıl yeniden yürürlüğe girmiştir?","o":["1908","1839","1856","1876"],"a":0,"e":"Kanun-ı Esasi 1908'de II. Meşrutiyet'in ilanıyla yeniden yürürlüğe konmuştur."},{"id":133,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? 93 Harbi hangi devletler arasında yapılmıştır?","o":["Osmanlı-Rusya","Osmanlı-Fransa","Osmanlı-İtalya","Osmanlı-İngiltere"],"a":0,"e":"1877-1878 Osmanlı-Rus Savaşı, Hicrî takvimde 1293 yılına denk geldiği için 93 Harbi olarak bilinir."},{"id":138,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: 31 Mart Olayı'nın temel hedefi neydi?","o":["Cumhuriyeti ilan etmek","II. Meşrutiyet'e son vermek","Trablusgarp'ı almak","Yeniçeri Ocağı'nı kaldırmak"],"a":1,"e":"Ayaklanma, II. Meşrutiyet yönetimine karşı gelişmiş ve Hareket Ordusu tarafından bastırılmıştır."},{"id":142,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı'da ilk anayasal yönetime geçiş hangi gelişmeyle olmuştur?","o":["Tanzimat","I. Meşrutiyet","II. Meşrutiyet","Sened-i İttifak"],"a":1,"e":"1876 I. Meşrutiyet ile anayasa ve parlamento temelli yönetime geçilmiştir."},{"id":156,"q":"Aşağıdaki bilgilerden hangisi doğrudur? 31 Mart Olayı sonrasında tahttan indirilen padişah kimdir?","o":["V. Mehmet Reşat","Abdülaziz","II. Mahmut","II. Abdülhamit"],"a":3,"e":"31 Mart Olayı'nın ardından II. Abdülhamit tahttan indirilmiştir."},{"id":157,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? 1853-1856 arasında Rusya'ya karşı yapılan savaş hangisidir?","o":["Kırım Savaşı","Trablusgarp","Balkan Savaşı","93 Harbi"],"a":0,"e":"Kırım Savaşı 1853-1856 yılları arasında Osmanlı ve müttefiklerinin Rusya'ya karşı mücadelesidir."},{"id":159,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? iI. Meşrutiyet sonrasında yeniden açılan parlamento hangisidir?","o":["Ayan Meclisi","Divan-ı Hümayun","Meclis-i Mebusan","Meclis-i Vala"],"a":2,"e":"II. Meşrutiyet'in ilanıyla Meclis-i Mebusan yeniden faaliyete geçmiştir."},{"id":161,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? iI. Abdülhamit döneminde meclisin kapatılması hangi uygulamayı gösterir?","o":["İstibdat yönetimini","Meclisin sürekli açık tutulmasını","Saltanatın kaldırılmasını","Basın özgürlüğünün genişlemesini"],"a":0,"e":"Meclisin kapatılması ve siyasi denetimin sıkılaştırılması istibdat döneminin özelliklerindendir."},{"id":166,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: 1909 Kanun-ı Esasi değişikliklerinden biri hangisidir?","o":["Padişaha sınırsız yetki verilmesi","Hükûmetin Meclis'e karşı sorumlu hâle gelmesi","Meclisin kaldırılması","Partilerin yasaklanması"],"a":1,"e":"1909 değişiklikleri padişahın yetkilerini sınırlamış, parlamenter yapıyı güçlendirmiştir."},{"id":171,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? 93 Harbi hangi yıllarda yapılmıştır?","o":["1853-1856","1912-1913","1877-1878","1914-1918"],"a":2,"e":"93 Harbi, 1877-1878 Osmanlı-Rus Savaşı'nın adıdır."},{"id":172,"q":"Aşağıdaki bilgilerden hangisi doğrudur? iI. Meşrutiyet'in ilanından sonra hangi siyasi gelişme hızlanmıştır?","o":["Saltanatın kaldırılması","Cumhuriyetin ilanı","Halifeliğin kaldırılması","Çok partili siyasi hayat"],"a":3,"e":"Meşrutiyetin yeniden ilanı siyasal örgütlenmeyi ve parti faaliyetlerini artırmıştır."},{"id":176,"q":"Aşağıdaki bilgilerden hangisi doğrudur? islahat Fermanı hangi savaşın ardından ilan edilmiştir?","o":["93 Harbi","Trablusgarp","Birinci Balkan","Kırım Savaşı"],"a":3,"e":"1856 Islahat Fermanı, Kırım Savaşı'nın ardından ilan edilmiştir."},{"id":181,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? kanun-ı Esasi hangi padişah döneminde ilan edilmiştir?","o":["II. Abdülhamit","Abdülaziz","II. Mahmut","V. Mehmet Reşat"],"a":0,"e":"Kanun-ı Esasi, II. Abdülhamit'in tahta çıkışının ardından 1876'da ilan edilmiştir."},{"id":184,"q":"Aşağıdaki bilgilerden hangisi doğrudur? iI. Meşrutiyet öncesinde Makedonya'da öne çıkan isimlerden biri kimdir?","o":["Koçi Bey","Tarhuncu Ahmet Paşa","Mithat Paşa","Resneli Niyazi"],"a":3,"e":"Resneli Niyazi, 1908 sürecinde Makedonya'da başlattığı hareketle II. Meşrutiyet'in ilanında etkili olmuştur."},{"id":195,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? berlin Antlaşması sonrasında bağımsızlığını kazanan devletlerden biri hangisidir?","o":["Bulgaristan","Yunanistan","Romanya","Arnavutluk"],"a":2,"e":"Berlin Antlaşması ile Romanya, Sırbistan ve Karadağ'ın bağımsızlığı tanınmıştır."},{"id":197,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? iI. Meşrutiyet ile yeniden yürürlüğe giren belge hangisidir?","o":["Kanun-ı Esasi","Tanzimat","Islahat","Sened-i İttifak"],"a":0,"e":"II. Meşrutiyet, 1876 Kanun-ı Esasi'sini yeniden yürürlüğe koymuştur."}],"hafta5":[{"id":2,"q":"Trablusgarp Savaşı'nda Osmanlı Devleti'nin karşısında hangi devlet vardı?","o":["Fransa","İtalya","İngiltere","Rusya"],"a":1,"e":"Trablusgarp'a 1911'de saldıran devlet İtalya'dır."},{"id":8,"q":"Uşi Antlaşması hangi savaşın sonunda imzalanmıştır?","o":["Balkan Savaşları","Kırım Savaşı","Birinci Dünya Savaşı","Trablusgarp Savaşı"],"a":3,"e":"Uşi Antlaşması 1912'de Trablusgarp Savaşı'nı sona erdirmiştir."},{"id":13,"q":"İkinci Balkan Savaşı'nın çıkmasında temel etken nedir?","o":["Bulgaristan'ın aldığı toprakların paylaşımından diğer devletlerin hoşnut olmaması","Osmanlı'nın Balkan devletlerini birleştirmesi","Rusya'nın İstanbul'u işgali","İtalya'nın Trablusgarp'a saldırması"],"a":0,"e":"Birinci Balkan Savaşı'nda kazanılan toprakların paylaşımı Bulgaristan ile diğer Balkan devletlerini karşı karşıya getirmiştir."},{"id":18,"q":"Birinci Balkan Savaşı sonunda imzalanan Londra Antlaşması hangi yıl yapılmıştır?","o":["1912","1913","1911","1914"],"a":1,"e":"Londra Antlaşması 30 Mayıs 1913'te imzalanmıştır."},{"id":22,"q":"İtalya'nın Trablusgarp'a saldırmasının temel amaçlarından biri nedir?","o":["Rusya ile kara bağlantısı kurmak","Yeni bir sömürge ve pazar elde etmek","Balkanlarda toprak kazanmak","Alman sömürgelerini ele geçirmek"],"a":1,"e":"İtalya, Kuzey Afrika'da sömürge edinmek ve ekonomik nüfuz sağlamak istemiştir."},{"id":30,"q":"Uşi Antlaşması'yla Trablusgarp ve Bingazi hangi devlete bırakılmıştır?","o":["Fransa","İtalya","İngiltere","Yunanistan"],"a":1,"e":"Uşi Antlaşması sonucunda Trablusgarp ve Bingazi İtalya'nın kontrolüne geçmiştir."},{"id":35,"q":"Birinci Balkan Savaşı'nda Osmanlı'ya karşı savaşan devletlerden biri hangisidir?","o":["Almanya","İtalya","Bulgaristan","Avusturya"],"a":2,"e":"Bulgaristan, Sırbistan, Yunanistan ve Karadağ Birinci Balkan Savaşı'nda Osmanlı'ya karşı yer almıştır."},{"id":36,"q":"Berlin Antlaşması'nın sonuçlarından biri nedir?","o":["Osmanlı'nın Kuzey Afrika'yı alması","Kapitülasyonların kalkması","Yeniçeriliğin kaldırılması","Balkanlarda önemli toprak kayıpları"],"a":3,"e":"1878 Berlin Antlaşması, Osmanlı'nın Balkanlardaki toprak ve nüfuz kaybını artırmıştır."},{"id":48,"q":"Balkan Savaşları sonunda Osmanlı'nın Avrupa'daki durumu nasıl değişmiştir?","o":["Kuzey Afrika'da egemenliği artmıştır","Mısır'ı geri almıştır","Kafkasya'yı kazanmıştır","Balkanlardaki topraklarının büyük bölümünü kaybetmiştir"],"a":3,"e":"Balkan Savaşları sonunda Osmanlı'nın Avrupa kıtasındaki toprakları büyük ölçüde azalmıştır."},{"id":54,"q":"Birinci Balkan Savaşı hangi yıl başlamıştır?","o":["1908","1912","1911","1914"],"a":1,"e":"Birinci Balkan Savaşı 1912'de başlamıştır."},{"id":61,"q":"Trablusgarp'ta Osmanlı subaylarının yerel halkla mücadele etmesi neyi gösterir?","o":["Osmanlı'nın düzenli orduyu bölgeye ulaştıramadığını","Donanma üstünlüğünü","İtalya'nın savaştan çekildiğini","Balkanların Osmanlı'ya yardım ettiğini"],"a":0,"e":"Deniz gücü ve ulaşım kısıtları nedeniyle Osmanlı düzenli birlik gönderememiş, gönüllü subaylar yerel direnişi örgütlemiştir."},{"id":64,"q":"Mora İsyanı hangi düşüncenin etkisiyle gelişmiştir?","o":["Sanayicilik","Merkantilizm","Feodalizm","Milliyetçilik"],"a":3,"e":"Milliyetçilik düşüncesi, Balkanlardaki Hristiyan toplulukların bağımsızlık hareketlerini etkilemiştir."},{"id":68,"q":"İkinci Balkan Savaşı sırasında Osmanlı'nın geri aldığı önemli şehir hangisidir?","o":["Selanik","Atina","Sofya","Edirne"],"a":3,"e":"Osmanlı Devleti, İkinci Balkan Savaşı'nın koşullarından yararlanarak Edirne'yi geri almıştır."},{"id":79,"q":"Babıâli Baskını hangi siyasi grubun iktidarını güçlendirmiştir?","o":["Hürriyet ve İtilaf","Osmanlı Ahrar","İttihat ve Terakki","İttihad-ı Muhammedi"],"a":2,"e":"1913 Babıâli Baskını sonrasında İttihat ve Terakki yönetimde belirleyici hâle gelmiştir."},{"id":86,"q":"Uşi Antlaşması hangi yıl imzalanmıştır?","o":["1911","1912","1913","1914"],"a":1,"e":"Uşi Antlaşması 18 Ekim 1912'de imzalanmıştır."},{"id":93,"q":"Balkan Savaşları'nda kaybedilen bölgeler hangi coğrafyadaydı?","o":["Balkanlar","Kuzey Afrika","Kafkasya","Orta Asya"],"a":0,"e":"Savaşlar sonucunda Osmanlı, Balkan topraklarının büyük bölümünü kaybetmiştir."},{"id":101,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? trablusgarp Savaşı'nda Osmanlı Devleti'nin karşısında hangi devlet vardı?","o":["İtalya","Fransa","İngiltere","Rusya"],"a":0,"e":"Trablusgarp'a 1911'de saldıran devlet İtalya'dır."},{"id":107,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? uşi Antlaşması hangi savaşın sonunda imzalanmıştır?","o":["Balkan Savaşları","Kırım Savaşı","Trablusgarp Savaşı","Birinci Dünya Savaşı"],"a":2,"e":"Uşi Antlaşması 1912'de Trablusgarp Savaşı'nı sona erdirmiştir."},{"id":112,"q":"Aşağıdaki bilgilerden hangisi doğrudur? i̇kinci Balkan Savaşı'nın çıkmasında temel etken nedir?","o":["Osmanlı'nın Balkan devletlerini birleştirmesi","Rusya'nın İstanbul'u işgali","İtalya'nın Trablusgarp'a saldırması","Bulgaristan'ın aldığı toprakların paylaşımından diğer devletlerin hoşnut olmaması"],"a":3,"e":"Birinci Balkan Savaşı'nda kazanılan toprakların paylaşımı Bulgaristan ile diğer Balkan devletlerini karşı karşıya getirmiştir."},{"id":117,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? birinci Balkan Savaşı sonunda imzalanan Londra Antlaşması hangi yıl yapılmıştır?","o":["1913","1912","1911","1914"],"a":0,"e":"Londra Antlaşması 30 Mayıs 1913'te imzalanmıştır."},{"id":121,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? i̇talya'nın Trablusgarp'a saldırmasının temel amaçlarından biri nedir?","o":["Yeni bir sömürge ve pazar elde etmek","Rusya ile kara bağlantısı kurmak","Balkanlarda toprak kazanmak","Alman sömürgelerini ele geçirmek"],"a":0,"e":"İtalya, Kuzey Afrika'da sömürge edinmek ve ekonomik nüfuz sağlamak istemiştir."},{"id":129,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? uşi Antlaşması'yla Trablusgarp ve Bingazi hangi devlete bırakılmıştır?","o":["İtalya","Fransa","İngiltere","Yunanistan"],"a":0,"e":"Uşi Antlaşması sonucunda Trablusgarp ve Bingazi İtalya'nın kontrolüne geçmiştir."},{"id":134,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: birinci Balkan Savaşı'nda Osmanlı'ya karşı savaşan devletlerden biri hangisidir?","o":["Almanya","Bulgaristan","İtalya","Avusturya"],"a":1,"e":"Bulgaristan, Sırbistan, Yunanistan ve Karadağ Birinci Balkan Savaşı'nda Osmanlı'ya karşı yer almıştır."},{"id":135,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? berlin Antlaşması'nın sonuçlarından biri nedir?","o":["Osmanlı'nın Kuzey Afrika'yı alması","Kapitülasyonların kalkması","Balkanlarda önemli toprak kayıpları","Yeniçeriliğin kaldırılması"],"a":2,"e":"1878 Berlin Antlaşması, Osmanlı'nın Balkanlardaki toprak ve nüfuz kaybını artırmıştır."},{"id":147,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? balkan Savaşları sonunda Osmanlı'nın Avrupa'daki durumu nasıl değişmiştir?","o":["Kuzey Afrika'da egemenliği artmıştır","Mısır'ı geri almıştır","Balkanlardaki topraklarının büyük bölümünü kaybetmiştir","Kafkasya'yı kazanmıştır"],"a":2,"e":"Balkan Savaşları sonunda Osmanlı'nın Avrupa kıtasındaki toprakları büyük ölçüde azalmıştır."},{"id":153,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? birinci Balkan Savaşı hangi yıl başlamıştır?","o":["1912","1908","1911","1914"],"a":0,"e":"Birinci Balkan Savaşı 1912'de başlamıştır."},{"id":160,"q":"Aşağıdaki bilgilerden hangisi doğrudur? trablusgarp'ta Osmanlı subaylarının yerel halkla mücadele etmesi neyi gösterir?","o":["Donanma üstünlüğünü","İtalya'nın savaştan çekildiğini","Balkanların Osmanlı'ya yardım ettiğini","Osmanlı'nın düzenli orduyu bölgeye ulaştıramadığını"],"a":3,"e":"Deniz gücü ve ulaşım kısıtları nedeniyle Osmanlı düzenli birlik gönderememiş, gönüllü subaylar yerel direnişi örgütlemiştir."},{"id":163,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? mora İsyanı hangi düşüncenin etkisiyle gelişmiştir?","o":["Sanayicilik","Merkantilizm","Milliyetçilik","Feodalizm"],"a":2,"e":"Milliyetçilik düşüncesi, Balkanlardaki Hristiyan toplulukların bağımsızlık hareketlerini etkilemiştir."},{"id":167,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? i̇kinci Balkan Savaşı sırasında Osmanlı'nın geri aldığı önemli şehir hangisidir?","o":["Selanik","Atina","Edirne","Sofya"],"a":2,"e":"Osmanlı Devleti, İkinci Balkan Savaşı'nın koşullarından yararlanarak Edirne'yi geri almıştır."},{"id":178,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: babıâli Baskını hangi siyasi grubun iktidarını güçlendirmiştir?","o":["Hürriyet ve İtilaf","İttihat ve Terakki","Osmanlı Ahrar","İttihad-ı Muhammedi"],"a":1,"e":"1913 Babıâli Baskını sonrasında İttihat ve Terakki yönetimde belirleyici hâle gelmiştir."},{"id":185,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? uşi Antlaşması hangi yıl imzalanmıştır?","o":["1912","1911","1913","1914"],"a":0,"e":"Uşi Antlaşması 18 Ekim 1912'de imzalanmıştır."},{"id":192,"q":"Aşağıdaki bilgilerden hangisi doğrudur? balkan Savaşları'nda kaybedilen bölgeler hangi coğrafyadaydı?","o":["Kuzey Afrika","Kafkasya","Orta Asya","Balkanlar"],"a":3,"e":"Savaşlar sonucunda Osmanlı, Balkan topraklarının büyük bölümünü kaybetmiştir."},{"id":200,"q":"Aşağıdaki bilgilerden hangisi doğrudur? trablusgarp Savaşı'nda Osmanlı Devleti'nin karşısında hangi devlet vardı?","o":["Fransa","İngiltere","Rusya","İtalya"],"a":3,"e":"Trablusgarp'a 1911'de saldıran devlet İtalya'dır."}],"hafta6":[{"id":10,"q":"Osmanlı Devleti'nin Birinci Dünya Savaşı'nda savaştığı cephelerden biri hangisidir?","o":["Normandiya","Kafkas","Verdun","Somme"],"a":1,"e":"Kafkas Cephesi, Osmanlı'nın Rusya'ya karşı savaştığı cephedir."},{"id":15,"q":"Birinci Dünya Savaşı'nı başlatan suikast nerede gerçekleşmiştir?","o":["Berlin","Paris","Saraybosna","Viyana"],"a":2,"e":"Avusturya-Macaristan veliahdı Franz Ferdinand, 28 Haziran 1914'te Saraybosna'da öldürülmüştür."},{"id":20,"q":"Çanakkale Cephesi'nin açılmasındaki amaçlardan biri nedir?","o":["İtalya'yı Kuzey Afrika'dan çıkarmak","Balkan devletlerini Osmanlı'ya bağlamak","Almanya'yı savaştan çıkarmak","Rusya'ya yardım ulaştırmak ve İstanbul'u ele geçirmek"],"a":3,"e":"İtilaf Devletleri boğazları geçerek İstanbul'u almayı ve Rusya'ya yardım ulaştırmayı hedeflemiştir."},{"id":25,"q":"Osmanlı Devleti'nin Birinci Dünya Savaşı'na Almanya yanında girmesinde etkili olan unsur nedir?","o":["Almanya ile ittifak ilişkisi","Fransa ile dostluk","Rusya'nın yardım göndermesi","İngiltere'nin daveti"],"a":0,"e":"Osmanlı yönetimi Almanya ile ittifak yaparak siyasi ve askerî destek sağlamayı ummuştur."},{"id":28,"q":"Osmanlı'nın Rusya'ya karşı savaştığı cephe hangisidir?","o":["Kanal","Irak","Hicaz","Kafkas"],"a":3,"e":"Kafkas Cephesi'nde Osmanlı kuvvetleri Rus ordusuna karşı savaşmıştır."},{"id":32,"q":"İngiltere'nin Araplarla yaptığı yazışmalarla ilgili anlaşma hangisidir?","o":["Sykes-Picot","Balfour","Saint Jean de Maurienne","Mac Mahon"],"a":3,"e":"Mac Mahon yazışmaları, İngiltere'nin Araplara bağımsızlık vaadiyle ilişkilidir."},{"id":38,"q":"Osmanlı'nın İngiltere'ye karşı açtığı cephelerden biri hangisidir?","o":["Galiçya","Kanal","Romanya","Makedonya"],"a":1,"e":"Kanal Cephesi, İngiltere'nin Süveyş ve Hindistan bağlantısını tehdit etmeyi amaçlamıştır."},{"id":40,"q":"Osmanlı Devleti'nin savaşa girmesinde etkili olan Alman gemileri hangileridir?","o":["Nusret ve Hamidiye","Ertuğrul ve Barbaros","Mecidiye ve Turgut Reis","Yavuz ve Midilli"],"a":3,"e":"Yavuz ve Midilli adı verilen Alman gemilerinin Karadeniz'de Rus limanlarını bombalaması savaşa giriş sürecini hızlandırmıştır."},{"id":42,"q":"Sykes-Picot Antlaşması hangi devletlerin Orta Doğu paylaşım planıdır?","o":["Almanya ve Avusturya","İngiltere ve Fransa","Rusya ve İtalya","Osmanlı ve Almanya"],"a":1,"e":"Sykes-Picot, İngiltere ve Fransa'nın Osmanlı'nın Arap topraklarını nüfuz alanlarına ayırma planıdır."},{"id":45,"q":"Kutü'l-Amare zaferi hangi cephede kazanılmıştır?","o":["Irak","Sarıkamış","Çanakkale","Kanal"],"a":0,"e":"Kutü'l-Amare, 1916'da Irak Cephesi'nde İngiliz kuvvetlerine karşı kazanılmıştır."},{"id":56,"q":"Kafkas Cephesi'nde başarısızlıkla sonuçlanan harekât hangisidir?","o":["Kutü'l-Amare","Çanakkale","Kanal","Sarıkamış"],"a":3,"e":"Sarıkamış Harekâtı ağır kış koşulları ve planlama sorunları nedeniyle büyük kayıpla sonuçlanmıştır."},{"id":63,"q":"Osmanlı'nın Birinci Dünya Savaşı'ndaki müttefiklerinden biri hangisidir?","o":["İngiltere","Fransa","Almanya","Rusya"],"a":2,"e":"Almanya, Osmanlı Devleti'nin savaşta aynı blokta yer aldığı başlıca müttefikidir."},{"id":65,"q":"Çanakkale Cephesi'nde öne çıkan Osmanlı komutanlarından biri kimdir?","o":["Mustafa Kemal","Enver Paşa","Cemal Paşa","Talat Paşa"],"a":0,"e":"Mustafa Kemal, Çanakkale Savaşları'nda özellikle Anafartalar ve Conkbayırı'ndaki başarılarıyla öne çıkmıştır."},{"id":70,"q":"Kanal Cephesi'nde hedeflenen stratejik nokta hangisidir?","o":["Cebelitarık","Süveyş Kanalı","Manş Denizi","İstanbul Boğazı"],"a":1,"e":"Süveyş Kanalı, İngiltere'nin Hindistan ve Uzak Doğu bağlantısı için stratejik öneme sahipti."},{"id":74,"q":"Birinci Dünya Savaşı'nın genel nedenlerinden biri hangisidir?","o":["Silahsızlanmanın tamamlanması","Sömürgecilik yarışı ve çıkar çatışmaları","Milliyetçiliğin bitmesi","Ekonomik rekabetin sona ermesi"],"a":1,"e":"Emperyalist rekabet, bloklaşma, silahlanma ve milliyetçilik savaşın temel nedenleri arasındadır."},{"id":78,"q":"İngiltere ve Fransa'nın Osmanlı topraklarını paylaşma planı hangisidir?","o":["Uşi","Sykes-Picot","Karlofça","Hünkâr İskelesi"],"a":1,"e":"Sykes-Picot, İngiltere ve Fransa'nın Orta Doğu'daki nüfuz alanlarını belirleyen gizli anlaşmadır."},{"id":83,"q":"Hicaz Cephesi'nde Osmanlı hangi güçlerle mücadele etmiştir?","o":["Rusya","İtalya","İngiltere destekli Arap isyancı kuvvetler","Almanya"],"a":2,"e":"Hicaz bölgesinde İngiliz desteği alan Arap isyanı Osmanlı kuvvetleriyle çatışmıştır."},{"id":88,"q":"Osmanlı'nın müttefiklerine destek amacıyla asker gönderdiği cephelerden biri hangisidir?","o":["Çanakkale","Kafkas","Kanal","Galiçya"],"a":3,"e":"Osmanlı birlikleri müttefiklerine destek için Galiçya gibi Avrupa cephelerinde görev yapmıştır."},{"id":94,"q":"Rusya'nın Birinci Dünya Savaşı'ndan çekilmesi hangi gelişmeyle bağlantılıdır?","o":["Osmanlı'nın savaşa girmesi","1917 Bolşevik Devrimi","İtalya'nın savaşa katılması","Çanakkale'nin açılması"],"a":1,"e":"1917 Bolşevik Devrimi sonrasında Rusya savaştan çekilmiş ve Brest-Litovsk süreci başlamıştır."},{"id":109,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? osmanlı Devleti'nin Birinci Dünya Savaşı'nda savaştığı cephelerden biri hangisidir?","o":["Kafkas","Normandiya","Verdun","Somme"],"a":0,"e":"Kafkas Cephesi, Osmanlı'nın Rusya'ya karşı savaştığı cephedir."},{"id":114,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: birinci Dünya Savaşı'nı başlatan suikast nerede gerçekleşmiştir?","o":["Berlin","Saraybosna","Paris","Viyana"],"a":1,"e":"Avusturya-Macaristan veliahdı Franz Ferdinand, 28 Haziran 1914'te Saraybosna'da öldürülmüştür."},{"id":119,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? çanakkale Cephesi'nin açılmasındaki amaçlardan biri nedir?","o":["İtalya'yı Kuzey Afrika'dan çıkarmak","Balkan devletlerini Osmanlı'ya bağlamak","Rusya'ya yardım ulaştırmak ve İstanbul'u ele geçirmek","Almanya'yı savaştan çıkarmak"],"a":2,"e":"İtilaf Devletleri boğazları geçerek İstanbul'u almayı ve Rusya'ya yardım ulaştırmayı hedeflemiştir."},{"id":124,"q":"Aşağıdaki bilgilerden hangisi doğrudur? osmanlı Devleti'nin Birinci Dünya Savaşı'na Almanya yanında girmesinde etkili olan unsur nedir?","o":["Fransa ile dostluk","Rusya'nın yardım göndermesi","İngiltere'nin daveti","Almanya ile ittifak ilişkisi"],"a":3,"e":"Osmanlı yönetimi Almanya ile ittifak yaparak siyasi ve askerî destek sağlamayı ummuştur."},{"id":127,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? osmanlı'nın Rusya'ya karşı savaştığı cephe hangisidir?","o":["Kanal","Irak","Kafkas","Hicaz"],"a":2,"e":"Kafkas Cephesi'nde Osmanlı kuvvetleri Rus ordusuna karşı savaşmıştır."},{"id":131,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? i̇ngiltere'nin Araplarla yaptığı yazışmalarla ilgili anlaşma hangisidir?","o":["Sykes-Picot","Balfour","Mac Mahon","Saint Jean de Maurienne"],"a":2,"e":"Mac Mahon yazışmaları, İngiltere'nin Araplara bağımsızlık vaadiyle ilişkilidir."},{"id":137,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? osmanlı'nın İngiltere'ye karşı açtığı cephelerden biri hangisidir?","o":["Kanal","Galiçya","Romanya","Makedonya"],"a":0,"e":"Kanal Cephesi, İngiltere'nin Süveyş ve Hindistan bağlantısını tehdit etmeyi amaçlamıştır."},{"id":139,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? osmanlı Devleti'nin savaşa girmesinde etkili olan Alman gemileri hangileridir?","o":["Nusret ve Hamidiye","Ertuğrul ve Barbaros","Yavuz ve Midilli","Mecidiye ve Turgut Reis"],"a":2,"e":"Yavuz ve Midilli adı verilen Alman gemilerinin Karadeniz'de Rus limanlarını bombalaması savaşa giriş sürecini hızlandırmıştır."},{"id":141,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? sykes-Picot Antlaşması hangi devletlerin Orta Doğu paylaşım planıdır?","o":["İngiltere ve Fransa","Almanya ve Avusturya","Rusya ve İtalya","Osmanlı ve Almanya"],"a":0,"e":"Sykes-Picot, İngiltere ve Fransa'nın Osmanlı'nın Arap topraklarını nüfuz alanlarına ayırma planıdır."},{"id":144,"q":"Aşağıdaki bilgilerden hangisi doğrudur? kutü'l-Amare zaferi hangi cephede kazanılmıştır?","o":["Sarıkamış","Çanakkale","Kanal","Irak"],"a":3,"e":"Kutü'l-Amare, 1916'da Irak Cephesi'nde İngiliz kuvvetlerine karşı kazanılmıştır."},{"id":155,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? kafkas Cephesi'nde başarısızlıkla sonuçlanan harekât hangisidir?","o":["Kutü'l-Amare","Çanakkale","Sarıkamış","Kanal"],"a":2,"e":"Sarıkamış Harekâtı ağır kış koşulları ve planlama sorunları nedeniyle büyük kayıpla sonuçlanmıştır."},{"id":162,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı'nın Birinci Dünya Savaşı'ndaki müttefiklerinden biri hangisidir?","o":["İngiltere","Almanya","Fransa","Rusya"],"a":1,"e":"Almanya, Osmanlı Devleti'nin savaşta aynı blokta yer aldığı başlıca müttefikidir."},{"id":164,"q":"Aşağıdaki bilgilerden hangisi doğrudur? çanakkale Cephesi'nde öne çıkan Osmanlı komutanlarından biri kimdir?","o":["Enver Paşa","Cemal Paşa","Talat Paşa","Mustafa Kemal"],"a":3,"e":"Mustafa Kemal, Çanakkale Savaşları'nda özellikle Anafartalar ve Conkbayırı'ndaki başarılarıyla öne çıkmıştır."},{"id":169,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? kanal Cephesi'nde hedeflenen stratejik nokta hangisidir?","o":["Süveyş Kanalı","Cebelitarık","Manş Denizi","İstanbul Boğazı"],"a":0,"e":"Süveyş Kanalı, İngiltere'nin Hindistan ve Uzak Doğu bağlantısı için stratejik öneme sahipti."},{"id":173,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? birinci Dünya Savaşı'nın genel nedenlerinden biri hangisidir?","o":["Sömürgecilik yarışı ve çıkar çatışmaları","Silahsızlanmanın tamamlanması","Milliyetçiliğin bitmesi","Ekonomik rekabetin sona ermesi"],"a":0,"e":"Emperyalist rekabet, bloklaşma, silahlanma ve milliyetçilik savaşın temel nedenleri arasındadır."},{"id":177,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? i̇ngiltere ve Fransa'nın Osmanlı topraklarını paylaşma planı hangisidir?","o":["Sykes-Picot","Uşi","Karlofça","Hünkâr İskelesi"],"a":0,"e":"Sykes-Picot, İngiltere ve Fransa'nın Orta Doğu'daki nüfuz alanlarını belirleyen gizli anlaşmadır."},{"id":182,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: hicaz Cephesi'nde Osmanlı hangi güçlerle mücadele etmiştir?","o":["Rusya","İngiltere destekli Arap isyancı kuvvetler","İtalya","Almanya"],"a":1,"e":"Hicaz bölgesinde İngiliz desteği alan Arap isyanı Osmanlı kuvvetleriyle çatışmıştır."},{"id":187,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? osmanlı'nın müttefiklerine destek amacıyla asker gönderdiği cephelerden biri hangisidir?","o":["Çanakkale","Kafkas","Galiçya","Kanal"],"a":2,"e":"Osmanlı birlikleri müttefiklerine destek için Galiçya gibi Avrupa cephelerinde görev yapmıştır."},{"id":193,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? rusya'nın Birinci Dünya Savaşı'ndan çekilmesi hangi gelişmeyle bağlantılıdır?","o":["1917 Bolşevik Devrimi","Osmanlı'nın savaşa girmesi","İtalya'nın savaşa katılması","Çanakkale'nin açılması"],"a":0,"e":"1917 Bolşevik Devrimi sonrasında Rusya savaştan çekilmiş ve Brest-Litovsk süreci başlamıştır."}],"hafta7":[{"id":5,"q":"Mondros Ateşkes Antlaşması'nın en tehlikeli maddelerinden biri hangisidir?","o":["İtilaf Devletlerinin güvenlik gerekçesiyle stratejik yerleri işgal edebilmesi","Ordunun terhis edilmesi","Boğazların açılması","Haberleşmenin denetlenmesi"],"a":0,"e":"7. madde, İtilaf Devletlerine güvenliklerini tehdit eden bir durum gördüklerinde işgal imkânı tanımıştır."},{"id":47,"q":"II. Meşrutiyet'in ilanında etkili olan cemiyet hangisidir?","o":["İttihad-ı Muhammedi","Hürriyet ve İtilaf","İttihat ve Terakki","Osmanlı Ahrar"],"a":2,"e":"İttihat ve Terakki Cemiyeti, 1908'de II. Meşrutiyet'in ilanında belirleyici rol oynamıştır."},{"id":49,"q":"Mondros Ateşkes Antlaşması hangi tarihte imzalanmıştır?","o":["30 Ekim 1918","23 Temmuz 1908","19 Mayıs 1919","24 Temmuz 1923"],"a":0,"e":"Mondros Ateşkesi 30 Ekim 1918'de imzalanmıştır."},{"id":51,"q":"Çanakkale Cephesi'nde İtilaf Devletlerinin temel hedefi neydi?","o":["İtalya'yı Afrika'dan çıkarmak","Balkanları Osmanlı'ya bağlamak","İstanbul'u ele geçirmek ve Rusya'ya yardım ulaştırmak","Almanya'yı savaştan çıkarmak"],"a":2,"e":"Boğazları geçmek, İstanbul'u işgal etmek ve Rusya ile bağlantı kurmak temel hedeflerdi."},{"id":81,"q":"Mondros'tan sonra Osmanlı topraklarında hangi süreç başlamıştır?","o":["İşgallerin başlaması","Osmanlı'nın genişlemesi","Sanayileşmenin hızlanması","Balkan birliği"],"a":0,"e":"Ateşkes hükümleri ve özellikle 7. madde, İtilaf işgallerinin önünü açmıştır."},{"id":91,"q":"Osmanlı Devleti'nin Birinci Dünya Savaşı sonunda imzaladığı ateşkes hangisidir?","o":["Sevr","Lozan","Mondros","Mudanya"],"a":2,"e":"Osmanlı Devleti, Birinci Dünya Savaşı'ndan 30 Ekim 1918 Mondros Ateşkesi ile çekilmiştir."},{"id":99,"q":"Mondros'un 24. maddesi hangi bölgelerle ilgili işgal ihtimalini gündeme getirmiştir?","o":["Trakya","Ege Adaları","Altı vilayet","Kuzey Afrika"],"a":2,"e":"24. madde, doğudaki altı vilayette karışıklık çıkması hâlinde işgal imkânı tanıyan hüküm olarak yorumlanmıştır."},{"id":104,"q":"Aşağıdaki bilgilerden hangisi doğrudur? mondros Ateşkes Antlaşması'nın en tehlikeli maddelerinden biri hangisidir?","o":["Ordunun terhis edilmesi","Boğazların açılması","Haberleşmenin denetlenmesi","İtilaf Devletlerinin güvenlik gerekçesiyle stratejik yerleri işgal edebilmesi"],"a":3,"e":"7. madde, İtilaf Devletlerine güvenliklerini tehdit eden bir durum gördüklerinde işgal imkânı tanımıştır."},{"id":146,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: iI. Meşrutiyet'in ilanında etkili olan cemiyet hangisidir?","o":["İttihad-ı Muhammedi","İttihat ve Terakki","Hürriyet ve İtilaf","Osmanlı Ahrar"],"a":1,"e":"İttihat ve Terakki Cemiyeti, 1908'de II. Meşrutiyet'in ilanında belirleyici rol oynamıştır."},{"id":148,"q":"Aşağıdaki bilgilerden hangisi doğrudur? mondros Ateşkes Antlaşması hangi tarihte imzalanmıştır?","o":["23 Temmuz 1908","19 Mayıs 1919","24 Temmuz 1923","30 Ekim 1918"],"a":3,"e":"Mondros Ateşkesi 30 Ekim 1918'de imzalanmıştır."},{"id":150,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: çanakkale Cephesi'nde İtilaf Devletlerinin temel hedefi neydi?","o":["İtalya'yı Afrika'dan çıkarmak","İstanbul'u ele geçirmek ve Rusya'ya yardım ulaştırmak","Balkanları Osmanlı'ya bağlamak","Almanya'yı savaştan çıkarmak"],"a":1,"e":"Boğazları geçmek, İstanbul'u işgal etmek ve Rusya ile bağlantı kurmak temel hedeflerdi."},{"id":180,"q":"Aşağıdaki bilgilerden hangisi doğrudur? mondros'tan sonra Osmanlı topraklarında hangi süreç başlamıştır?","o":["Osmanlı'nın genişlemesi","Sanayileşmenin hızlanması","Balkan birliği","İşgallerin başlaması"],"a":3,"e":"Ateşkes hükümleri ve özellikle 7. madde, İtilaf işgallerinin önünü açmıştır."},{"id":190,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı Devleti'nin Birinci Dünya Savaşı sonunda imzaladığı ateşkes hangisidir?","o":["Sevr","Mondros","Lozan","Mudanya"],"a":1,"e":"Osmanlı Devleti, Birinci Dünya Savaşı'ndan 30 Ekim 1918 Mondros Ateşkesi ile çekilmiştir."},{"id":198,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: mondros'un 24. maddesi hangi bölgelerle ilgili işgal ihtimalini gündeme getirmiştir?","o":["Trakya","Altı vilayet","Ege Adaları","Kuzey Afrika"],"a":1,"e":"24. madde, doğudaki altı vilayette karışıklık çıkması hâlinde işgal imkânı tanıyan hüküm olarak yorumlanmıştır."}],"all":[{"id":1,"q":"Atatürk İlkeleri ve İnkılap Tarihi derslerinin yaygınlaştırılmasının temel amaçlarından biri nedir?","o":["Cumhuriyet değerlerini halka benimsetmek","Osmanlı hanedanını yeniden yönetime getirmek","Saltanat yönetimini güçlendirmek","Sömürgeciliği desteklemek"],"a":0,"e":"Dersin temel amaçlarından biri Cumhuriyetin kuruluş sürecini ve temel değerlerini tanıtmaktır."},{"id":2,"q":"Trablusgarp Savaşı'nda Osmanlı Devleti'nin karşısında hangi devlet vardı?","o":["Fransa","İtalya","İngiltere","Rusya"],"a":1,"e":"Trablusgarp'a 1911'de saldıran devlet İtalya'dır."},{"id":3,"q":"1699 Karlofça Antlaşması'nın Osmanlı tarihi açısından önemi nedir?","o":["Kapitülasyonları kaldırması","Cumhuriyeti ilan etmesi","Büyük çaplı toprak kayıplarının yaşandığı önemli bir dönüm noktası olması","Kuzey Afrika'yı Osmanlı'ya kazandırması"],"a":2,"e":"Karlofça, Osmanlı'nın Avrupa'da genişleme döneminin sona erdiğini ve önemli toprak kayıplarını simgeler."},{"id":4,"q":"31 Mart Olayı'nı bastırmak için kurulan ordunun adı nedir?","o":["Nizam-ı Cedid","Sekban-ı Cedid","Asakir-i Mansure","Hareket Ordusu"],"a":3,"e":"Hareket Ordusu İstanbul'a gelerek 31 Mart Olayı'nı bastırmıştır."},{"id":5,"q":"Mondros Ateşkes Antlaşması'nın en tehlikeli maddelerinden biri hangisidir?","o":["İtilaf Devletlerinin güvenlik gerekçesiyle stratejik yerleri işgal edebilmesi","Ordunun terhis edilmesi","Boğazların açılması","Haberleşmenin denetlenmesi"],"a":0,"e":"7. madde, İtilaf Devletlerine güvenliklerini tehdit eden bir durum gördüklerinde işgal imkânı tanımıştır."},{"id":6,"q":"Ekber ve Erşed sistemi neyi esas alır?","o":["En küçük şehzadenin tahta geçmesini","Hanedanın en yaşlı ve aklı başında üyesinin tahta geçmesini","Seçimle padişah belirlenmesini","Sadrazamın hükümdar olmasını"],"a":1,"e":"Ekber ve Erşed, hanedanın en yaşlı erkek üyesinin tahta geçmesi esasına dayanır."},{"id":7,"q":"Fransız İhtilali'nin Osmanlı Devleti'ni en fazla etkileyen düşüncesi hangisidir?","o":["Merkantilizm","Hümanizm","Milliyetçilik","Feodalizm"],"a":2,"e":"Milliyetçilik, çok uluslu Osmanlı Devleti'nde ayrılıkçı hareketleri güçlendirmiştir."},{"id":8,"q":"Uşi Antlaşması hangi savaşın sonunda imzalanmıştır?","o":["Balkan Savaşları","Kırım Savaşı","Birinci Dünya Savaşı","Trablusgarp Savaşı"],"a":3,"e":"Uşi Antlaşması 1912'de Trablusgarp Savaşı'nı sona erdirmiştir."},{"id":9,"q":"Osmanlı Devleti'nin ilk anayasasının adı nedir?","o":["Kanun-ı Esasi","Sened-i İttifak","Tanzimat Fermanı","Islahat Fermanı"],"a":0,"e":"Kanun-ı Esasi 1876'da ilan edilmiş, Osmanlı'nın ilk anayasası olmuştur."},{"id":10,"q":"Osmanlı Devleti'nin Birinci Dünya Savaşı'nda savaştığı cephelerden biri hangisidir?","o":["Normandiya","Kafkas","Verdun","Somme"],"a":1,"e":"Kafkas Cephesi, Osmanlı'nın Rusya'ya karşı savaştığı cephedir."},{"id":11,"q":"Osmanlı ıslahatlarının askerî alanda yoğunlaşmasının temel nedeni nedir?","o":["Sömürgeciliğin bitmesi","Deniz ticaretinin bırakılması","Askerî yenilgiler ve güç kaybı","Milliyetçiliğin ortadan kalkması"],"a":2,"e":"Askerî yenilgiler, devlet adamlarını öncelikle orduda ve askerî teknolojide yenilik yapmaya yöneltmiştir."},{"id":12,"q":"Tanzimat Fermanı hangi yıl ilan edilmiştir?","o":["1856","1876","1808","1839"],"a":3,"e":"Tanzimat Fermanı 3 Kasım 1839'da Gülhane'de ilan edilmiştir."},{"id":13,"q":"İkinci Balkan Savaşı'nın çıkmasında temel etken nedir?","o":["Bulgaristan'ın aldığı toprakların paylaşımından diğer devletlerin hoşnut olmaması","Osmanlı'nın Balkan devletlerini birleştirmesi","Rusya'nın İstanbul'u işgali","İtalya'nın Trablusgarp'a saldırması"],"a":0,"e":"Birinci Balkan Savaşı'nda kazanılan toprakların paylaşımı Bulgaristan ile diğer Balkan devletlerini karşı karşıya getirmiştir."},{"id":14,"q":"I. Meşrutiyet hangi yıl ilan edilmiştir?","o":["1908","1876","1923","1839"],"a":1,"e":"I. Meşrutiyet 1876'da II. Abdülhamit döneminde ilan edilmiştir."},{"id":15,"q":"Birinci Dünya Savaşı'nı başlatan suikast nerede gerçekleşmiştir?","o":["Berlin","Paris","Saraybosna","Viyana"],"a":2,"e":"Avusturya-Macaristan veliahdı Franz Ferdinand, 28 Haziran 1914'te Saraybosna'da öldürülmüştür."},{"id":16,"q":"Osmanlı borçlarını denetlemek amacıyla kurulan kurum hangisidir?","o":["Meclis-i Mebusan","Divan-ı Hümayun","Babıâli","Düyûn-ı Umûmiye"],"a":3,"e":"Düyûn-ı Umûmiye, 1881'de Osmanlı gelirlerinin bir bölümünü dış borçların ödenmesi için denetlemiştir."},{"id":17,"q":"Kabakçı Mustafa İsyanı hangi padişah döneminde yaşanmıştır?","o":["III. Selim","II. Mahmut","IV. Murat","II. Abdülhamit"],"a":0,"e":"Kabakçı Mustafa İsyanı 1807'de III. Selim'in yeniliklerine karşı çıkmıştır."},{"id":18,"q":"Birinci Balkan Savaşı sonunda imzalanan Londra Antlaşması hangi yıl yapılmıştır?","o":["1912","1913","1911","1914"],"a":1,"e":"Londra Antlaşması 30 Mayıs 1913'te imzalanmıştır."},{"id":19,"q":"Tımar sisteminin bozulması hangi sonuca yol açmıştır?","o":["Avrupa'da sanayinin durmasına","Osmanlı donanmasının güçlenmesine","Taşrada güvenlik ve üretim sorunlarının artmasına","Merkezi yönetimin güçlenmesine"],"a":2,"e":"Tımar sisteminin bozulması üretimi, vergi düzenini ve taşra güvenliğini olumsuz etkilemiştir."},{"id":20,"q":"Çanakkale Cephesi'nin açılmasındaki amaçlardan biri nedir?","o":["İtalya'yı Kuzey Afrika'dan çıkarmak","Balkan devletlerini Osmanlı'ya bağlamak","Almanya'yı savaştan çıkarmak","Rusya'ya yardım ulaştırmak ve İstanbul'u ele geçirmek"],"a":3,"e":"İtilaf Devletleri boğazları geçerek İstanbul'u almayı ve Rusya'ya yardım ulaştırmayı hedeflemiştir."},{"id":21,"q":"Sened-i İttifak hangi taraflar arasında imzalanmıştır?","o":["Padişah ile ayanlar","Osmanlı-Rusya","Osmanlı-İngiltere","Osmanlı-Fransa"],"a":0,"e":"1808 Sened-i İttifak, II. Mahmut ile ayanlar arasında yapılmıştır."},{"id":22,"q":"İtalya'nın Trablusgarp'a saldırmasının temel amaçlarından biri nedir?","o":["Rusya ile kara bağlantısı kurmak","Yeni bir sömürge ve pazar elde etmek","Balkanlarda toprak kazanmak","Alman sömürgelerini ele geçirmek"],"a":1,"e":"İtalya, Kuzey Afrika'da sömürge edinmek ve ekonomik nüfuz sağlamak istemiştir."},{"id":23,"q":"Islahat Fermanı'nın temel hedeflerinden biri nedir?","o":["Yeniçeri Ocağı'nı kurmak","Saltanatı kaldırmak","Gayrimüslimlere yeni haklar tanımak","Cumhuriyete geçmek"],"a":2,"e":"1856 Islahat Fermanı özellikle gayrimüslim tebaanın hak ve statüsüne ilişkin düzenlemeler getirmiştir."},{"id":24,"q":"II. Viyana Kuşatması hangi yıl gerçekleşmiştir?","o":["1699","1718","1730","1683"],"a":3,"e":"1683 II. Viyana Kuşatması'nın başarısızlığı, Osmanlı'nın Avrupa'da geri çekilme sürecini hızlandırmıştır."},{"id":25,"q":"Osmanlı Devleti'nin Birinci Dünya Savaşı'na Almanya yanında girmesinde etkili olan unsur nedir?","o":["Almanya ile ittifak ilişkisi","Fransa ile dostluk","Rusya'nın yardım göndermesi","İngiltere'nin daveti"],"a":0,"e":"Osmanlı yönetimi Almanya ile ittifak yaparak siyasi ve askerî destek sağlamayı ummuştur."},{"id":26,"q":"Kanun-ı Esasi hangi yıl yeniden yürürlüğe girmiştir?","o":["1839","1908","1856","1876"],"a":1,"e":"Kanun-ı Esasi 1908'de II. Meşrutiyet'in ilanıyla yeniden yürürlüğe konmuştur."},{"id":27,"q":"Lale Devri hangi antlaşmadan sonra başlamıştır?","o":["Küçük Kaynarca","Karlofça","Pasarofça","Berlin"],"a":2,"e":"1718 Pasarofça Antlaşması sonrasında Lale Devri başlamıştır."},{"id":28,"q":"Osmanlı'nın Rusya'ya karşı savaştığı cephe hangisidir?","o":["Kanal","Irak","Hicaz","Kafkas"],"a":3,"e":"Kafkas Cephesi'nde Osmanlı kuvvetleri Rus ordusuna karşı savaşmıştır."},{"id":29,"q":"Yeniçeri Ocağı'nın kaldırılması hangi olayla anılır?","o":["Vaka-i Hayriye","31 Mart Olayı","Babıâli Baskını","Kabakçı İsyanı"],"a":0,"e":"1826'da Yeniçeri Ocağı kaldırılmış ve bu olay Vaka-i Hayriye olarak adlandırılmıştır."},{"id":30,"q":"Uşi Antlaşması'yla Trablusgarp ve Bingazi hangi devlete bırakılmıştır?","o":["Fransa","İtalya","İngiltere","Yunanistan"],"a":1,"e":"Uşi Antlaşması sonucunda Trablusgarp ve Bingazi İtalya'nın kontrolüne geçmiştir."},{"id":31,"q":"II. Abdülhamit dönemindeki baskıcı yönetim hangi kavramla ifade edilir?","o":["Tanzimat","Meşrutiyet","İstibdat","Islahat"],"a":2,"e":"İstibdat, II. Abdülhamit dönemindeki sıkı denetim ve baskıcı yönetim anlayışını tanımlar."},{"id":32,"q":"İngiltere'nin Araplarla yaptığı yazışmalarla ilgili anlaşma hangisidir?","o":["Sykes-Picot","Balfour","Saint Jean de Maurienne","Mac Mahon"],"a":3,"e":"Mac Mahon yazışmaları, İngiltere'nin Araplara bağımsızlık vaadiyle ilişkilidir."},{"id":33,"q":"1718-1730 yılları arasındaki döneme ne ad verilir?","o":["Lale Devri","Tanzimat","Meşrutiyet","Fetret"],"a":0,"e":"Lale Devri 1718 Pasarofça ile başlayıp 1730 Patrona Halil İsyanı ile sona ermiştir."},{"id":34,"q":"93 Harbi hangi devletler arasında yapılmıştır?","o":["Osmanlı-Fransa","Osmanlı-Rusya","Osmanlı-İtalya","Osmanlı-İngiltere"],"a":1,"e":"1877-1878 Osmanlı-Rus Savaşı, Hicrî takvimde 1293 yılına denk geldiği için 93 Harbi olarak bilinir."},{"id":35,"q":"Birinci Balkan Savaşı'nda Osmanlı'ya karşı savaşan devletlerden biri hangisidir?","o":["Almanya","İtalya","Bulgaristan","Avusturya"],"a":2,"e":"Bulgaristan, Sırbistan, Yunanistan ve Karadağ Birinci Balkan Savaşı'nda Osmanlı'ya karşı yer almıştır."},{"id":36,"q":"Berlin Antlaşması'nın sonuçlarından biri nedir?","o":["Osmanlı'nın Kuzey Afrika'yı alması","Kapitülasyonların kalkması","Yeniçeriliğin kaldırılması","Balkanlarda önemli toprak kayıpları"],"a":3,"e":"1878 Berlin Antlaşması, Osmanlı'nın Balkanlardaki toprak ve nüfuz kaybını artırmıştır."},{"id":37,"q":"Avrupa'daki bilimsel gelişmelerin takip edilmemesi hangi alanda gerilemeye neden olmuştur?","o":["Bilim ve eğitim","Tarım arazileri","Deniz ticareti","Nüfus"],"a":0,"e":"Bilimsel ve teknik gelişmelerin gerisinde kalmak eğitim, teknoloji ve üretim kapasitesini olumsuz etkilemiştir."},{"id":38,"q":"Osmanlı'nın İngiltere'ye karşı açtığı cephelerden biri hangisidir?","o":["Galiçya","Kanal","Romanya","Makedonya"],"a":1,"e":"Kanal Cephesi, İngiltere'nin Süveyş ve Hindistan bağlantısını tehdit etmeyi amaçlamıştır."},{"id":39,"q":"31 Mart Olayı'nın temel hedefi neydi?","o":["Cumhuriyeti ilan etmek","Trablusgarp'ı almak","II. Meşrutiyet'e son vermek","Yeniçeri Ocağı'nı kaldırmak"],"a":2,"e":"Ayaklanma, II. Meşrutiyet yönetimine karşı gelişmiş ve Hareket Ordusu tarafından bastırılmıştır."},{"id":40,"q":"Osmanlı Devleti'nin savaşa girmesinde etkili olan Alman gemileri hangileridir?","o":["Nusret ve Hamidiye","Ertuğrul ve Barbaros","Mecidiye ve Turgut Reis","Yavuz ve Midilli"],"a":3,"e":"Yavuz ve Midilli adı verilen Alman gemilerinin Karadeniz'de Rus limanlarını bombalaması savaşa giriş sürecini hızlandırmıştır."},{"id":41,"q":"Osmanlı'da taşrada güç kazanan yerel eşrafa ne ad verilirdi?","o":["Ayan","Yeniçeri","Müderris","Kapıkulu"],"a":0,"e":"Ayanlar, özellikle merkezi otoritenin zayıfladığı dönemlerde taşrada nüfuz sahibi yerel ileri gelenlerdi."},{"id":42,"q":"Sykes-Picot Antlaşması hangi devletlerin Orta Doğu paylaşım planıdır?","o":["Almanya ve Avusturya","İngiltere ve Fransa","Rusya ve İtalya","Osmanlı ve Almanya"],"a":1,"e":"Sykes-Picot, İngiltere ve Fransa'nın Osmanlı'nın Arap topraklarını nüfuz alanlarına ayırma planıdır."},{"id":43,"q":"Osmanlı'da ilk anayasal yönetime geçiş hangi gelişmeyle olmuştur?","o":["Tanzimat","II. Meşrutiyet","I. Meşrutiyet","Sened-i İttifak"],"a":2,"e":"1876 I. Meşrutiyet ile anayasa ve parlamento temelli yönetime geçilmiştir."},{"id":44,"q":"Tanzimat Fermanı hangi hakları güvence altına almayı hedeflemiştir?","o":["Sadece askerlerin haklarını","Saray çalışanlarının ayrıcalıklarını","Yalnız ticaret gemilerini","Can, mal ve namus güvenliğini"],"a":3,"e":"Tanzimat Fermanı, tebaanın can, mal ve namus güvenliğini güvence altına alma vaadi içerir."},{"id":45,"q":"Kutü'l-Amare zaferi hangi cephede kazanılmıştır?","o":["Irak","Sarıkamış","Çanakkale","Kanal"],"a":0,"e":"Kutü'l-Amare, 1916'da Irak Cephesi'nde İngiliz kuvvetlerine karşı kazanılmıştır."},{"id":46,"q":"II. Mahmut dönemindeki önemli gelişmelerden biri hangisidir?","o":["Saltanatın kaldırılması","Yeniçeri Ocağı'nın kaldırılması","Cumhuriyetin ilanı","Halifeliğin kaldırılması"],"a":1,"e":"II. Mahmut döneminde 1826'da Yeniçeri Ocağı kaldırılmıştır."},{"id":47,"q":"II. Meşrutiyet'in ilanında etkili olan cemiyet hangisidir?","o":["İttihad-ı Muhammedi","Hürriyet ve İtilaf","İttihat ve Terakki","Osmanlı Ahrar"],"a":2,"e":"İttihat ve Terakki Cemiyeti, 1908'de II. Meşrutiyet'in ilanında belirleyici rol oynamıştır."},{"id":48,"q":"Balkan Savaşları sonunda Osmanlı'nın Avrupa'daki durumu nasıl değişmiştir?","o":["Kuzey Afrika'da egemenliği artmıştır","Mısır'ı geri almıştır","Kafkasya'yı kazanmıştır","Balkanlardaki topraklarının büyük bölümünü kaybetmiştir"],"a":3,"e":"Balkan Savaşları sonunda Osmanlı'nın Avrupa kıtasındaki toprakları büyük ölçüde azalmıştır."},{"id":49,"q":"Mondros Ateşkes Antlaşması hangi tarihte imzalanmıştır?","o":["30 Ekim 1918","23 Temmuz 1908","19 Mayıs 1919","24 Temmuz 1923"],"a":0,"e":"Mondros Ateşkesi 30 Ekim 1918'de imzalanmıştır."},{"id":50,"q":"Osmanlı duraklamasının iç nedenlerinden biri hangisidir?","o":["Avrupa'da Rönesans","Merkezi yönetimin bozulması","Coğrafi Keşifler","Sanayi Devrimi"],"a":1,"e":"Merkezi yönetimdeki bozulma, taşrada otorite kaybına ve devlet düzeninin zayıflamasına yol açmıştır."},{"id":51,"q":"Çanakkale Cephesi'nde İtilaf Devletlerinin temel hedefi neydi?","o":["İtalya'yı Afrika'dan çıkarmak","Balkanları Osmanlı'ya bağlamak","İstanbul'u ele geçirmek ve Rusya'ya yardım ulaştırmak","Almanya'yı savaştan çıkarmak"],"a":2,"e":"Boğazları geçmek, İstanbul'u işgal etmek ve Rusya ile bağlantı kurmak temel hedeflerdi."},{"id":52,"q":"Mısır Meselesi sırasında Mehmet Ali Paşa ile yapılan antlaşma hangisidir?","o":["Uşi","Karlofça","Berlin","Kütahya"],"a":3,"e":"1833 Kütahya Antlaşması, Osmanlı ile Mehmet Ali Paşa arasındaki krizin geçici çözümüdür."},{"id":53,"q":"Islahatların başarısız olmasının nedenlerinden biri nedir?","o":["Yeniliklerin kişilere bağlı kalması ve süreklilik kazanmaması","Avrupa'nın müdahale etmemesi","Halkın tüm yenilikleri desteklemesi","Devletin çok güçlü ekonomisi"],"a":0,"e":"Reformların kurumsallaşamaması ve kişilere bağlı kalması kalıcı sonuç alınmasını zorlaştırmıştır."},{"id":54,"q":"Birinci Balkan Savaşı hangi yıl başlamıştır?","o":["1908","1912","1911","1914"],"a":1,"e":"Birinci Balkan Savaşı 1912'de başlamıştır."},{"id":55,"q":"Karlofça sonrası yeniliklerin temel hedefi neydi?","o":["Saltanatı kaldırmak","Cumhuriyeti ilan etmek","Kaybedilen toprakları geri almak ve devleti güçlendirmek","Avrupa'yla savaşı büyütmek"],"a":2,"e":"Karlofça sonrasında Osmanlı, askerî ve idari yeniliklerle kayıpları telafi etmeye çalışmıştır."},{"id":56,"q":"Kafkas Cephesi'nde başarısızlıkla sonuçlanan harekât hangisidir?","o":["Kutü'l-Amare","Çanakkale","Kanal","Sarıkamış"],"a":3,"e":"Sarıkamış Harekâtı ağır kış koşulları ve planlama sorunları nedeniyle büyük kayıpla sonuçlanmıştır."},{"id":57,"q":"31 Mart Olayı sonrasında tahttan indirilen padişah kimdir?","o":["II. Abdülhamit","V. Mehmet Reşat","Abdülaziz","II. Mahmut"],"a":0,"e":"31 Mart Olayı'nın ardından II. Abdülhamit tahttan indirilmiştir."},{"id":58,"q":"1853-1856 arasında Rusya'ya karşı yapılan savaş hangisidir?","o":["Trablusgarp","Kırım Savaşı","Balkan Savaşı","93 Harbi"],"a":1,"e":"Kırım Savaşı 1853-1856 yılları arasında Osmanlı ve müttefiklerinin Rusya'ya karşı mücadelesidir."},{"id":59,"q":"Sanayi Devrimi'nin Avrupa'daki sonuçlarından biri hangisidir?","o":["El işçiliğine dönüş","Sömürgeciliğin bitmesi","Ham madde ve pazar ihtiyacının artması","Fabrikaların kapanması"],"a":2,"e":"Sanayileşme, fabrikalar için ham madde ve ürünler için yeni pazar arayışını hızlandırmıştır."},{"id":60,"q":"II. Meşrutiyet sonrasında yeniden açılan parlamento hangisidir?","o":["Ayan Meclisi","Divan-ı Hümayun","Meclis-i Vala","Meclis-i Mebusan"],"a":3,"e":"II. Meşrutiyet'in ilanıyla Meclis-i Mebusan yeniden faaliyete geçmiştir."},{"id":61,"q":"Trablusgarp'ta Osmanlı subaylarının yerel halkla mücadele etmesi neyi gösterir?","o":["Osmanlı'nın düzenli orduyu bölgeye ulaştıramadığını","Donanma üstünlüğünü","İtalya'nın savaştan çekildiğini","Balkanların Osmanlı'ya yardım ettiğini"],"a":0,"e":"Deniz gücü ve ulaşım kısıtları nedeniyle Osmanlı düzenli birlik gönderememiş, gönüllü subaylar yerel direnişi örgütlemiştir."},{"id":62,"q":"II. Abdülhamit döneminde meclisin kapatılması hangi uygulamayı gösterir?","o":["Meclisin sürekli açık tutulmasını","İstibdat yönetimini","Saltanatın kaldırılmasını","Basın özgürlüğünün genişlemesini"],"a":1,"e":"Meclisin kapatılması ve siyasi denetimin sıkılaştırılması istibdat döneminin özelliklerindendir."},{"id":63,"q":"Osmanlı'nın Birinci Dünya Savaşı'ndaki müttefiklerinden biri hangisidir?","o":["İngiltere","Fransa","Almanya","Rusya"],"a":2,"e":"Almanya, Osmanlı Devleti'nin savaşta aynı blokta yer aldığı başlıca müttefikidir."},{"id":64,"q":"Mora İsyanı hangi düşüncenin etkisiyle gelişmiştir?","o":["Sanayicilik","Merkantilizm","Feodalizm","Milliyetçilik"],"a":3,"e":"Milliyetçilik düşüncesi, Balkanlardaki Hristiyan toplulukların bağımsızlık hareketlerini etkilemiştir."},{"id":65,"q":"Çanakkale Cephesi'nde öne çıkan Osmanlı komutanlarından biri kimdir?","o":["Mustafa Kemal","Enver Paşa","Cemal Paşa","Talat Paşa"],"a":0,"e":"Mustafa Kemal, Çanakkale Savaşları'nda özellikle Anafartalar ve Conkbayırı'ndaki başarılarıyla öne çıkmıştır."},{"id":66,"q":"Tanzimat Fermanı'nın ilanında etkili olan devlet adamı kimdir?","o":["Köprülü Mehmet Paşa","Mustafa Reşit Paşa","Tarhuncu Ahmet Paşa","Koçi Bey"],"a":1,"e":"Mustafa Reşit Paşa, Gülhane Hatt-ı Hümayunu'nun ilanında öncü rol oynamıştır."},{"id":67,"q":"1909 Kanun-ı Esasi değişikliklerinden biri hangisidir?","o":["Padişaha sınırsız yetki verilmesi","Meclisin kaldırılması","Hükûmetin Meclis'e karşı sorumlu hâle gelmesi","Partilerin yasaklanması"],"a":2,"e":"1909 değişiklikleri padişahın yetkilerini sınırlamış, parlamenter yapıyı güçlendirmiştir."},{"id":68,"q":"İkinci Balkan Savaşı sırasında Osmanlı'nın geri aldığı önemli şehir hangisidir?","o":["Selanik","Atina","Sofya","Edirne"],"a":3,"e":"Osmanlı Devleti, İkinci Balkan Savaşı'nın koşullarından yararlanarak Edirne'yi geri almıştır."},{"id":69,"q":"Vergi toplama hakkının belirli kişilere verilmesi hangi sistemdir?","o":["İltizam","Devşirme","Tımar","Ekber-Erşed"],"a":0,"e":"İltizam sisteminde vergi toplama hakkı belirli süre ve bedel karşılığında mültezimlere bırakılır."},{"id":70,"q":"Kanal Cephesi'nde hedeflenen stratejik nokta hangisidir?","o":["Cebelitarık","Süveyş Kanalı","Manş Denizi","İstanbul Boğazı"],"a":1,"e":"Süveyş Kanalı, İngiltere'nin Hindistan ve Uzak Doğu bağlantısı için stratejik öneme sahipti."},{"id":71,"q":"II. Mahmut döneminde kaldırılan askerî teşkilat hangisidir?","o":["Nizam-ı Cedid","Asakir-i Mansure","Yeniçeri Ocağı","Redif"],"a":2,"e":"Yeniçeri Ocağı 1826'da Vaka-i Hayriye ile kaldırılmıştır."},{"id":72,"q":"93 Harbi hangi yıllarda yapılmıştır?","o":["1853-1856","1912-1913","1914-1918","1877-1878"],"a":3,"e":"93 Harbi, 1877-1878 Osmanlı-Rus Savaşı'nın adıdır."},{"id":73,"q":"II. Meşrutiyet'in ilanından sonra hangi siyasi gelişme hızlanmıştır?","o":["Çok partili siyasi hayat","Saltanatın kaldırılması","Cumhuriyetin ilanı","Halifeliğin kaldırılması"],"a":0,"e":"Meşrutiyetin yeniden ilanı siyasal örgütlenmeyi ve parti faaliyetlerini artırmıştır."},{"id":74,"q":"Birinci Dünya Savaşı'nın genel nedenlerinden biri hangisidir?","o":["Silahsızlanmanın tamamlanması","Sömürgecilik yarışı ve çıkar çatışmaları","Milliyetçiliğin bitmesi","Ekonomik rekabetin sona ermesi"],"a":1,"e":"Emperyalist rekabet, bloklaşma, silahlanma ve milliyetçilik savaşın temel nedenleri arasındadır."},{"id":75,"q":"Osmanlı yönetiminde en üst makamda kim bulunurdu?","o":["Sadrazam","Kazasker","Padişah","Defterdar"],"a":2,"e":"Osmanlı klasik yönetim düzeninde devletin başında padişah bulunurdu."},{"id":76,"q":"Lale Devri'ni sona erdiren isyan hangisidir?","o":["Celali","Kabakçı Mustafa","31 Mart","Patrona Halil"],"a":3,"e":"1730 Patrona Halil İsyanı Lale Devri'ni sona erdirmiştir."},{"id":77,"q":"Islahat Fermanı hangi savaşın ardından ilan edilmiştir?","o":["Kırım Savaşı","93 Harbi","Trablusgarp","Birinci Balkan"],"a":0,"e":"1856 Islahat Fermanı, Kırım Savaşı'nın ardından ilan edilmiştir."},{"id":78,"q":"İngiltere ve Fransa'nın Osmanlı topraklarını paylaşma planı hangisidir?","o":["Uşi","Sykes-Picot","Karlofça","Hünkâr İskelesi"],"a":1,"e":"Sykes-Picot, İngiltere ve Fransa'nın Orta Doğu'daki nüfuz alanlarını belirleyen gizli anlaşmadır."},{"id":79,"q":"Babıâli Baskını hangi siyasi grubun iktidarını güçlendirmiştir?","o":["Hürriyet ve İtilaf","Osmanlı Ahrar","İttihat ve Terakki","İttihad-ı Muhammedi"],"a":2,"e":"1913 Babıâli Baskını sonrasında İttihat ve Terakki yönetimde belirleyici hâle gelmiştir."},{"id":80,"q":"17. yüzyılda sorunları rapor eden devlet adamı kimdir?","o":["Mustafa Reşit Paşa","Mithat Paşa","Mahmut Şevket Paşa","Koçi Bey"],"a":3,"e":"Koçi Bey, IV. Murat ve Sultan İbrahim dönemlerinde devlet düzenindeki sorunları raporlarıyla ele almıştır."},{"id":81,"q":"Mondros'tan sonra Osmanlı topraklarında hangi süreç başlamıştır?","o":["İşgallerin başlaması","Osmanlı'nın genişlemesi","Sanayileşmenin hızlanması","Balkan birliği"],"a":0,"e":"Ateşkes hükümleri ve özellikle 7. madde, İtilaf işgallerinin önünü açmıştır."},{"id":82,"q":"Kanun-ı Esasi hangi padişah döneminde ilan edilmiştir?","o":["Abdülaziz","II. Abdülhamit","II. Mahmut","V. Mehmet Reşat"],"a":1,"e":"Kanun-ı Esasi, II. Abdülhamit'in tahta çıkışının ardından 1876'da ilan edilmiştir."},{"id":83,"q":"Hicaz Cephesi'nde Osmanlı hangi güçlerle mücadele etmiştir?","o":["Rusya","İtalya","İngiltere destekli Arap isyancı kuvvetler","Almanya"],"a":2,"e":"Hicaz bölgesinde İngiliz desteği alan Arap isyanı Osmanlı kuvvetleriyle çatışmıştır."},{"id":84,"q":"Merkezi yönetimin zayıflaması hangi sonuca yol açmıştır?","o":["Bilimsel gelişmelerin hızlanması","Sömürgeciliğin bitmesi","Sanayi üretiminin artması","Taşrada otorite kaybı"],"a":3,"e":"Merkezî otorite zayıfladıkça yerel güçler artmış, güvenlik ve vergi düzeni bozulmuştur."},{"id":85,"q":"II. Meşrutiyet öncesinde Makedonya'da öne çıkan isimlerden biri kimdir?","o":["Resneli Niyazi","Koçi Bey","Tarhuncu Ahmet Paşa","Mithat Paşa"],"a":0,"e":"Resneli Niyazi, 1908 sürecinde Makedonya'da başlattığı hareketle II. Meşrutiyet'in ilanında etkili olmuştur."},{"id":86,"q":"Uşi Antlaşması hangi yıl imzalanmıştır?","o":["1911","1912","1913","1914"],"a":1,"e":"Uşi Antlaşması 18 Ekim 1912'de imzalanmıştır."},{"id":87,"q":"Karlofça Antlaşması hangi savaşlar sonrasında imzalanmıştır?","o":["İngiltere-Fransa savaşları","İtalya-Almanya savaşları","Kutsal İttifak savaşları","Rusya-İran savaşları"],"a":2,"e":"Osmanlı, Kutsal İttifak devletleriyle uzun savaşların ardından 1699'da Karlofça'yı imzalamıştır."},{"id":88,"q":"Osmanlı'nın müttefiklerine destek amacıyla asker gönderdiği cephelerden biri hangisidir?","o":["Çanakkale","Kafkas","Kanal","Galiçya"],"a":3,"e":"Osmanlı birlikleri müttefiklerine destek için Galiçya gibi Avrupa cephelerinde görev yapmıştır."},{"id":89,"q":"Sened-i İttifak'ın tarihî önemi nedir?","o":["Padişah otoritesinin ilk kez bazı yönlerden sınırlandırılması","Cumhuriyetin ilanı","Yeniçeriliğin kaldırılması","İlk anayasanın yürürlüğe girmesi"],"a":0,"e":"Sened-i İttifak, padişah ile ayanlar arasında karşılıklı yükümlülükler getirerek merkezî otoriteyi sınırlayan bir belge olarak değerlendirilir."},{"id":90,"q":"Mısır Meselesi'nin önemli taraflarından biri kimdir?","o":["Enver Paşa","Mehmet Ali Paşa","Mustafa Reşit Paşa","Mahmut Şevket Paşa"],"a":1,"e":"Mısır Valisi Mehmet Ali Paşa'nın güçlenmesi Osmanlı yönetimiyle ciddi bir krize yol açmıştır."},{"id":91,"q":"Osmanlı Devleti'nin Birinci Dünya Savaşı sonunda imzaladığı ateşkes hangisidir?","o":["Sevr","Lozan","Mondros","Mudanya"],"a":2,"e":"Osmanlı Devleti, Birinci Dünya Savaşı'ndan 30 Ekim 1918 Mondros Ateşkesi ile çekilmiştir."},{"id":92,"q":"Patrona Halil İsyanı'nın lideri kimdir?","o":["Kabakçı Mustafa","Alemdar Mustafa Paşa","Resneli Niyazi","Patrona Halil"],"a":3,"e":"İsyan, Patrona Halil'in önderliğinde 1730'da gerçekleşmiştir."},{"id":93,"q":"Balkan Savaşları'nda kaybedilen bölgeler hangi coğrafyadaydı?","o":["Balkanlar","Kuzey Afrika","Kafkasya","Orta Asya"],"a":0,"e":"Savaşlar sonucunda Osmanlı, Balkan topraklarının büyük bölümünü kaybetmiştir."},{"id":94,"q":"Rusya'nın Birinci Dünya Savaşı'ndan çekilmesi hangi gelişmeyle bağlantılıdır?","o":["Osmanlı'nın savaşa girmesi","1917 Bolşevik Devrimi","İtalya'nın savaşa katılması","Çanakkale'nin açılması"],"a":1,"e":"1917 Bolşevik Devrimi sonrasında Rusya savaştan çekilmiş ve Brest-Litovsk süreci başlamıştır."},{"id":95,"q":"Osmanlı ıslahatlarının ilk dönemlerinde ağırlık verilen alan hangisidir?","o":["Spor","Turizm","Askerî alan","Sinema"],"a":2,"e":"Askerî yenilgiler nedeniyle ilk yenilik girişimleri çoğunlukla orduyu güçlendirmeye yönelmiştir."},{"id":96,"q":"Berlin Antlaşması sonrasında bağımsızlığını kazanan devletlerden biri hangisidir?","o":["Bulgaristan","Yunanistan","Arnavutluk","Romanya"],"a":3,"e":"Berlin Antlaşması ile Romanya, Sırbistan ve Karadağ'ın bağımsızlığı tanınmıştır."},{"id":97,"q":"Irak Cephesi'nde Osmanlı hangi devletle mücadele etmiştir?","o":["İngiltere","Fransa","İtalya","Almanya"],"a":0,"e":"Irak Cephesi'nde Osmanlı kuvvetleri İngiliz ordusuna karşı savaşmıştır."},{"id":98,"q":"II. Meşrutiyet ile yeniden yürürlüğe giren belge hangisidir?","o":["Tanzimat","Kanun-ı Esasi","Islahat","Sened-i İttifak"],"a":1,"e":"II. Meşrutiyet, 1876 Kanun-ı Esasi'sini yeniden yürürlüğe koymuştur."},{"id":99,"q":"Mondros'un 24. maddesi hangi bölgelerle ilgili işgal ihtimalini gündeme getirmiştir?","o":["Trakya","Ege Adaları","Altı vilayet","Kuzey Afrika"],"a":2,"e":"24. madde, doğudaki altı vilayette karışıklık çıkması hâlinde işgal imkânı tanıyan hüküm olarak yorumlanmıştır."},{"id":100,"q":"Aşağıdaki bilgilerden hangisi doğrudur? atatürk İlkeleri ve İnkılap Tarihi derslerinin yaygınlaştırılmasının temel amaçlarından biri nedir?","o":["Osmanlı hanedanını yeniden yönetime getirmek","Saltanat yönetimini güçlendirmek","Sömürgeciliği desteklemek","Cumhuriyet değerlerini halka benimsetmek"],"a":3,"e":"Dersin temel amaçlarından biri Cumhuriyetin kuruluş sürecini ve temel değerlerini tanıtmaktır."},{"id":101,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? trablusgarp Savaşı'nda Osmanlı Devleti'nin karşısında hangi devlet vardı?","o":["İtalya","Fransa","İngiltere","Rusya"],"a":0,"e":"Trablusgarp'a 1911'de saldıran devlet İtalya'dır."},{"id":102,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: 1699 Karlofça Antlaşması'nın Osmanlı tarihi açısından önemi nedir?","o":["Kapitülasyonları kaldırması","Büyük çaplı toprak kayıplarının yaşandığı önemli bir dönüm noktası olması","Cumhuriyeti ilan etmesi","Kuzey Afrika'yı Osmanlı'ya kazandırması"],"a":1,"e":"Karlofça, Osmanlı'nın Avrupa'da genişleme döneminin sona erdiğini ve önemli toprak kayıplarını simgeler."},{"id":103,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? 31 Mart Olayı'nı bastırmak için kurulan ordunun adı nedir?","o":["Nizam-ı Cedid","Sekban-ı Cedid","Hareket Ordusu","Asakir-i Mansure"],"a":2,"e":"Hareket Ordusu İstanbul'a gelerek 31 Mart Olayı'nı bastırmıştır."},{"id":104,"q":"Aşağıdaki bilgilerden hangisi doğrudur? mondros Ateşkes Antlaşması'nın en tehlikeli maddelerinden biri hangisidir?","o":["Ordunun terhis edilmesi","Boğazların açılması","Haberleşmenin denetlenmesi","İtilaf Devletlerinin güvenlik gerekçesiyle stratejik yerleri işgal edebilmesi"],"a":3,"e":"7. madde, İtilaf Devletlerine güvenliklerini tehdit eden bir durum gördüklerinde işgal imkânı tanımıştır."},{"id":105,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? ekber ve Erşed sistemi neyi esas alır?","o":["Hanedanın en yaşlı ve aklı başında üyesinin tahta geçmesini","En küçük şehzadenin tahta geçmesini","Seçimle padişah belirlenmesini","Sadrazamın hükümdar olmasını"],"a":0,"e":"Ekber ve Erşed, hanedanın en yaşlı erkek üyesinin tahta geçmesi esasına dayanır."},{"id":106,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: fransız İhtilali'nin Osmanlı Devleti'ni en fazla etkileyen düşüncesi hangisidir?","o":["Merkantilizm","Milliyetçilik","Hümanizm","Feodalizm"],"a":1,"e":"Milliyetçilik, çok uluslu Osmanlı Devleti'nde ayrılıkçı hareketleri güçlendirmiştir."},{"id":107,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? uşi Antlaşması hangi savaşın sonunda imzalanmıştır?","o":["Balkan Savaşları","Kırım Savaşı","Trablusgarp Savaşı","Birinci Dünya Savaşı"],"a":2,"e":"Uşi Antlaşması 1912'de Trablusgarp Savaşı'nı sona erdirmiştir."},{"id":108,"q":"Aşağıdaki bilgilerden hangisi doğrudur? osmanlı Devleti'nin ilk anayasasının adı nedir?","o":["Sened-i İttifak","Tanzimat Fermanı","Islahat Fermanı","Kanun-ı Esasi"],"a":3,"e":"Kanun-ı Esasi 1876'da ilan edilmiş, Osmanlı'nın ilk anayasası olmuştur."},{"id":109,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? osmanlı Devleti'nin Birinci Dünya Savaşı'nda savaştığı cephelerden biri hangisidir?","o":["Kafkas","Normandiya","Verdun","Somme"],"a":0,"e":"Kafkas Cephesi, Osmanlı'nın Rusya'ya karşı savaştığı cephedir."},{"id":110,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı ıslahatlarının askerî alanda yoğunlaşmasının temel nedeni nedir?","o":["Sömürgeciliğin bitmesi","Askerî yenilgiler ve güç kaybı","Deniz ticaretinin bırakılması","Milliyetçiliğin ortadan kalkması"],"a":1,"e":"Askerî yenilgiler, devlet adamlarını öncelikle orduda ve askerî teknolojide yenilik yapmaya yöneltmiştir."},{"id":111,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? tanzimat Fermanı hangi yıl ilan edilmiştir?","o":["1856","1876","1839","1808"],"a":2,"e":"Tanzimat Fermanı 3 Kasım 1839'da Gülhane'de ilan edilmiştir."},{"id":112,"q":"Aşağıdaki bilgilerden hangisi doğrudur? i̇kinci Balkan Savaşı'nın çıkmasında temel etken nedir?","o":["Osmanlı'nın Balkan devletlerini birleştirmesi","Rusya'nın İstanbul'u işgali","İtalya'nın Trablusgarp'a saldırması","Bulgaristan'ın aldığı toprakların paylaşımından diğer devletlerin hoşnut olmaması"],"a":3,"e":"Birinci Balkan Savaşı'nda kazanılan toprakların paylaşımı Bulgaristan ile diğer Balkan devletlerini karşı karşıya getirmiştir."},{"id":113,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? i. Meşrutiyet hangi yıl ilan edilmiştir?","o":["1876","1908","1923","1839"],"a":0,"e":"I. Meşrutiyet 1876'da II. Abdülhamit döneminde ilan edilmiştir."},{"id":114,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: birinci Dünya Savaşı'nı başlatan suikast nerede gerçekleşmiştir?","o":["Berlin","Saraybosna","Paris","Viyana"],"a":1,"e":"Avusturya-Macaristan veliahdı Franz Ferdinand, 28 Haziran 1914'te Saraybosna'da öldürülmüştür."},{"id":115,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? osmanlı borçlarını denetlemek amacıyla kurulan kurum hangisidir?","o":["Meclis-i Mebusan","Divan-ı Hümayun","Düyûn-ı Umûmiye","Babıâli"],"a":2,"e":"Düyûn-ı Umûmiye, 1881'de Osmanlı gelirlerinin bir bölümünü dış borçların ödenmesi için denetlemiştir."},{"id":116,"q":"Aşağıdaki bilgilerden hangisi doğrudur? kabakçı Mustafa İsyanı hangi padişah döneminde yaşanmıştır?","o":["II. Mahmut","IV. Murat","II. Abdülhamit","III. Selim"],"a":3,"e":"Kabakçı Mustafa İsyanı 1807'de III. Selim'in yeniliklerine karşı çıkmıştır."},{"id":117,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? birinci Balkan Savaşı sonunda imzalanan Londra Antlaşması hangi yıl yapılmıştır?","o":["1913","1912","1911","1914"],"a":0,"e":"Londra Antlaşması 30 Mayıs 1913'te imzalanmıştır."},{"id":118,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: tımar sisteminin bozulması hangi sonuca yol açmıştır?","o":["Avrupa'da sanayinin durmasına","Taşrada güvenlik ve üretim sorunlarının artmasına","Osmanlı donanmasının güçlenmesine","Merkezi yönetimin güçlenmesine"],"a":1,"e":"Tımar sisteminin bozulması üretimi, vergi düzenini ve taşra güvenliğini olumsuz etkilemiştir."},{"id":119,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? çanakkale Cephesi'nin açılmasındaki amaçlardan biri nedir?","o":["İtalya'yı Kuzey Afrika'dan çıkarmak","Balkan devletlerini Osmanlı'ya bağlamak","Rusya'ya yardım ulaştırmak ve İstanbul'u ele geçirmek","Almanya'yı savaştan çıkarmak"],"a":2,"e":"İtilaf Devletleri boğazları geçerek İstanbul'u almayı ve Rusya'ya yardım ulaştırmayı hedeflemiştir."},{"id":120,"q":"Aşağıdaki bilgilerden hangisi doğrudur? sened-i İttifak hangi taraflar arasında imzalanmıştır?","o":["Osmanlı-Rusya","Osmanlı-İngiltere","Osmanlı-Fransa","Padişah ile ayanlar"],"a":3,"e":"1808 Sened-i İttifak, II. Mahmut ile ayanlar arasında yapılmıştır."},{"id":121,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? i̇talya'nın Trablusgarp'a saldırmasının temel amaçlarından biri nedir?","o":["Yeni bir sömürge ve pazar elde etmek","Rusya ile kara bağlantısı kurmak","Balkanlarda toprak kazanmak","Alman sömürgelerini ele geçirmek"],"a":0,"e":"İtalya, Kuzey Afrika'da sömürge edinmek ve ekonomik nüfuz sağlamak istemiştir."},{"id":122,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: islahat Fermanı'nın temel hedeflerinden biri nedir?","o":["Yeniçeri Ocağı'nı kurmak","Gayrimüslimlere yeni haklar tanımak","Saltanatı kaldırmak","Cumhuriyete geçmek"],"a":1,"e":"1856 Islahat Fermanı özellikle gayrimüslim tebaanın hak ve statüsüne ilişkin düzenlemeler getirmiştir."},{"id":123,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? iI. Viyana Kuşatması hangi yıl gerçekleşmiştir?","o":["1699","1718","1683","1730"],"a":2,"e":"1683 II. Viyana Kuşatması'nın başarısızlığı, Osmanlı'nın Avrupa'da geri çekilme sürecini hızlandırmıştır."},{"id":124,"q":"Aşağıdaki bilgilerden hangisi doğrudur? osmanlı Devleti'nin Birinci Dünya Savaşı'na Almanya yanında girmesinde etkili olan unsur nedir?","o":["Fransa ile dostluk","Rusya'nın yardım göndermesi","İngiltere'nin daveti","Almanya ile ittifak ilişkisi"],"a":3,"e":"Osmanlı yönetimi Almanya ile ittifak yaparak siyasi ve askerî destek sağlamayı ummuştur."},{"id":125,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? kanun-ı Esasi hangi yıl yeniden yürürlüğe girmiştir?","o":["1908","1839","1856","1876"],"a":0,"e":"Kanun-ı Esasi 1908'de II. Meşrutiyet'in ilanıyla yeniden yürürlüğe konmuştur."},{"id":126,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: lale Devri hangi antlaşmadan sonra başlamıştır?","o":["Küçük Kaynarca","Pasarofça","Karlofça","Berlin"],"a":1,"e":"1718 Pasarofça Antlaşması sonrasında Lale Devri başlamıştır."},{"id":127,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? osmanlı'nın Rusya'ya karşı savaştığı cephe hangisidir?","o":["Kanal","Irak","Kafkas","Hicaz"],"a":2,"e":"Kafkas Cephesi'nde Osmanlı kuvvetleri Rus ordusuna karşı savaşmıştır."},{"id":128,"q":"Aşağıdaki bilgilerden hangisi doğrudur? yeniçeri Ocağı'nın kaldırılması hangi olayla anılır?","o":["31 Mart Olayı","Babıâli Baskını","Kabakçı İsyanı","Vaka-i Hayriye"],"a":3,"e":"1826'da Yeniçeri Ocağı kaldırılmış ve bu olay Vaka-i Hayriye olarak adlandırılmıştır."},{"id":129,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? uşi Antlaşması'yla Trablusgarp ve Bingazi hangi devlete bırakılmıştır?","o":["İtalya","Fransa","İngiltere","Yunanistan"],"a":0,"e":"Uşi Antlaşması sonucunda Trablusgarp ve Bingazi İtalya'nın kontrolüne geçmiştir."},{"id":130,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: iI. Abdülhamit dönemindeki baskıcı yönetim hangi kavramla ifade edilir?","o":["Tanzimat","İstibdat","Meşrutiyet","Islahat"],"a":1,"e":"İstibdat, II. Abdülhamit dönemindeki sıkı denetim ve baskıcı yönetim anlayışını tanımlar."},{"id":131,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? i̇ngiltere'nin Araplarla yaptığı yazışmalarla ilgili anlaşma hangisidir?","o":["Sykes-Picot","Balfour","Mac Mahon","Saint Jean de Maurienne"],"a":2,"e":"Mac Mahon yazışmaları, İngiltere'nin Araplara bağımsızlık vaadiyle ilişkilidir."},{"id":132,"q":"Aşağıdaki bilgilerden hangisi doğrudur? 1718-1730 yılları arasındaki döneme ne ad verilir?","o":["Tanzimat","Meşrutiyet","Fetret","Lale Devri"],"a":3,"e":"Lale Devri 1718 Pasarofça ile başlayıp 1730 Patrona Halil İsyanı ile sona ermiştir."},{"id":133,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? 93 Harbi hangi devletler arasında yapılmıştır?","o":["Osmanlı-Rusya","Osmanlı-Fransa","Osmanlı-İtalya","Osmanlı-İngiltere"],"a":0,"e":"1877-1878 Osmanlı-Rus Savaşı, Hicrî takvimde 1293 yılına denk geldiği için 93 Harbi olarak bilinir."},{"id":134,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: birinci Balkan Savaşı'nda Osmanlı'ya karşı savaşan devletlerden biri hangisidir?","o":["Almanya","Bulgaristan","İtalya","Avusturya"],"a":1,"e":"Bulgaristan, Sırbistan, Yunanistan ve Karadağ Birinci Balkan Savaşı'nda Osmanlı'ya karşı yer almıştır."},{"id":135,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? berlin Antlaşması'nın sonuçlarından biri nedir?","o":["Osmanlı'nın Kuzey Afrika'yı alması","Kapitülasyonların kalkması","Balkanlarda önemli toprak kayıpları","Yeniçeriliğin kaldırılması"],"a":2,"e":"1878 Berlin Antlaşması, Osmanlı'nın Balkanlardaki toprak ve nüfuz kaybını artırmıştır."},{"id":136,"q":"Aşağıdaki bilgilerden hangisi doğrudur? avrupa'daki bilimsel gelişmelerin takip edilmemesi hangi alanda gerilemeye neden olmuştur?","o":["Tarım arazileri","Deniz ticareti","Nüfus","Bilim ve eğitim"],"a":3,"e":"Bilimsel ve teknik gelişmelerin gerisinde kalmak eğitim, teknoloji ve üretim kapasitesini olumsuz etkilemiştir."},{"id":137,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? osmanlı'nın İngiltere'ye karşı açtığı cephelerden biri hangisidir?","o":["Kanal","Galiçya","Romanya","Makedonya"],"a":0,"e":"Kanal Cephesi, İngiltere'nin Süveyş ve Hindistan bağlantısını tehdit etmeyi amaçlamıştır."},{"id":138,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: 31 Mart Olayı'nın temel hedefi neydi?","o":["Cumhuriyeti ilan etmek","II. Meşrutiyet'e son vermek","Trablusgarp'ı almak","Yeniçeri Ocağı'nı kaldırmak"],"a":1,"e":"Ayaklanma, II. Meşrutiyet yönetimine karşı gelişmiş ve Hareket Ordusu tarafından bastırılmıştır."},{"id":139,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? osmanlı Devleti'nin savaşa girmesinde etkili olan Alman gemileri hangileridir?","o":["Nusret ve Hamidiye","Ertuğrul ve Barbaros","Yavuz ve Midilli","Mecidiye ve Turgut Reis"],"a":2,"e":"Yavuz ve Midilli adı verilen Alman gemilerinin Karadeniz'de Rus limanlarını bombalaması savaşa giriş sürecini hızlandırmıştır."},{"id":140,"q":"Aşağıdaki bilgilerden hangisi doğrudur? osmanlı'da taşrada güç kazanan yerel eşrafa ne ad verilirdi?","o":["Yeniçeri","Müderris","Kapıkulu","Ayan"],"a":3,"e":"Ayanlar, özellikle merkezi otoritenin zayıfladığı dönemlerde taşrada nüfuz sahibi yerel ileri gelenlerdi."},{"id":141,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? sykes-Picot Antlaşması hangi devletlerin Orta Doğu paylaşım planıdır?","o":["İngiltere ve Fransa","Almanya ve Avusturya","Rusya ve İtalya","Osmanlı ve Almanya"],"a":0,"e":"Sykes-Picot, İngiltere ve Fransa'nın Osmanlı'nın Arap topraklarını nüfuz alanlarına ayırma planıdır."},{"id":142,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı'da ilk anayasal yönetime geçiş hangi gelişmeyle olmuştur?","o":["Tanzimat","I. Meşrutiyet","II. Meşrutiyet","Sened-i İttifak"],"a":1,"e":"1876 I. Meşrutiyet ile anayasa ve parlamento temelli yönetime geçilmiştir."},{"id":143,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? tanzimat Fermanı hangi hakları güvence altına almayı hedeflemiştir?","o":["Sadece askerlerin haklarını","Saray çalışanlarının ayrıcalıklarını","Can, mal ve namus güvenliğini","Yalnız ticaret gemilerini"],"a":2,"e":"Tanzimat Fermanı, tebaanın can, mal ve namus güvenliğini güvence altına alma vaadi içerir."},{"id":144,"q":"Aşağıdaki bilgilerden hangisi doğrudur? kutü'l-Amare zaferi hangi cephede kazanılmıştır?","o":["Sarıkamış","Çanakkale","Kanal","Irak"],"a":3,"e":"Kutü'l-Amare, 1916'da Irak Cephesi'nde İngiliz kuvvetlerine karşı kazanılmıştır."},{"id":145,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? iI. Mahmut dönemindeki önemli gelişmelerden biri hangisidir?","o":["Yeniçeri Ocağı'nın kaldırılması","Saltanatın kaldırılması","Cumhuriyetin ilanı","Halifeliğin kaldırılması"],"a":0,"e":"II. Mahmut döneminde 1826'da Yeniçeri Ocağı kaldırılmıştır."},{"id":146,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: iI. Meşrutiyet'in ilanında etkili olan cemiyet hangisidir?","o":["İttihad-ı Muhammedi","İttihat ve Terakki","Hürriyet ve İtilaf","Osmanlı Ahrar"],"a":1,"e":"İttihat ve Terakki Cemiyeti, 1908'de II. Meşrutiyet'in ilanında belirleyici rol oynamıştır."},{"id":147,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? balkan Savaşları sonunda Osmanlı'nın Avrupa'daki durumu nasıl değişmiştir?","o":["Kuzey Afrika'da egemenliği artmıştır","Mısır'ı geri almıştır","Balkanlardaki topraklarının büyük bölümünü kaybetmiştir","Kafkasya'yı kazanmıştır"],"a":2,"e":"Balkan Savaşları sonunda Osmanlı'nın Avrupa kıtasındaki toprakları büyük ölçüde azalmıştır."},{"id":148,"q":"Aşağıdaki bilgilerden hangisi doğrudur? mondros Ateşkes Antlaşması hangi tarihte imzalanmıştır?","o":["23 Temmuz 1908","19 Mayıs 1919","24 Temmuz 1923","30 Ekim 1918"],"a":3,"e":"Mondros Ateşkesi 30 Ekim 1918'de imzalanmıştır."},{"id":149,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? osmanlı duraklamasının iç nedenlerinden biri hangisidir?","o":["Merkezi yönetimin bozulması","Avrupa'da Rönesans","Coğrafi Keşifler","Sanayi Devrimi"],"a":0,"e":"Merkezi yönetimdeki bozulma, taşrada otorite kaybına ve devlet düzeninin zayıflamasına yol açmıştır."},{"id":150,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: çanakkale Cephesi'nde İtilaf Devletlerinin temel hedefi neydi?","o":["İtalya'yı Afrika'dan çıkarmak","İstanbul'u ele geçirmek ve Rusya'ya yardım ulaştırmak","Balkanları Osmanlı'ya bağlamak","Almanya'yı savaştan çıkarmak"],"a":1,"e":"Boğazları geçmek, İstanbul'u işgal etmek ve Rusya ile bağlantı kurmak temel hedeflerdi."},{"id":151,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? mısır Meselesi sırasında Mehmet Ali Paşa ile yapılan antlaşma hangisidir?","o":["Uşi","Karlofça","Kütahya","Berlin"],"a":2,"e":"1833 Kütahya Antlaşması, Osmanlı ile Mehmet Ali Paşa arasındaki krizin geçici çözümüdür."},{"id":152,"q":"Aşağıdaki bilgilerden hangisi doğrudur? islahatların başarısız olmasının nedenlerinden biri nedir?","o":["Avrupa'nın müdahale etmemesi","Halkın tüm yenilikleri desteklemesi","Devletin çok güçlü ekonomisi","Yeniliklerin kişilere bağlı kalması ve süreklilik kazanmaması"],"a":3,"e":"Reformların kurumsallaşamaması ve kişilere bağlı kalması kalıcı sonuç alınmasını zorlaştırmıştır."},{"id":153,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? birinci Balkan Savaşı hangi yıl başlamıştır?","o":["1912","1908","1911","1914"],"a":0,"e":"Birinci Balkan Savaşı 1912'de başlamıştır."},{"id":154,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: karlofça sonrası yeniliklerin temel hedefi neydi?","o":["Saltanatı kaldırmak","Kaybedilen toprakları geri almak ve devleti güçlendirmek","Cumhuriyeti ilan etmek","Avrupa'yla savaşı büyütmek"],"a":1,"e":"Karlofça sonrasında Osmanlı, askerî ve idari yeniliklerle kayıpları telafi etmeye çalışmıştır."},{"id":155,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? kafkas Cephesi'nde başarısızlıkla sonuçlanan harekât hangisidir?","o":["Kutü'l-Amare","Çanakkale","Sarıkamış","Kanal"],"a":2,"e":"Sarıkamış Harekâtı ağır kış koşulları ve planlama sorunları nedeniyle büyük kayıpla sonuçlanmıştır."},{"id":156,"q":"Aşağıdaki bilgilerden hangisi doğrudur? 31 Mart Olayı sonrasında tahttan indirilen padişah kimdir?","o":["V. Mehmet Reşat","Abdülaziz","II. Mahmut","II. Abdülhamit"],"a":3,"e":"31 Mart Olayı'nın ardından II. Abdülhamit tahttan indirilmiştir."},{"id":157,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? 1853-1856 arasında Rusya'ya karşı yapılan savaş hangisidir?","o":["Kırım Savaşı","Trablusgarp","Balkan Savaşı","93 Harbi"],"a":0,"e":"Kırım Savaşı 1853-1856 yılları arasında Osmanlı ve müttefiklerinin Rusya'ya karşı mücadelesidir."},{"id":158,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: sanayi Devrimi'nin Avrupa'daki sonuçlarından biri hangisidir?","o":["El işçiliğine dönüş","Ham madde ve pazar ihtiyacının artması","Sömürgeciliğin bitmesi","Fabrikaların kapanması"],"a":1,"e":"Sanayileşme, fabrikalar için ham madde ve ürünler için yeni pazar arayışını hızlandırmıştır."},{"id":159,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? iI. Meşrutiyet sonrasında yeniden açılan parlamento hangisidir?","o":["Ayan Meclisi","Divan-ı Hümayun","Meclis-i Mebusan","Meclis-i Vala"],"a":2,"e":"II. Meşrutiyet'in ilanıyla Meclis-i Mebusan yeniden faaliyete geçmiştir."},{"id":160,"q":"Aşağıdaki bilgilerden hangisi doğrudur? trablusgarp'ta Osmanlı subaylarının yerel halkla mücadele etmesi neyi gösterir?","o":["Donanma üstünlüğünü","İtalya'nın savaştan çekildiğini","Balkanların Osmanlı'ya yardım ettiğini","Osmanlı'nın düzenli orduyu bölgeye ulaştıramadığını"],"a":3,"e":"Deniz gücü ve ulaşım kısıtları nedeniyle Osmanlı düzenli birlik gönderememiş, gönüllü subaylar yerel direnişi örgütlemiştir."},{"id":161,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? iI. Abdülhamit döneminde meclisin kapatılması hangi uygulamayı gösterir?","o":["İstibdat yönetimini","Meclisin sürekli açık tutulmasını","Saltanatın kaldırılmasını","Basın özgürlüğünün genişlemesini"],"a":0,"e":"Meclisin kapatılması ve siyasi denetimin sıkılaştırılması istibdat döneminin özelliklerindendir."},{"id":162,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı'nın Birinci Dünya Savaşı'ndaki müttefiklerinden biri hangisidir?","o":["İngiltere","Almanya","Fransa","Rusya"],"a":1,"e":"Almanya, Osmanlı Devleti'nin savaşta aynı blokta yer aldığı başlıca müttefikidir."},{"id":163,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? mora İsyanı hangi düşüncenin etkisiyle gelişmiştir?","o":["Sanayicilik","Merkantilizm","Milliyetçilik","Feodalizm"],"a":2,"e":"Milliyetçilik düşüncesi, Balkanlardaki Hristiyan toplulukların bağımsızlık hareketlerini etkilemiştir."},{"id":164,"q":"Aşağıdaki bilgilerden hangisi doğrudur? çanakkale Cephesi'nde öne çıkan Osmanlı komutanlarından biri kimdir?","o":["Enver Paşa","Cemal Paşa","Talat Paşa","Mustafa Kemal"],"a":3,"e":"Mustafa Kemal, Çanakkale Savaşları'nda özellikle Anafartalar ve Conkbayırı'ndaki başarılarıyla öne çıkmıştır."},{"id":165,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? tanzimat Fermanı'nın ilanında etkili olan devlet adamı kimdir?","o":["Mustafa Reşit Paşa","Köprülü Mehmet Paşa","Tarhuncu Ahmet Paşa","Koçi Bey"],"a":0,"e":"Mustafa Reşit Paşa, Gülhane Hatt-ı Hümayunu'nun ilanında öncü rol oynamıştır."},{"id":166,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: 1909 Kanun-ı Esasi değişikliklerinden biri hangisidir?","o":["Padişaha sınırsız yetki verilmesi","Hükûmetin Meclis'e karşı sorumlu hâle gelmesi","Meclisin kaldırılması","Partilerin yasaklanması"],"a":1,"e":"1909 değişiklikleri padişahın yetkilerini sınırlamış, parlamenter yapıyı güçlendirmiştir."},{"id":167,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? i̇kinci Balkan Savaşı sırasında Osmanlı'nın geri aldığı önemli şehir hangisidir?","o":["Selanik","Atina","Edirne","Sofya"],"a":2,"e":"Osmanlı Devleti, İkinci Balkan Savaşı'nın koşullarından yararlanarak Edirne'yi geri almıştır."},{"id":168,"q":"Aşağıdaki bilgilerden hangisi doğrudur? vergi toplama hakkının belirli kişilere verilmesi hangi sistemdir?","o":["Devşirme","Tımar","Ekber-Erşed","İltizam"],"a":3,"e":"İltizam sisteminde vergi toplama hakkı belirli süre ve bedel karşılığında mültezimlere bırakılır."},{"id":169,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? kanal Cephesi'nde hedeflenen stratejik nokta hangisidir?","o":["Süveyş Kanalı","Cebelitarık","Manş Denizi","İstanbul Boğazı"],"a":0,"e":"Süveyş Kanalı, İngiltere'nin Hindistan ve Uzak Doğu bağlantısı için stratejik öneme sahipti."},{"id":170,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: iI. Mahmut döneminde kaldırılan askerî teşkilat hangisidir?","o":["Nizam-ı Cedid","Yeniçeri Ocağı","Asakir-i Mansure","Redif"],"a":1,"e":"Yeniçeri Ocağı 1826'da Vaka-i Hayriye ile kaldırılmıştır."},{"id":171,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? 93 Harbi hangi yıllarda yapılmıştır?","o":["1853-1856","1912-1913","1877-1878","1914-1918"],"a":2,"e":"93 Harbi, 1877-1878 Osmanlı-Rus Savaşı'nın adıdır."},{"id":172,"q":"Aşağıdaki bilgilerden hangisi doğrudur? iI. Meşrutiyet'in ilanından sonra hangi siyasi gelişme hızlanmıştır?","o":["Saltanatın kaldırılması","Cumhuriyetin ilanı","Halifeliğin kaldırılması","Çok partili siyasi hayat"],"a":3,"e":"Meşrutiyetin yeniden ilanı siyasal örgütlenmeyi ve parti faaliyetlerini artırmıştır."},{"id":173,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? birinci Dünya Savaşı'nın genel nedenlerinden biri hangisidir?","o":["Sömürgecilik yarışı ve çıkar çatışmaları","Silahsızlanmanın tamamlanması","Milliyetçiliğin bitmesi","Ekonomik rekabetin sona ermesi"],"a":0,"e":"Emperyalist rekabet, bloklaşma, silahlanma ve milliyetçilik savaşın temel nedenleri arasındadır."},{"id":174,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı yönetiminde en üst makamda kim bulunurdu?","o":["Sadrazam","Padişah","Kazasker","Defterdar"],"a":1,"e":"Osmanlı klasik yönetim düzeninde devletin başında padişah bulunurdu."},{"id":175,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? lale Devri'ni sona erdiren isyan hangisidir?","o":["Celali","Kabakçı Mustafa","Patrona Halil","31 Mart"],"a":2,"e":"1730 Patrona Halil İsyanı Lale Devri'ni sona erdirmiştir."},{"id":176,"q":"Aşağıdaki bilgilerden hangisi doğrudur? islahat Fermanı hangi savaşın ardından ilan edilmiştir?","o":["93 Harbi","Trablusgarp","Birinci Balkan","Kırım Savaşı"],"a":3,"e":"1856 Islahat Fermanı, Kırım Savaşı'nın ardından ilan edilmiştir."},{"id":177,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? i̇ngiltere ve Fransa'nın Osmanlı topraklarını paylaşma planı hangisidir?","o":["Sykes-Picot","Uşi","Karlofça","Hünkâr İskelesi"],"a":0,"e":"Sykes-Picot, İngiltere ve Fransa'nın Orta Doğu'daki nüfuz alanlarını belirleyen gizli anlaşmadır."},{"id":178,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: babıâli Baskını hangi siyasi grubun iktidarını güçlendirmiştir?","o":["Hürriyet ve İtilaf","İttihat ve Terakki","Osmanlı Ahrar","İttihad-ı Muhammedi"],"a":1,"e":"1913 Babıâli Baskını sonrasında İttihat ve Terakki yönetimde belirleyici hâle gelmiştir."},{"id":179,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? 17. yüzyılda sorunları rapor eden devlet adamı kimdir?","o":["Mustafa Reşit Paşa","Mithat Paşa","Koçi Bey","Mahmut Şevket Paşa"],"a":2,"e":"Koçi Bey, IV. Murat ve Sultan İbrahim dönemlerinde devlet düzenindeki sorunları raporlarıyla ele almıştır."},{"id":180,"q":"Aşağıdaki bilgilerden hangisi doğrudur? mondros'tan sonra Osmanlı topraklarında hangi süreç başlamıştır?","o":["Osmanlı'nın genişlemesi","Sanayileşmenin hızlanması","Balkan birliği","İşgallerin başlaması"],"a":3,"e":"Ateşkes hükümleri ve özellikle 7. madde, İtilaf işgallerinin önünü açmıştır."},{"id":181,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? kanun-ı Esasi hangi padişah döneminde ilan edilmiştir?","o":["II. Abdülhamit","Abdülaziz","II. Mahmut","V. Mehmet Reşat"],"a":0,"e":"Kanun-ı Esasi, II. Abdülhamit'in tahta çıkışının ardından 1876'da ilan edilmiştir."},{"id":182,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: hicaz Cephesi'nde Osmanlı hangi güçlerle mücadele etmiştir?","o":["Rusya","İngiltere destekli Arap isyancı kuvvetler","İtalya","Almanya"],"a":1,"e":"Hicaz bölgesinde İngiliz desteği alan Arap isyanı Osmanlı kuvvetleriyle çatışmıştır."},{"id":183,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? merkezi yönetimin zayıflaması hangi sonuca yol açmıştır?","o":["Bilimsel gelişmelerin hızlanması","Sömürgeciliğin bitmesi","Taşrada otorite kaybı","Sanayi üretiminin artması"],"a":2,"e":"Merkezî otorite zayıfladıkça yerel güçler artmış, güvenlik ve vergi düzeni bozulmuştur."},{"id":184,"q":"Aşağıdaki bilgilerden hangisi doğrudur? iI. Meşrutiyet öncesinde Makedonya'da öne çıkan isimlerden biri kimdir?","o":["Koçi Bey","Tarhuncu Ahmet Paşa","Mithat Paşa","Resneli Niyazi"],"a":3,"e":"Resneli Niyazi, 1908 sürecinde Makedonya'da başlattığı hareketle II. Meşrutiyet'in ilanında etkili olmuştur."},{"id":185,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? uşi Antlaşması hangi yıl imzalanmıştır?","o":["1912","1911","1913","1914"],"a":0,"e":"Uşi Antlaşması 18 Ekim 1912'de imzalanmıştır."},{"id":186,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: karlofça Antlaşması hangi savaşlar sonrasında imzalanmıştır?","o":["İngiltere-Fransa savaşları","Kutsal İttifak savaşları","İtalya-Almanya savaşları","Rusya-İran savaşları"],"a":1,"e":"Osmanlı, Kutsal İttifak devletleriyle uzun savaşların ardından 1699'da Karlofça'yı imzalamıştır."},{"id":187,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? osmanlı'nın müttefiklerine destek amacıyla asker gönderdiği cephelerden biri hangisidir?","o":["Çanakkale","Kafkas","Galiçya","Kanal"],"a":2,"e":"Osmanlı birlikleri müttefiklerine destek için Galiçya gibi Avrupa cephelerinde görev yapmıştır."},{"id":188,"q":"Aşağıdaki bilgilerden hangisi doğrudur? sened-i İttifak'ın tarihî önemi nedir?","o":["Cumhuriyetin ilanı","Yeniçeriliğin kaldırılması","İlk anayasanın yürürlüğe girmesi","Padişah otoritesinin ilk kez bazı yönlerden sınırlandırılması"],"a":3,"e":"Sened-i İttifak, padişah ile ayanlar arasında karşılıklı yükümlülükler getirerek merkezî otoriteyi sınırlayan bir belge olarak değerlendirilir."},{"id":189,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? mısır Meselesi'nin önemli taraflarından biri kimdir?","o":["Mehmet Ali Paşa","Enver Paşa","Mustafa Reşit Paşa","Mahmut Şevket Paşa"],"a":0,"e":"Mısır Valisi Mehmet Ali Paşa'nın güçlenmesi Osmanlı yönetimiyle ciddi bir krize yol açmıştır."},{"id":190,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı Devleti'nin Birinci Dünya Savaşı sonunda imzaladığı ateşkes hangisidir?","o":["Sevr","Mondros","Lozan","Mudanya"],"a":1,"e":"Osmanlı Devleti, Birinci Dünya Savaşı'ndan 30 Ekim 1918 Mondros Ateşkesi ile çekilmiştir."},{"id":191,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? patrona Halil İsyanı'nın lideri kimdir?","o":["Kabakçı Mustafa","Alemdar Mustafa Paşa","Patrona Halil","Resneli Niyazi"],"a":2,"e":"İsyan, Patrona Halil'in önderliğinde 1730'da gerçekleşmiştir."},{"id":192,"q":"Aşağıdaki bilgilerden hangisi doğrudur? balkan Savaşları'nda kaybedilen bölgeler hangi coğrafyadaydı?","o":["Kuzey Afrika","Kafkasya","Orta Asya","Balkanlar"],"a":3,"e":"Savaşlar sonucunda Osmanlı, Balkan topraklarının büyük bölümünü kaybetmiştir."},{"id":193,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? rusya'nın Birinci Dünya Savaşı'ndan çekilmesi hangi gelişmeyle bağlantılıdır?","o":["1917 Bolşevik Devrimi","Osmanlı'nın savaşa girmesi","İtalya'nın savaşa katılması","Çanakkale'nin açılması"],"a":0,"e":"1917 Bolşevik Devrimi sonrasında Rusya savaştan çekilmiş ve Brest-Litovsk süreci başlamıştır."},{"id":194,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: osmanlı ıslahatlarının ilk dönemlerinde ağırlık verilen alan hangisidir?","o":["Spor","Askerî alan","Turizm","Sinema"],"a":1,"e":"Askerî yenilgiler nedeniyle ilk yenilik girişimleri çoğunlukla orduyu güçlendirmeye yönelmiştir."},{"id":195,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? berlin Antlaşması sonrasında bağımsızlığını kazanan devletlerden biri hangisidir?","o":["Bulgaristan","Yunanistan","Romanya","Arnavutluk"],"a":2,"e":"Berlin Antlaşması ile Romanya, Sırbistan ve Karadağ'ın bağımsızlığı tanınmıştır."},{"id":196,"q":"Aşağıdaki bilgilerden hangisi doğrudur? irak Cephesi'nde Osmanlı hangi devletle mücadele etmiştir?","o":["Fransa","İtalya","Almanya","İngiltere"],"a":3,"e":"Irak Cephesi'nde Osmanlı kuvvetleri İngiliz ordusuna karşı savaşmıştır."},{"id":197,"q":"Ders notlarına göre aşağıdaki sorunun doğru yanıtı hangisidir? iI. Meşrutiyet ile yeniden yürürlüğe giren belge hangisidir?","o":["Kanun-ı Esasi","Tanzimat","Islahat","Sened-i İttifak"],"a":0,"e":"II. Meşrutiyet, 1876 Kanun-ı Esasi'sini yeniden yürürlüğe koymuştur."},{"id":198,"q":"Konu bilgisini dikkate alarak doğru seçeneği belirleyiniz: mondros'un 24. maddesi hangi bölgelerle ilgili işgal ihtimalini gündeme getirmiştir?","o":["Trakya","Altı vilayet","Ege Adaları","Kuzey Afrika"],"a":1,"e":"24. madde, doğudaki altı vilayette karışıklık çıkması hâlinde işgal imkânı tanıyan hüküm olarak yorumlanmıştır."},{"id":199,"q":"Aşağıdaki tarihî gelişme veya kavramla ilgili doğru ifade hangisidir? atatürk İlkeleri ve İnkılap Tarihi derslerinin yaygınlaştırılmasının temel amaçlarından biri nedir?","o":["Osmanlı hanedanını yeniden yönetime getirmek","Saltanat yönetimini güçlendirmek","Cumhuriyet değerlerini halka benimsetmek","Sömürgeciliği desteklemek"],"a":2,"e":"Dersin temel amaçlarından biri Cumhuriyetin kuruluş sürecini ve temel değerlerini tanıtmaktır."},{"id":200,"q":"Aşağıdaki bilgilerden hangisi doğrudur? trablusgarp Savaşı'nda Osmanlı Devleti'nin karşısında hangi devlet vardı?","o":["Fransa","İngiltere","Rusya","İtalya"],"a":3,"e":"Trablusgarp'a 1911'de saldıran devlet İtalya'dır."}]},"blanksData":{"hafta1":[{"week":"hafta1","q":"Mevcut düzeni bütünüyle yıkmadan, aksayan yönleri düzeltmek amacıyla yapılan yenileştirme hareketine ___ denir.","code":"Düzeni kökten yıkmadan yapılan reform hareketi: ___","a":"ıslahat","hint":"I... harfiyle başlar (ıslahat)","e":"Islahat, var olan siyasal ve hukuki düzeni koruyarak kurumları iyileştirmeyi ifade eder."},{"week":"hafta1","q":"Mevcut siyasi ve toplumsal düzenin halk hareketi ve zor kullanılarak köklü biçimde yıkılıp değiştirilmesine ___ denir.","code":"Halkın mevcut düzeni devirmesi olayı: ___","a":"ihtilal","hint":"Fransız İhtilali'nden aklınıza gelsin: ihtilal","e":"İhtilal, halkın yönetime başkaldırarak düzeni tamamen yıkması ve yeni bir yapı kurmasıdır."},{"week":"hafta1","q":"Osmanlı Devleti'nde devlet işlerinin karara bağlandığı, sadrazam ve vezirlerin katıldığı en üst idari kurul ___ dir.","code":"Osmanlı merkez yönetim meclisi: ___","a":"Divan-ı Hümayun","hint":"Divan veya Divan-ı Hümayun","e":"Divan-ı Hümayun, padişahın başkanlığında (sonraları sadrazam yönetiminde) toplanan en yetkili kuruldur."},{"week":"hafta1","q":"Osmanlı Devleti'nde toprağın mülkiyetinin devlete ait olduğu ve vergi gelirleriyle asker beslendiği sistem ___ sistemidir.","code":"Osmanlı tarım ve ordu düzeni: ___ sistemi","a":"tımar","hint":"5 harfli sistem (T...): tımar","e":"Tımar sistemi, toprağın işlenmesini, vergi toplanmasını ve savaşa hazır cebelü adlı atlı asker yetiştirilmesini sağlardı."}],"hafta2":[{"week":"hafta2","q":"1699 yılında imzalanan ve Osmanlı Devleti'nin Batı'da ilk kez büyük çapta toprak kaybettiği antlaşma ___ Antlaşması'dır.","code":"Osmanlı gerileme dönemini başlatan antlaşma: ___ (1699)","a":"Karlofça","hint":"K... ile başlar: Karlofça","e":"Karlofça Antlaşması, Kutsal İttifak devletleriyle imzalanmış ve Osmanlı'nın genişlemesini sonlandırmıştır."},{"week":"hafta2","q":"I. Ahmet döneminde getirilen ve hanedanın en yaşlı ve akli başında üyesinin tahta geçmesini öngören sistem ___ sistemidir.","code":"Hanedanın en yaşlı üyesinin tahta çıkması kuralı: ___","a":"Ekber ve Erşed","hint":"Ekber (en büyük) ve Erşed (en olgun)","e":"Ekber ve Erşed sistemi taht kavgalarını önlemek amacıyla getirilmiş ancak şehzadelerin yönetim tecrübesi edinmesini zorlaştırmıştır."},{"week":"hafta2","q":"1718 Pasarofça Antlaşması ile başlayıp 1730 Patrona Halil İsyanı ile sona eren Osmanlı yenilik dönemine ___ Devri denir.","code":"Çiçek adıyla anılan yenilik dönemi (1718-1730): ___ Devri","a":"Lale","hint":"Bir çiçek adı: Lale","e":"Lale Devri, matbaanın ilk kez Osmanlı'ya girdiği ve Avrupa'ya geçici elçilerin gönderildiği barış dönemidir."}],"hafta3":[{"week":"hafta3","q":"1808 yılında II. Mahmut ile ayanlar arasında imzalanan ve padişah otoritesini ilk defa sınırlayan belge ___ dir.","code":"Padişah otoritesini ilk sınırlayan sözleşme: ___ (1808)","a":"Sened-i İttifak","hint":"Sened... ile başlar: Sened-i İttifak","e":"Sened-i İttifak, Magna Carta'ya benzetilen ve padişah ile yerel güçler (ayanlar) arasında yapılan uzlaşma belgesidir."},{"week":"hafta3","q":"1826 yılında II. Mahmut tarafından Yeniçeri Ocağı'nın topa tutularak kaldırılması olayına tarihte ___ adı verilmiştir.","code":"Yeniçeri Ocağı'nın kaldırılması (Hayırlı Olay): ___","a":"Vaka-i Hayriye","hint":"Hayırlı Olay: Vaka-i Hayriye","e":"Vaka-i Hayriye ile Yeniçeri Ocağı kaldırılmış, yerine Asakir-i Mansure-i Muhammediye ordusu kurulmuştur."},{"week":"hafta3","q":"3 Kasım 1839'da Gülhane Parkı'nda okunan ve can, mal, namus güvencesi vaat eden tarihî ferman ___ Fermanı'dır.","code":"Hukuk devleti yolundaki ilk büyük adım: ___ Fermanı (1839)","a":"Tanzimat","hint":"Mustafa Reşit Paşa tarafından ilan edilen: Tanzimat","e":"Tanzimat Fermanı (Gülhane Hatt-ı Hümayunu), padişahın da kanunlara uyacağını taahhüt ettiği reform fermanıdır."}],"hafta4":[{"week":"hafta4","q":"Türk tarihinin ve Osmanlı Devleti'nin ilk yazılı anayasası olan 1876 belgesi ___ dir.","code":"Osmanlı'nın ilk anayasası (1876): ___","a":"Kanun-ı Esasi","hint":"Kanun... ile başlar: Kanun-ı Esasi","e":"Kanun-ı Esasi ile Osmanlı Meşrutiyet yönetimine geçmiş, Mebusan ve Ayan meclisleri açılmıştır."},{"week":"hafta4","q":"1909 yılında II. Meşrutiyet yönetimine karşı çıkan 31 Mart Ayaklanması'nı bastırmak için Selanik'ten gelen ordu ___ Ordusu'dur.","code":"31 Mart isyanını bastıran ordu: ___ Ordusu","a":"Hareket","hint":"H... harfiyle başlar: Hareket","e":"Mahmut Şevket Paşa komutasındaki ve kurmay başkanlığını Mustafa Kemal'in yaptığı Hareket Ordusu isyanı bastırmıştır."},{"week":"hafta4","q":"1881 yılında Muharrem Kararnamesi ile kurulan ve Osmanlı gelirlerini dış borçlar için yöneten yabancı kurum ___ dir.","code":"Genel Borçlar İdaresi: ___","a":"Düyûn-ı Umûmiye","hint":"Düyûn-ı Umûmiye (Genel Borçlar İdaresi)","e":"Düyûn-ı Umûmiye, Osmanlı maliyesini ve vergi kaynaklarını doğrudan denetleyen emperyalist bir idareydi."}],"hafta5":[{"week":"hafta5","q":"1911 yılında İtalya'nın Osmanlı'nın Kuzey Afrika'daki son toprağına saldırmasıyla patlak veren savaş ___ Savaşı'dır.","code":"Kuzey Afrika'daki son vatan toprağı savaşı: ___ Savaşı","a":"Trablusgarp","hint":"Bugünkü Libya toprakları: Trablusgarp","e":"Trablusgarp Savaşı'nda Mustafa Kemal (Derne ve Tobruk) ve Enver Paşa yerel halkı teşkilatlandırarak İtalyanları durdurmuştur."},{"week":"hafta5","q":"Trablusgarp Savaşı'nı sona erdiren ve Trablusgarp ile Bingazi'nin İtalya'ya bırakıldığı 1912 antlaşması ___ Antlaşması'dır.","code":"1912'de İsviçre'de imzalanan antlaşma: ___ Antlaşması","a":"Uşi","hint":"3 harfli kısa antlaşma: Uşi","e":"Uşi (Ouchy) Antlaşması ile Osmanlı, Kuzey Afrika'daki son toprak parçasını kaybetmiştir."},{"week":"hafta5","q":"İkinci Balkan Savaşı sırasında Balkan devletlerinin kendi arasındaki çatışmasından yararlanan Osmanlı'nın geri aldığı şehir ___ dir.","code":"Enver Paşa'nın geri aldığı serhat şehri: ___","a":"Edirne","hint":"Trakya'daki tarihî başkent: Edirne","e":"Osmanlı kuvvetleri Edirne ve Kırklareli'ni Bulgar işgalinden kurtararak Meriç nehrini sınır yapmıştır."}],"hafta6":[{"week":"hafta6","q":"Osmanlı Devleti'nin I. Dünya Savaşı'na fiilen girmesine yol açan ve Rus limanlarını bombalayan gemiler Yavuz ile ___ dir.","code":"Alman zırhlıları: Goeben (Yavuz) ve Breslau (___)","a":"Midilli","hint":"M... harfiyle başlayan gemi: Midilli","e":"Yavuz ve Midilli'nin Karadeniz'de Sivastopol ve Odesa limanlarını topa tutması Osmanlı'yı savaşa sokmuştur."},{"week":"hafta6","q":"1916 yılında Irak Cephesi'nde Halil Kut Paşa komutasındaki Osmanlı ordusunun İngiliz tümenini esir aldığı büyük zafer ___ zaferidir.","code":"İngiliz ordusunun teslim alındığı zafer: ___ Zaferi","a":"Kutü'l-Amare","hint":"Kut... ile başlar: Kutü'l-Amare","e":"Kutü'l-Amare'de General Townshend dahil 13 binden fazla İngiliz askeri esir alınmış, büyük bir askerî zafer kazanılmıştır."},{"week":"hafta6","q":"İtilaf Devletlerinin Rusya'ya yardım ulaştırmak ve İstanbul'u alarak Osmanlı'yı saf dışı bırakmak için açtığı deniz ve kara cephesi ___ dir.","code":"'Çanakkale Geçilmez!' destanının yazıldığı cephe: ___","a":"Çanakkale","hint":"18 Mart ve Anafartalar: Çanakkale","e":"Çanakkale Cephesi zaferi I. Dünya Savaşı'nın en az iki yıl uzamasına ve Çarlık Rusyası'nın çöküşüne yol açmıştır."}],"hafta7":[{"week":"hafta7","q":"Osmanlı Devleti'nin 30 Ekim 1918 tarihinde imzalayarak savaştan çekildiği ağır mütareke belgesi ___ Ateşkes Antlaşması'dır.","code":"Limni adasında imzalanan ateşkes: ___ Mütarekesi","a":"Mondros","hint":"M... ile başlayan ateşkes: Mondros","e":"Mondros Mütarekesi, Osmanlı ordusunun terhis edilmesini ve stratejik noktaların işgalini öngören teslimiyet belgesidir."},{"week":"hafta7","q":"Mondros Ateşkes Antlaşması'nın 'İtilaf Devletleri güvenliklerini tehdit eden herhangi bir yeri işgal edebilir' diyen en tehlikeli maddesi ___ maddedir.","code":"İşgallerin hukuki kılıfı olan meşhur madde: ___ . madde","a":"7","hint":"Tek basamaklı sayı: 7 (veya 7. madde)","e":"7. madde, İtilaf Devletlerinin Anadolu'yu karışıklık bahanesiyle işgal etmelerine zemin hazırlayan en yıkıcı hükümdür."}],"all":[{"week":"hafta1","q":"Mevcut düzeni bütünüyle yıkmadan, aksayan yönleri düzeltmek amacıyla yapılan yenileştirme hareketine ___ denir.","code":"Düzeni kökten yıkmadan yapılan reform hareketi: ___","a":"ıslahat","hint":"I... harfiyle başlar (ıslahat)","e":"Islahat, var olan siyasal ve hukuki düzeni koruyarak kurumları iyileştirmeyi ifade eder."},{"week":"hafta1","q":"Mevcut siyasi ve toplumsal düzenin halk hareketi ve zor kullanılarak köklü biçimde yıkılıp değiştirilmesine ___ denir.","code":"Halkın mevcut düzeni devirmesi olayı: ___","a":"ihtilal","hint":"Fransız İhtilali'nden aklınıza gelsin: ihtilal","e":"İhtilal, halkın yönetime başkaldırarak düzeni tamamen yıkması ve yeni bir yapı kurmasıdır."},{"week":"hafta1","q":"Osmanlı Devleti'nde devlet işlerinin karara bağlandığı, sadrazam ve vezirlerin katıldığı en üst idari kurul ___ dir.","code":"Osmanlı merkez yönetim meclisi: ___","a":"Divan-ı Hümayun","hint":"Divan veya Divan-ı Hümayun","e":"Divan-ı Hümayun, padişahın başkanlığında (sonraları sadrazam yönetiminde) toplanan en yetkili kuruldur."},{"week":"hafta1","q":"Osmanlı Devleti'nde toprağın mülkiyetinin devlete ait olduğu ve vergi gelirleriyle asker beslendiği sistem ___ sistemidir.","code":"Osmanlı tarım ve ordu düzeni: ___ sistemi","a":"tımar","hint":"5 harfli sistem (T...): tımar","e":"Tımar sistemi, toprağın işlenmesini, vergi toplanmasını ve savaşa hazır cebelü adlı atlı asker yetiştirilmesini sağlardı."},{"week":"hafta2","q":"1699 yılında imzalanan ve Osmanlı Devleti'nin Batı'da ilk kez büyük çapta toprak kaybettiği antlaşma ___ Antlaşması'dır.","code":"Osmanlı gerileme dönemini başlatan antlaşma: ___ (1699)","a":"Karlofça","hint":"K... ile başlar: Karlofça","e":"Karlofça Antlaşması, Kutsal İttifak devletleriyle imzalanmış ve Osmanlı'nın genişlemesini sonlandırmıştır."},{"week":"hafta2","q":"I. Ahmet döneminde getirilen ve hanedanın en yaşlı ve akli başında üyesinin tahta geçmesini öngören sistem ___ sistemidir.","code":"Hanedanın en yaşlı üyesinin tahta çıkması kuralı: ___","a":"Ekber ve Erşed","hint":"Ekber (en büyük) ve Erşed (en olgun)","e":"Ekber ve Erşed sistemi taht kavgalarını önlemek amacıyla getirilmiş ancak şehzadelerin yönetim tecrübesi edinmesini zorlaştırmıştır."},{"week":"hafta2","q":"1718 Pasarofça Antlaşması ile başlayıp 1730 Patrona Halil İsyanı ile sona eren Osmanlı yenilik dönemine ___ Devri denir.","code":"Çiçek adıyla anılan yenilik dönemi (1718-1730): ___ Devri","a":"Lale","hint":"Bir çiçek adı: Lale","e":"Lale Devri, matbaanın ilk kez Osmanlı'ya girdiği ve Avrupa'ya geçici elçilerin gönderildiği barış dönemidir."},{"week":"hafta3","q":"1808 yılında II. Mahmut ile ayanlar arasında imzalanan ve padişah otoritesini ilk defa sınırlayan belge ___ dir.","code":"Padişah otoritesini ilk sınırlayan sözleşme: ___ (1808)","a":"Sened-i İttifak","hint":"Sened... ile başlar: Sened-i İttifak","e":"Sened-i İttifak, Magna Carta'ya benzetilen ve padişah ile yerel güçler (ayanlar) arasında yapılan uzlaşma belgesidir."},{"week":"hafta3","q":"1826 yılında II. Mahmut tarafından Yeniçeri Ocağı'nın topa tutularak kaldırılması olayına tarihte ___ adı verilmiştir.","code":"Yeniçeri Ocağı'nın kaldırılması (Hayırlı Olay): ___","a":"Vaka-i Hayriye","hint":"Hayırlı Olay: Vaka-i Hayriye","e":"Vaka-i Hayriye ile Yeniçeri Ocağı kaldırılmış, yerine Asakir-i Mansure-i Muhammediye ordusu kurulmuştur."},{"week":"hafta3","q":"3 Kasım 1839'da Gülhane Parkı'nda okunan ve can, mal, namus güvencesi vaat eden tarihî ferman ___ Fermanı'dır.","code":"Hukuk devleti yolundaki ilk büyük adım: ___ Fermanı (1839)","a":"Tanzimat","hint":"Mustafa Reşit Paşa tarafından ilan edilen: Tanzimat","e":"Tanzimat Fermanı (Gülhane Hatt-ı Hümayunu), padişahın da kanunlara uyacağını taahhüt ettiği reform fermanıdır."},{"week":"hafta4","q":"Türk tarihinin ve Osmanlı Devleti'nin ilk yazılı anayasası olan 1876 belgesi ___ dir.","code":"Osmanlı'nın ilk anayasası (1876): ___","a":"Kanun-ı Esasi","hint":"Kanun... ile başlar: Kanun-ı Esasi","e":"Kanun-ı Esasi ile Osmanlı Meşrutiyet yönetimine geçmiş, Mebusan ve Ayan meclisleri açılmıştır."},{"week":"hafta4","q":"1909 yılında II. Meşrutiyet yönetimine karşı çıkan 31 Mart Ayaklanması'nı bastırmak için Selanik'ten gelen ordu ___ Ordusu'dur.","code":"31 Mart isyanını bastıran ordu: ___ Ordusu","a":"Hareket","hint":"H... harfiyle başlar: Hareket","e":"Mahmut Şevket Paşa komutasındaki ve kurmay başkanlığını Mustafa Kemal'in yaptığı Hareket Ordusu isyanı bastırmıştır."},{"week":"hafta4","q":"1881 yılında Muharrem Kararnamesi ile kurulan ve Osmanlı gelirlerini dış borçlar için yöneten yabancı kurum ___ dir.","code":"Genel Borçlar İdaresi: ___","a":"Düyûn-ı Umûmiye","hint":"Düyûn-ı Umûmiye (Genel Borçlar İdaresi)","e":"Düyûn-ı Umûmiye, Osmanlı maliyesini ve vergi kaynaklarını doğrudan denetleyen emperyalist bir idareydi."},{"week":"hafta5","q":"1911 yılında İtalya'nın Osmanlı'nın Kuzey Afrika'daki son toprağına saldırmasıyla patlak veren savaş ___ Savaşı'dır.","code":"Kuzey Afrika'daki son vatan toprağı savaşı: ___ Savaşı","a":"Trablusgarp","hint":"Bugünkü Libya toprakları: Trablusgarp","e":"Trablusgarp Savaşı'nda Mustafa Kemal (Derne ve Tobruk) ve Enver Paşa yerel halkı teşkilatlandırarak İtalyanları durdurmuştur."},{"week":"hafta5","q":"Trablusgarp Savaşı'nı sona erdiren ve Trablusgarp ile Bingazi'nin İtalya'ya bırakıldığı 1912 antlaşması ___ Antlaşması'dır.","code":"1912'de İsviçre'de imzalanan antlaşma: ___ Antlaşması","a":"Uşi","hint":"3 harfli kısa antlaşma: Uşi","e":"Uşi (Ouchy) Antlaşması ile Osmanlı, Kuzey Afrika'daki son toprak parçasını kaybetmiştir."},{"week":"hafta5","q":"İkinci Balkan Savaşı sırasında Balkan devletlerinin kendi arasındaki çatışmasından yararlanan Osmanlı'nın geri aldığı şehir ___ dir.","code":"Enver Paşa'nın geri aldığı serhat şehri: ___","a":"Edirne","hint":"Trakya'daki tarihî başkent: Edirne","e":"Osmanlı kuvvetleri Edirne ve Kırklareli'ni Bulgar işgalinden kurtararak Meriç nehrini sınır yapmıştır."},{"week":"hafta6","q":"Osmanlı Devleti'nin I. Dünya Savaşı'na fiilen girmesine yol açan ve Rus limanlarını bombalayan gemiler Yavuz ile ___ dir.","code":"Alman zırhlıları: Goeben (Yavuz) ve Breslau (___)","a":"Midilli","hint":"M... harfiyle başlayan gemi: Midilli","e":"Yavuz ve Midilli'nin Karadeniz'de Sivastopol ve Odesa limanlarını topa tutması Osmanlı'yı savaşa sokmuştur."},{"week":"hafta6","q":"1916 yılında Irak Cephesi'nde Halil Kut Paşa komutasındaki Osmanlı ordusunun İngiliz tümenini esir aldığı büyük zafer ___ zaferidir.","code":"İngiliz ordusunun teslim alındığı zafer: ___ Zaferi","a":"Kutü'l-Amare","hint":"Kut... ile başlar: Kutü'l-Amare","e":"Kutü'l-Amare'de General Townshend dahil 13 binden fazla İngiliz askeri esir alınmış, büyük bir askerî zafer kazanılmıştır."},{"week":"hafta6","q":"İtilaf Devletlerinin Rusya'ya yardım ulaştırmak ve İstanbul'u alarak Osmanlı'yı saf dışı bırakmak için açtığı deniz ve kara cephesi ___ dir.","code":"'Çanakkale Geçilmez!' destanının yazıldığı cephe: ___","a":"Çanakkale","hint":"18 Mart ve Anafartalar: Çanakkale","e":"Çanakkale Cephesi zaferi I. Dünya Savaşı'nın en az iki yıl uzamasına ve Çarlık Rusyası'nın çöküşüne yol açmıştır."},{"week":"hafta7","q":"Osmanlı Devleti'nin 30 Ekim 1918 tarihinde imzalayarak savaştan çekildiği ağır mütareke belgesi ___ Ateşkes Antlaşması'dır.","code":"Limni adasında imzalanan ateşkes: ___ Mütarekesi","a":"Mondros","hint":"M... ile başlayan ateşkes: Mondros","e":"Mondros Mütarekesi, Osmanlı ordusunun terhis edilmesini ve stratejik noktaların işgalini öngören teslimiyet belgesidir."},{"week":"hafta7","q":"Mondros Ateşkes Antlaşması'nın 'İtilaf Devletleri güvenliklerini tehdit eden herhangi bir yeri işgal edebilir' diyen en tehlikeli maddesi ___ maddedir.","code":"İşgallerin hukuki kılıfı olan meşhur madde: ___ . madde","a":"7","hint":"Tek basamaklı sayı: 7 (veya 7. madde)","e":"7. madde, İtilaf Devletlerinin Anadolu'yu karışıklık bahanesiyle işgal etmelerine zemin hazırlayan en yıkıcı hükümdür."}]},"summaries":[{"title":"1. Hafta – Dersin kapsamı ve Osmanlı Devleti'nin yapısı","body":["Atatürk İlkeleri ve İnkılap Tarihi dersi, Osmanlı Devleti'nin son döneminden Cumhuriyet'in kuruluşuna uzanan dönüşümü ve Cumhuriyetin temel ilkelerini anlamayı amaçlar.","Temel kavramlar: ihtilal mevcut düzenin ani biçimde değiştirilmesidir; darbe yönetimin zor kullanılarak ele geçirilmesidir; inkılap köklü ve kalıcı toplumsal-siyasal dönüşümdür; ıslahat ise mevcut düzeni bütünüyle yıkmadan düzeltme girişimidir.","Osmanlı yönetiminin merkezinde padişah bulunur. Divan-ı Hümayun yönetim, adalet ve maliye işlerinde önemli rol oynar. Toprak düzeni, tımar sistemi ve vergi uygulamaları devletin askerî ve ekonomik yapısını destekler.","Tımar sistemi bozuldukça taşrada güvenlik, üretim ve vergi toplama sorunları büyümüştür."]},{"title":"2. Hafta – Duraklama ve ıslahat hareketleri","body":["Osmanlı duraklamasında iç nedenler arasında merkezi yönetimin zayıflaması, saray ve yönetim düzenindeki sorunlar, tımar sisteminin bozulması, ekonomik sıkıntılar ve askerî yapının bozulması bulunur. Dış nedenler arasında Avrupa'nın bilimsel-teknolojik ilerlemesi, coğrafi keşifler ve değişen ticaret yolları sayılır.","Islahatlar özellikle askerî alanda yoğunlaşmıştır. I. Ahmet döneminde Ekber ve Erşed sistemi benimsenmiş; II. Osman, IV. Murat ve Köprülüler dönemlerinde düzeni sağlama girişimleri yapılmıştır. Koçi Bey raporları devletin sorunlarını ortaya koymuştur.","1683 II. Viyana Kuşatması'nın başarısızlığı ve ardından Kutsal İttifak savaşları Osmanlı'nın Avrupa'daki gerilemesini hızlandırmıştır. 1699 Karlofça Antlaşması önemli toprak kayıplarını simgeler.","1718 Pasarofça Antlaşması sonrasında başlayan Lale Devri, 1730 Patrona Halil İsyanı ile sona ermiştir."]},{"title":"3. Hafta – 19. yüzyıl, Tanzimat ve Meşrutiyet","body":["Sanayi Devrimi Avrupa'da üretimi artırmış, ham madde ve pazar ihtiyacını büyütmüştür. Fransız İhtilali'nin milliyetçilik düşüncesi çok uluslu Osmanlı Devleti'nde ayrılıkçı hareketleri güçlendirmiştir.","II. Mahmut döneminde merkezîleşme ve modernleşme yönünde adımlar atılmış; 1808 Sened-i İttifak ayanlarla padişah arasında yapılmış, 1826 Vaka-i Hayriye ile Yeniçeri Ocağı kaldırılmıştır.","1839 Tanzimat Fermanı can, mal ve namus güvenliği ile yönetim-hukuk düzenlemelerini hedeflemiştir. 1856 Islahat Fermanı özellikle gayrimüslim tebaanın haklarına ilişkin düzenlemeler getirmiştir.","1876'da Kanun-ı Esasi ilan edilmiş ve I. Meşrutiyet'e geçilmiştir. II. Abdülhamit döneminde meclisin kapatılması ve sıkı yönetim istibdat olarak anılır. 1908'de II. Meşrutiyet ilan edilerek anayasa yeniden yürürlüğe girmiştir."]},{"title":"4. Hafta – Dış sorunlar, savaşlar ve fikir akımları","body":["Sırp ve Mora isyanlarında milliyetçilik düşüncesi etkili olmuştur. Mehmet Ali Paşa ile yaşanan Mısır Meselesi Kütahya Antlaşması ve Hünkâr İskelesi gibi diplomatik gelişmelere yol açmıştır.","1853-1856 Kırım Savaşı'nın ardından 1856 Paris Antlaşması imzalanmış, aynı yıl Islahat Fermanı ilan edilmiştir. 1877-1878 Osmanlı-Rus Savaşı 93 Harbi olarak bilinir; 1878 Berlin Antlaşması Balkanlardaki kayıpları artırmıştır.","Düyûn-ı Umûmiye, Osmanlı borçlarının tahsili için 1881'de kurulmuştur. 1908 II. Meşrutiyet sonrasında 31 Mart Olayı yaşanmış, Hareket Ordusu ayaklanmayı bastırmış ve II. Abdülhamit tahttan indirilmiştir.","Dönemin fikir akımları Osmanlıcılık, İslamcılık, Türkçülük ve Batıcılık olarak özetlenebilir. Her biri devletin dağılmasını önlemek veya modernleşmesini sağlamak için farklı çözüm yolları önermiştir."]},{"title":"5. Hafta – Trablusgarp ve Balkan Savaşları","body":["İtalya, sömürge edinme hedefiyle 1911'de Trablusgarp'a saldırmıştır. Osmanlı Devleti bölgeye düzenli kuvvet göndermekte zorlanmış; Mustafa Kemal ve başka Osmanlı subayları yerel direnişi örgütlemiştir.","1912 Uşi Antlaşması ile Trablusgarp ve Bingazi İtalya'ya bırakılmıştır. Böylece Osmanlı'nın Kuzey Afrika'daki son önemli toprakları elden çıkmıştır.","1912'de başlayan Birinci Balkan Savaşı'nda Osmanlı; Bulgaristan, Sırbistan, Yunanistan ve Karadağ'a karşı savaşmıştır. 1913 Londra Antlaşması sonrasında Balkanlardaki toprakların büyük bölümü kaybedilmiştir.","İkinci Balkan Savaşı, Balkan devletlerinin paylaşım anlaşmazlıklarından doğmuştur. Osmanlı bu süreçte Edirne'yi geri almıştır. 1913 Babıâli Baskını, İttihat ve Terakki'nin iktidardaki etkisini artırmıştır."]},{"title":"6. Hafta – Birinci Dünya Savaşı","body":["Savaşın temel nedenleri arasında sömürgecilik yarışı, ham madde ve pazar rekabeti, silahlanma, bloklaşma ve milliyetçilik bulunur. Saraybosna Suikastı savaşın başlamasını tetiklemiştir.","Osmanlı Devleti Almanya yanında savaşa girmiştir. Yavuz ve Midilli gemilerinin Karadeniz'de Rus limanlarını bombalaması savaşa giriş sürecini hızlandırmıştır.","Osmanlı'nın başlıca cepheleri Kafkas, Çanakkale, Kanal, Irak ve Hicaz cepheleridir. Sarıkamış Harekâtı Kafkas Cephesi'nde ağır kayıpla sonuçlanmıştır. Çanakkale'de İtilaf Devletleri İstanbul'u ele geçirmek ve Rusya'ya yardım ulaştırmak istemiştir. Irak Cephesi'nde Kutü'l-Amare başarısı kazanılmıştır.","Gizli paylaşım planları arasında Sykes-Picot, Mac Mahon yazışmaları, Balfour Deklarasyonu ve diğer paylaşım anlaşmaları bulunur. Savaş sonunda Osmanlı Devleti 30 Ekim 1918'de Mondros Ateşkes Antlaşması'nı imzalamıştır."]},{"title":"7. Hafta – Mondros, işgaller ve cemiyetler","body":["Mondros Ateşkes Antlaşması 30 Ekim 1918'de imzalanmıştır. Ordunun terhis edilmesi, ulaşım ve haberleşmenin denetlenmesi gibi hükümler Osmanlı'nın savunma gücünü zayıflatmıştır.","7. madde, İtilaf Devletlerine güvenliklerini tehdit eden bir durum oluştuğunda stratejik noktaları işgal etme imkânı vermiştir. 24. madde ise doğudaki altı vilayetle ilgili işgal ihtimalini gündeme getirmiştir.","Paris Barış Konferansı'nda savaş sonrası düzen ve Osmanlı topraklarının paylaşımı ele alınmıştır. İzmir'in 15 Mayıs 1919'da Yunan kuvvetlerince işgali, Anadolu'da direniş hareketini hızlandıran gelişmelerden biridir.","Milli cemiyetler işgallere karşı bölgesel direnişi ve hakları savunmayı amaçlamıştır. Zararlı cemiyetler ise işgalleri destekleyen, ayrılıkçı hedefler taşıyan veya milli bütünlüğe karşı faaliyet gösteren gruplar olarak değerlendirilmiştir."]}],"weekMeta":{"hafta1":{"badge":"Hafta 1","title":"Hafta 1: Dersin Kapsamı, Temel Kavramlar & Osmanlı Devleti'nin Yapısı","desc":"İhtilal, inkılap, ıslahat ve darbe kavramları; Osmanlı padişah otoritesi, Divan-ı Hümayun, tımar ve vergi sistemi.","testCount":31,"blankCount":4},"hafta2":{"badge":"Hafta 2","title":"Hafta 2: Duraklama Dönemi, İç ve Dış Nedenler, 17-18. Yüzyıl Islahatları","desc":"Merkezi otoritenin bozulması, Ekber-Erşed sistemi, II. Viyana Kuşatması, 1699 Karlofça, Pasarofça ve Lale Devri ıslahatları.","testCount":26,"blankCount":3},"hafta3":{"badge":"Hafta 3","title":"Hafta 3: 19. Yüzyıl Başları, II. Mahmut Islahatları & Tanzimat Dönemi","desc":"Sened-i İttifak ve ayanlar, Yeniçeri Ocağı'nın kaldırılması (Vaka-i Hayriye), 1839 Tanzimat Fermanı ve 1856 Islahat Fermanı.","testCount":18,"blankCount":3},"hafta4":{"badge":"Hafta 4","title":"Hafta 4: I. ve II. Meşrutiyet, Kanun-ı Esasi, 31 Mart Vakası & Fikir Akımları","desc":"1876 Kanun-ı Esasi, İstibdat dönemi, İttihat ve Terakki, 1908 II. Meşrutiyet, 31 Mart Olayı, Hareket Ordusu ve Düyûn-ı Umûmiye.","testCount":40,"blankCount":3},"hafta5":{"badge":"Hafta 5","title":"Hafta 5: Trablusgarp Savaşı, Uşi Antlaşması & I.-II. Balkan Savaşları","desc":"İtalya'nın sömürge arayışı, Mustafa Kemal'in Derne-Tobruk direnişi, 1912 Uşi Antlaşması, I. ve II. Balkan Savaşları ve Edirne'nin geri alınışı.","testCount":33,"blankCount":3},"hafta6":{"badge":"Hafta 6","title":"Hafta 6: Birinci Dünya Savaşı, Savaşa Giriş Süreci & Cepheler","desc":"Savaşın nedenleri, bloklar, Yavuz ve Midilli, Kafkas ve Sarıkamış, Çanakkale Zaferi, Kutü'l-Amare, Kanal ve Hicaz cepheleri.","testCount":38,"blankCount":3},"hafta7":{"badge":"Hafta 7","title":"Hafta 7: Mondros Ateşkes Antlaşması, İşgaller & Millî Cemiyetler","desc":"30 Ekim 1918 Mondros Ateşkesi hükümleri, 7. ve 24. maddeler, Anadolu'nun işgali ve ilk direniş cemiyetleri.","testCount":14,"blankCount":2},"all":{"badge":"Tüm Konular","title":"🏆 Atatürk İlkeleri ve İnkılap Tarihi: 200 Soruluk Kapsamlı Vize & Final Testi","desc":"1. haftadan 7. haftaya kadar olan tüm ders konularını kapsayan 200 soruluk dev soru bankası ve sınav denemesi.","testCount":200,"blankCount":21}}};
+
+        // State Management
+        let currentWeek = 'hafta1';
+        let currentMode = 'quiz';
+        let currentQIndex = 0;
+        let currentBlankIndex = 0;
+        let soundEnabled = true;
+
+        // User answers stored in memory & localStorage
+        let answers = {};
+        try {
+            const saved = localStorage.getItem('tarih_platform_answers');
+            if (saved) answers = JSON.parse(saved);
+        } catch(e) {}
+
+        function saveAnswers() {
+            try {
+                localStorage.setItem('tarih_platform_answers', JSON.stringify(answers));
+            } catch(e) {}
+        }
+
+        // Web Audio Synthesizer for sounds
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new AudioCtx();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.08);
+                    osc.frequency.setValueAtTime(783.99, now + 0.16);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                } else if (type === 'wrong') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(180, now + 0.1);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                } else if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(800, now);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+                    osc.start(now);
+                    osc.stop(now + 0.04);
+                }
+            } catch(e) {}
+        }
+
+        // DOM Elements
+        const el = id => document.getElementById(id);
+
+        // Timer for All Topics / Exam mode
+        let timerSeconds = 40 * 60;
+        let timerInterval = null;
+
+        function updateTimer() {
+            if (currentWeek === 'all') {
+                el('vizeTimer').style.display = 'inline-flex';
+                if (!timerInterval) {
+                    timerInterval = setInterval(() => {
+                        if (timerSeconds > 0) {
+                            timerSeconds--;
+                            const m = Math.floor(timerSeconds / 60);
+                            const s = timerSeconds % 60;
+                            el('vizeTimer').textContent = '⏱️ ' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+                        } else {
+                            clearInterval(timerInterval);
+                            alert('Süre doldu! Deneme sınavı tamamlandı.');
+                        }
+                    }, 1000);
+                }
+            } else {
+                el('vizeTimer').style.display = 'none';
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+            }
+        }
+
+        // Stats calculation
+        function updateGlobalStats() {
+            let correct = 0;
+            let wrong = 0;
+            const weekQuestions = PLATFORM_DATA.questionData[currentWeek] || [];
+            
+            weekQuestions.forEach(q => {
+                const key = currentWeek + '_' + q.id;
+                if (answers[key] !== undefined) {
+                    if (answers[key] === q.a) correct++;
+                    else wrong++;
+                }
+            });
+
+            const total = correct + wrong;
+            const rate = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+            el('statCorrect').textContent = '✓ ' + correct + ' Doğru';
+            el('statWrong').textContent = 'X ' + wrong + ' Yanlış';
+            el('statRate').textContent = '%' + rate + ' Başarı';
+        }
+
+        // Update Week Info Banner
+        function updateWeekBanner() {
+            const info = PLATFORM_DATA.weekMeta[currentWeek];
+            if (!info) return;
+
+            el('weekCardTitle').textContent = info.title;
+            el('weekCardDesc').textContent = info.desc;
+            el('countTest').textContent = info.testCount + ' Soru';
+            el('countBlanks').textContent = info.blankCount + ' Soru';
+            el('countSummary').textContent = '7 Hafta';
+        }
+
+        // Switch View Mode
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('#modeFilterGroup .nav-pill').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+
+            el('viewQuiz').style.display = (mode === 'quiz') ? 'block' : 'none';
+            el('viewBlanks').style.display = (mode === 'blanks') ? 'block' : 'none';
+            el('viewSummary').style.display = (mode === 'summary') ? 'block' : 'none';
+
+            if (mode === 'quiz') renderQuiz();
+            else if (mode === 'blanks') renderBlanks();
+            else if (mode === 'summary') renderSummaries();
+        }
+
+        // Switch Week
+        function setWeek(week) {
+            currentWeek = week;
+            currentQIndex = 0;
+            document.querySelectorAll('#weekFilterGroup .nav-pill').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.week === week);
+            });
+
+            updateWeekBanner();
+            updateTimer();
+            updateGlobalStats();
+
+            if (currentMode === 'quiz') renderQuiz();
+            else if (currentMode === 'blanks') renderBlanks();
+        }
+
+        // ==========================================
+        // QUIZ ENGINE
+        // ==========================================
+        function renderQuiz() {
+            const questions = PLATFORM_DATA.questionData[currentWeek] || [];
+            if (!questions.length) return;
+
+            if (currentQIndex >= questions.length) currentQIndex = questions.length - 1;
+            if (currentQIndex < 0) currentQIndex = 0;
+
+            const q = questions[currentQIndex];
+            const answerKey = currentWeek + '_' + q.id;
+            const chosen = answers[answerKey];
+
+            // Progress Header
+            el('qProgressText').textContent = 'Soru ' + (currentQIndex + 1) + ' / ' + questions.length;
+            const answeredCount = questions.filter(item => answers[currentWeek + '_' + item.id] !== undefined).length;
+            const pct = Math.round((answeredCount / questions.length) * 100);
+            el('qProgressPercent').textContent = '%' + pct;
+            el('progressBarFill').style.width = pct + '%';
+
+            // Question Box Headers
+            const weekBadge = PLATFORM_DATA.weekMeta[currentWeek].badge;
+            el('qCounterBadge').textContent = weekBadge + ' • Soru ' + (currentQIndex + 1) + ' / ' + questions.length;
+            
+            // Format Question Text
+            el('qTitleText').textContent = q.q;
+
+            // Render Options
+            const letters = ['A', 'B', 'C', 'D', 'E'];
+            const optsContainer = el('optionsList');
+            optsContainer.innerHTML = '';
+
+            q.o.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                
+                const letterBox = document.createElement('div');
+                letterBox.className = 'opt-letter';
+                letterBox.textContent = letters[idx];
+
+                const textSpan = document.createElement('div');
+                textSpan.textContent = optText;
+
+                btn.appendChild(letterBox);
+                btn.appendChild(textSpan);
+
+                // Option State if answered
+                if (chosen !== undefined) {
+                    btn.disabled = true;
+                    if (idx === q.a) {
+                        btn.classList.add('correct');
+                    } else if (idx === chosen) {
+                        btn.classList.add('wrong');
+                    }
+                } else {
+                    btn.onclick = () => selectOption(idx);
+                }
+
+                optsContainer.appendChild(btn);
+            });
+
+            // Explanation Card
+            const expBox = el('explanationBox');
+            if (chosen !== undefined) {
+                expBox.classList.add('show');
+                const isCorrect = chosen === q.a;
+                expBox.classList.toggle('good', isCorrect);
+                expBox.classList.toggle('bad', !isCorrect);
+                el('expTitle').className = 'exp-title ' + (isCorrect ? 'good' : 'bad');
+                el('expTitle').textContent = isCorrect ? '✓ Doğru Cevap!' : '✕ Yanlış Cevap (Doğru Şık: ' + letters[q.a] + ')';
+                el('expDesc').textContent = q.e;
+            } else {
+                expBox.classList.remove('show');
+            }
+
+            // Foot Nav Buttons
+            el('prevBtn').disabled = (currentQIndex === 0);
+            el('nextBtn').disabled = (currentQIndex === questions.length - 1);
+
+            // Render Map Grid
+            renderMap();
+            updateGlobalStats();
+        }
+
+        function selectOption(index) {
+            const questions = PLATFORM_DATA.questionData[currentWeek] || [];
+            const q = questions[currentQIndex];
+            const answerKey = currentWeek + '_' + q.id;
+
+            answers[answerKey] = index;
+            saveAnswers();
+
+            const isCorrect = (index === q.a);
+            playSound(isCorrect ? 'correct' : 'wrong');
+
+            renderQuiz();
+        }
+
+        function renderMap() {
+            const questions = PLATFORM_DATA.questionData[currentWeek] || [];
+            const grid = el('mapGrid');
+            grid.innerHTML = '';
+
+            questions.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'map-btn';
+                btn.textContent = idx + 1;
+
+                const answerKey = currentWeek + '_' + q.id;
+                const chosen = answers[answerKey];
+
+                if (idx === currentQIndex) {
+                    btn.classList.add('current');
+                }
+
+                if (chosen !== undefined) {
+                    if (chosen === q.a) btn.classList.add('correct');
+                    else btn.classList.add('wrong');
+                }
+
+                btn.onclick = () => {
+                    playSound('click');
+                    currentQIndex = idx;
+                    renderQuiz();
+                };
+
+                grid.appendChild(btn);
+            });
+        }
+
+        // ==========================================
+        // BLANKS ENGINE
+        // ==========================================
+        function getActiveBlanks() {
+            return PLATFORM_DATA.blanksData[currentWeek] || PLATFORM_DATA.blanksData.all;
+        }
+
+        function renderBlanks() {
+            const list = getActiveBlanks();
+            if (currentBlankIndex >= list.length) currentBlankIndex = 0;
+            if (currentBlankIndex < 0) currentBlankIndex = 0;
+
+            const item = list[currentBlankIndex];
+            el('blankCounterBadge').textContent = 'Kavram ' + (currentBlankIndex + 1) + ' / ' + list.length;
+            el('blankQuestionText').textContent = item.q;
+            el('blankCodeBox').textContent = item.code;
+
+            const input = el('blankInput');
+            input.value = '';
+            input.focus();
+
+            el('blankFeedback').classList.remove('show');
+            el('blankPrevBtn').disabled = (currentBlankIndex === 0);
+            el('blankNextBtn').disabled = (currentBlankIndex === list.length - 1);
+        }
+
+        function checkBlank() {
+            const list = getActiveBlanks();
+            const item = list[currentBlankIndex];
+            const val = el('blankInput').value.trim();
+            const feedback = el('blankFeedback');
+            feedback.classList.add('show');
+
+            const normalizedInput = val.toLowerCase().replace(/['".,-]/g, '');
+            const normalizedAns = item.a.toLowerCase().replace(/['".,-]/g, '');
+
+            const isMatch = normalizedInput === normalizedAns || 
+                           normalizedAns.includes(normalizedInput) && normalizedInput.length >= 3;
+
+            if (isMatch) {
+                playSound('correct');
+                feedback.className = 'explanation-box show good';
+                el('blankFeedbackTitle').className = 'exp-title good';
+                el('blankFeedbackTitle').textContent = '✓ Harika, Doğru Yanıt!';
+                el('blankFeedbackDesc').textContent = item.e;
+            } else {
+                playSound('wrong');
+                feedback.className = 'explanation-box show bad';
+                el('blankFeedbackTitle').className = 'exp-title bad';
+                el('blankFeedbackTitle').textContent = '✕ Tekrar Deneyin veya İpucu Alın';
+                el('blankFeedbackDesc').textContent = 'Yazdığınız yanıt: "' + val + '". İpucu butonuna basarak doğru cevabı keşfedebilirsiniz.';
+            }
+        }
+
+        // ==========================================
+        // SUMMARIES RENDERER
+        // ==========================================
+        function renderSummaries() {
+            const container = el('summaryCardsContainer');
+            container.innerHTML = '';
+
+            PLATFORM_DATA.summaries.forEach((s, idx) => {
+                const card = document.createElement('div');
+                card.className = 'summary-card' + (idx === 0 ? ' open' : '');
+
+                const header = document.createElement('div');
+                header.className = 'summary-header';
+                header.innerHTML = '<span>📘 ' + s.title + '</span><span>▼</span>';
+                header.onclick = () => {
+                    card.classList.toggle('open');
+                    playSound('click');
+                };
+
+                const body = document.createElement('div');
+                body.className = 'summary-body';
+
+                let listHtml = '<ul>';
+                s.body.forEach(paragraph => {
+                    listHtml += '<li>' + paragraph + '</li>';
+                });
+                listHtml += '</ul>';
+
+                body.innerHTML = listHtml;
+                card.appendChild(header);
+                card.appendChild(body);
+                container.appendChild(card);
+            });
+        }
+
+        // Event Listeners Setup
+        document.addEventListener('DOMContentLoaded', () => {
+            // Week Filter Buttons
+            document.querySelectorAll('#weekFilterGroup .nav-pill').forEach(btn => {
+                btn.onclick = () => {
+                    playSound('click');
+                    setWeek(btn.dataset.week);
+                };
+            });
+
+            // Mode Filter Buttons
+            document.querySelectorAll('#modeFilterGroup .nav-pill').forEach(btn => {
+                btn.onclick = () => {
+                    playSound('click');
+                    setMode(btn.dataset.mode);
+                };
+            });
+
+            // Quiz Navigation Buttons
+            el('prevBtn').onclick = () => {
+                if (currentQIndex > 0) {
+                    playSound('click');
+                    currentQIndex--;
+                    renderQuiz();
+                }
+            };
+
+            el('nextBtn').onclick = () => {
+                const questions = PLATFORM_DATA.questionData[currentWeek] || [];
+                if (currentQIndex < questions.length - 1) {
+                    playSound('click');
+                    currentQIndex++;
+                    renderQuiz();
+                }
+            };
+
+            el('clearBtn').onclick = () => {
+                const questions = PLATFORM_DATA.questionData[currentWeek] || [];
+                const q = questions[currentQIndex];
+                delete answers[currentWeek + '_' + q.id];
+                saveAnswers();
+                playSound('click');
+                renderQuiz();
+            };
+
+            // Jump to next wrong question button
+            el('wrongOnlyBtn').onclick = () => {
+                const questions = PLATFORM_DATA.questionData[currentWeek] || [];
+                const wrongIndices = [];
+                questions.forEach((q, idx) => {
+                    const key = currentWeek + '_' + q.id;
+                    if (answers[key] !== undefined && answers[key] !== q.a) {
+                        wrongIndices.push(idx);
+                    }
+                });
+
+                if (wrongIndices.length === 0) {
+                    alert('🎉 Tebrikler! Bu haftada hiç yanlış işaretlediğiniz soru bulunmuyor.');
+                    return;
+                }
+
+                const nextWrong = wrongIndices.find(idx => idx > currentQIndex) !== undefined 
+                    ? wrongIndices.find(idx => idx > currentQIndex) 
+                    : wrongIndices[0];
+
+                currentQIndex = nextWrong;
+                playSound('click');
+                renderQuiz();
+            };
+
+            // Keyboard Shortcuts (A, B, C, D and Arrow Keys)
+            window.addEventListener('keydown', (e) => {
+                if (currentMode !== 'quiz') return;
+                const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+                if (activeTag === 'input' || activeTag === 'textarea') return;
+
+                const key = e.key.toUpperCase();
+                const keyMap = { 'A': 0, '1': 0, 'B': 1, '2': 1, 'C': 2, '3': 2, 'D': 3, '4': 3 };
+
+                if (keyMap[key] !== undefined) {
+                    const questions = PLATFORM_DATA.questionData[currentWeek] || [];
+                    const q = questions[currentQIndex];
+                    if (answers[currentWeek + '_' + q.id] === undefined) {
+                        selectOption(keyMap[key]);
+                    }
+                } else if (e.key === 'ArrowRight') {
+                    const questions = PLATFORM_DATA.questionData[currentWeek] || [];
+                    if (currentQIndex < questions.length - 1) {
+                        playSound('click');
+                        currentQIndex++;
+                        renderQuiz();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (currentQIndex > 0) {
+                        playSound('click');
+                        currentQIndex--;
+                        renderQuiz();
+                    }
+                }
+            });
+
+            // Blanks Buttons
+            el('blankCheckBtn').onclick = checkBlank;
+            el('blankInput').onkeydown = e => { if (e.key === 'Enter') checkBlank(); };
+            
+            el('blankHintBtn').onclick = () => {
+                const list = getActiveBlanks();
+                const item = list[currentBlankIndex];
+                alert('💡 İpucu: ' + item.hint);
+            };
+
+            el('blankShowBtn').onclick = () => {
+                const list = getActiveBlanks();
+                const item = list[currentBlankIndex];
+                el('blankInput').value = item.a;
+                checkBlank();
+            };
+
+            el('blankPrevBtn').onclick = () => {
+                if (currentBlankIndex > 0) {
+                    playSound('click');
+                    currentBlankIndex--;
+                    renderBlanks();
+                }
+            };
+
+            el('blankNextBtn').onclick = () => {
+                const list = getActiveBlanks();
+                if (currentBlankIndex < list.length - 1) {
+                    playSound('click');
+                    currentBlankIndex++;
+                    renderBlanks();
+                }
+            };
+
+            // Chips Insertion
+            document.querySelectorAll('.chip-btn').forEach(btn => {
+                btn.onclick = () => {
+                    const inp = el('blankInput');
+                    inp.value = btn.dataset.insert;
+                    inp.focus();
+                    playSound('click');
+                };
+            });
+
+            // Sound Toggle
+            el('soundBtn').onclick = () => {
+                soundEnabled = !soundEnabled;
+                el('soundBtn').textContent = soundEnabled ? '🔊 Ses' : '🔇 Ses Kapalı';
+                playSound('click');
+            };
+
+            // Reset Button
+            el('resetBtn').onclick = () => {
+                if (confirm('Tüm işaretlediğiniz cevapları sıfırlamak istediğinize emin misiniz?')) {
+                    answers = {};
+                    saveAnswers();
+                    playSound('click');
+                    renderQuiz();
+                    updateGlobalStats();
+                }
+            };
+
+            // Initial Render
+            updateWeekBanner();
+            renderQuiz();
+            updateGlobalStats();
+            renderSummaries();
+        });
+    </script>
+</body>
+</html>
